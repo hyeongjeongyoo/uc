@@ -146,7 +146,7 @@ export const SitemapDrawer = memo(
                 <Flex
                   align="center"
                   justify="space-between"
-                  maxW={{ base: "90%", "2xl": "1300px" }}
+                  maxW={{ base: "90%", "2xl": "92vw" }}
                   w="full"
                 >
                   <Link as={NextLink} href="/" onClick={onClose}>
@@ -256,7 +256,7 @@ export const SitemapDrawer = memo(
                     <VStack
                       as="aside"
                       w="full"
-                      maxW="1300px"
+                      maxW={{ base: "100%", "2xl": "92vw" }}
                       bg={isDark ? "gray.800" : "white"}
                       align="flex-start"
                       flexDirection={{ base: "column", xl: "row" }}
@@ -295,7 +295,6 @@ export const SitemapDrawer = memo(
                             className="main-menu-title"
                             fontSize={{ base: "18px", md: "24px", lg: "30px" }}
                             py={{ base: "15px", xl: "0" }}
-                            fontFamily="pretendard"
                             fontWeight={
                               hoveredMenuParent === menu.id ||
                               expandedMenu === menu.id
@@ -305,13 +304,13 @@ export const SitemapDrawer = memo(
                             color={{
                               base:
                                 expandedMenu === menu.id
-                                  ? "#4A7CD5"
+                                  ? "#0D344E"
                                   : isDark
                                   ? "gray.100"
                                   : "gray.700",
                               xl:
                                 hoveredMenuParent === menu.id
-                                  ? "#4A7CD5"
+                                  ? "#0D344E"
                                   : isDark
                                   ? "gray.100"
                                   : "gray.700",
@@ -332,7 +331,7 @@ export const SitemapDrawer = memo(
                             transition="all 0.2s ease"
                             mb={{ base: "0", xl: "120px" }}
                             _hover={{
-                              color: "#4A7CD5",
+                              color: "#0D344E",
                               fontWeight: "700",
                             }}
                             display="flex"
@@ -369,7 +368,7 @@ export const SitemapDrawer = memo(
                                 size={20}
                                 color={
                                   expandedMenu === menu.id
-                                    ? "#4A7CD5"
+                                    ? "#0D344E"
                                     : isDark
                                     ? "#F7FAFC"
                                     : "#2D3748"
@@ -447,6 +446,7 @@ export const SitemapDrawer = memo(
                                           md: "16px",
                                           lg: "22px",
                                         }}
+                                        lineHeight="1.2"
                                         fontFamily="pretendard"
                                         color={isDark ? "gray.100" : "gray.800"}
                                         position="relative"
@@ -463,13 +463,13 @@ export const SitemapDrawer = memo(
                                           left: 0,
                                           width: "0%",
                                           height: "100%",
-                                          backgroundColor: "#4A7CD5",
+                                          backgroundColor: "#0D344E",
                                           transition: "width 0.4s ease",
                                           zIndex: 0,
                                         }}
                                         _hover={{
                                           color: {
-                                            base: "#4A7CD5",
+                                            base: "#0D344E",
                                             xl: "white",
                                           },
                                           fontWeight: "bold",
@@ -487,7 +487,6 @@ export const SitemapDrawer = memo(
                                       <ChakraText
                                         fontWeight="medium"
                                         fontSize={{ base: "md", md: "lg" }}
-                                        fontFamily="pretendard"
                                         color={isDark ? "gray.100" : "gray.800"}
                                         onMouseEnter={() =>
                                           setHoveredMenuParent(menu.id)
@@ -556,7 +555,6 @@ export const SitemapDrawer = memo(
                                                 base: "sm",
                                                 md: "md",
                                               }}
-                                              fontFamily="pretendard"
                                               color={
                                                 isDark ? "gray.300" : "gray.600"
                                               }
@@ -580,14 +578,14 @@ export const SitemapDrawer = memo(
                                                 left: 0,
                                                 width: "0%",
                                                 height: "100%",
-                                                backgroundColor: "#4A7CD5",
+                                                backgroundColor: "#0D344E",
                                                 transition: "width 0.4s ease",
                                                 zIndex: 0,
                                               }}
                                               _hover={{
                                                 fontWeight: "semibold",
                                                 color: {
-                                                  base: "#4A7CD5",
+                                                  base: "#0D344E",
                                                   xl: "white",
                                                 },
                                                 _before: {

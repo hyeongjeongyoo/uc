@@ -3,6 +3,7 @@
 import { Flex, Box } from "@chakra-ui/react";
 import { memo } from "react";
 import { Menu } from "@/types/api";
+import { usePathname } from "next/navigation";
 import { MenuItem as MemoizedMenuItem } from "./MenuItem";
 
 interface DesktopNavProps {

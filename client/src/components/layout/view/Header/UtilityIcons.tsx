@@ -32,11 +32,11 @@ export const UtilityIcons = ({
   const router = useRouter();
   const { isAuthenticated } = useRecoilValue(authState);
   const { logout } = useAuthActions();
-  const {
-    open: isSearchOpen,
-    onOpen: onSearchOpen,
-    onClose: onSearchClose,
-  } = useDisclosure();
+  // const {
+  //   open: isSearchOpen,
+  //   onOpen: onSearchOpen,
+  //   onClose: onSearchClose,
+  // } = useDisclosure();
 
   const handleLogin = useCallback(() => {
     router.push("/login");
@@ -66,7 +66,7 @@ export const UtilityIcons = ({
       zIndex={1001}
     >
       {/* Search Icon */}
-      <IconButton
+      {/* <IconButton
         aria-label="Search"
         variant="ghost"
         color={iconColor}
@@ -78,8 +78,8 @@ export const UtilityIcons = ({
           bg: "rgba(255, 255, 255, 0.3)",
         }}
       >
-        <Search />
-      </IconButton>
+        <Search /> }
+      </IconButton>*/}
 
       {/* User Menu */}
       {/* <Menu.Root>
@@ -160,11 +160,11 @@ export const UtilityIcons = ({
         <Icon as={GiHamburgerMenu} boxSize={5} />
       </IconButton>
 
-      <SearchDialog
+      {/* <SearchDialog
         isOpen={isSearchOpen}
         onClose={onSearchClose}
         menus={menus}
-      />
+      /> */}
     </Flex>
   );
 };

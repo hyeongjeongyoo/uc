@@ -51,21 +51,25 @@ export function MenuItem({
   const topLevelColor =
     isScrolled || isNavHovered
       ? isActive
-        ? "#4A7CD5"
+        ? "#0D344E"
         : isCurrentlyHovered
-        ? "#4A7CD5"
+        ? "#0D344E"
         : "#0D344E"
       : isActive
-      ? "#4A7CD5"
+      ? "#0D344E"
       : isNavHovered
       ? "#0D344E"
-      : "white";
+      : "#0D344E";
 
-  const topLevelHoverFocusColor = "#4A7CD5";
+  const topLevelHoverFocusColor = "#0D344E";
 
   const childColor =
-    isScrolled || isNavHovered ? "#0D344E" : isNavHovered ? "#0D344E" : "white";
-  const childHoverFocusColor = "#4A7CD5";
+    isScrolled || isNavHovered
+      ? "#0D344E"
+      : isNavHovered
+      ? "#0D344E"
+      : "#0D344E";
+  const childHoverFocusColor = "#0D344E";
 
   const grandChildColor =
     isScrolled || isNavHovered
@@ -73,7 +77,7 @@ export function MenuItem({
       : isNavHovered
       ? "gray.600"
       : "gray.300";
-  const grandChildHoverFocusColor = "#4A7CD5";
+  const grandChildHoverFocusColor = "#0D344E";
 
   return (
     <Box
@@ -89,22 +93,36 @@ export function MenuItem({
       }}
     >
       <Box position="relative" role="group" textAlign="center">
+        <Box
+          position="absolute"
+          bottom="-4px"
+          left="50%"
+          transform="translateX(-50%)"
+          width="10px"
+          height="10px"
+          borderRadius="full"
+          bg="radial-gradient(circle, #FAB20B 0%, #ffffff 100%)"
+          opacity={isCurrentlyHovered ? 1 : 0}
+          transition="all 0.2s ease"
+        />
         <Link
           as={NextLink}
           href={menuUrl}
           display="block"
           py={6}
           fontSize={{ base: "xs", md: "sm", lg: "md" }}
-          fontWeight={isRoot ? "normal" : "bold"}
+          fontWeight={isRoot ? "bold" : "bold"}
           color={topLevelColor}
           position="relative"
           _hover={{
             textDecoration: "none",
-            color: topLevelHoverFocusColor,
+            color: "#0D344E",
+            fontWeight: "bold",
           }}
           _focus={{
             boxShadow: "none",
-            color: topLevelHoverFocusColor,
+            color: "#0D344E",
+            fontWeight: "bold",
             transform: "translateY(-1px)",
             outline: "none",
             border: "none",

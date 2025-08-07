@@ -52,12 +52,11 @@ export const Header = memo(function Header({
   isPreview,
 }: HeaderProps) {
   const [isNavHovered, setIsNavHovered] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [isSitemapDrawerOpen, setIsSitemapDrawerOpen] = useState(false);
   const [lastHoveredMenuId, setLastHoveredMenuId] = useState<number | null>(
     null
   );
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isScrolled] = useState(false);
 
   const { colorMode } = useColorMode();
   const navRef = useRef<HTMLDivElement>(null);
@@ -70,20 +69,6 @@ export const Header = memo(function Header({
     base: "60px",
     lg: "70px",
   });
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setIsScrolled(currentScrollY > 100);
-      if (currentScrollY > lastScrollY) {
-        setIsNavHovered(false);
-        setLastHoveredMenuId(null);
-      }
-      setLastScrollY(currentScrollY);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
 
   // 외부 클릭 시 헤더 메뉴 닫기
   useEffect(() => {
@@ -142,26 +127,19 @@ export const Header = memo(function Header({
     isLastMenuItem: index === visibleMenus.length - 1,
   }));
 
-  const logoWidth = useBreakpointValue({ base: 60, lg: 70 }) || 70;
+  const logoWidth = useBreakpointValue({ base: 20, lg: 35 }) || 35;
   const logoHeight = useBreakpointValue({ base: 22, lg: 30 }) || 22;
 
-  const iconColor = isScrolled || isNavHovered ? "#0D344E" : "white";
+  const iconColor = isScrolled || isNavHovered ? "#0D344E" : "#0D344E";
 
   return (
     <>
       <Box
         as="header"
-        position="fixed"
-        top={isPreview ? 50 : 0}
-        left={0}
-        right={0}
+        position="relative"
         zIndex={10}
-        bg={
-          isScrolled || isNavHovered
-            ? "rgba(255, 255, 255, 0.51)"
-            : "transparent"
-        }
-        backdropFilter={isScrolled || isNavHovered ? "blur(5px)" : "none"}
+        bg="rgba(255, 255, 255, 0.51)"
+        backdropFilter="blur(5px)"
         transition="all 0.3s ease"
         ref={navRef}
         role="navigation"
@@ -170,7 +148,7 @@ export const Header = memo(function Header({
         overflow="visible"
         opacity={1}
         pointerEvents={"auto"}
-        color={isScrolled || isNavHovered ? "#0D344E" : "white"}
+        color={isScrolled || isNavHovered ? "#0D344E" : "#0D344E"}
       >
         <Container
           position="relative"
@@ -178,7 +156,7 @@ export const Header = memo(function Header({
           transition="all 0.3s"
           m={0}
           w="100%"
-          maxW={{ base: "90%", "2xl": "1300px" }}
+          maxW={{ base: "90%", "2xl": "92vw" }}
           margin="0 auto"
           height="100%"
         >
@@ -204,19 +182,12 @@ export const Header = memo(function Header({
                       width={logoWidth}
                       height={logoHeight}
                       alt="logo"
-                      style={{
-                        filter:
-                          isScrolled || isNavHovered
-                            ? "none"
-                            : "brightness(0) invert(1)",
-                        transition: "filter 0.3s ease",
-                      }}
                     />
                   </Box>
                 </Link>
               </Flex>
-              <Flex flex={1} justify="center" align="center">
-                <Box width="68%" maxWidth="68%">
+              <Flex flex={1} justify="flex-end" align="center">
+                <Box width="45%">
                   <DesktopNav
                     menusWithLastFlag={menusWithLastFlag}
                     isNavHovered={isNavHovered}

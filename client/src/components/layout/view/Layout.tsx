@@ -2,49 +2,34 @@
 
 import { Box } from "@chakra-ui/react";
 import { Header } from "./Header/Header";
-import Footer from "@/components/main/component/Footer";
-import { memo } from "react";
-import { useColors } from "@/styles/theme";
-import { Menu } from "@/types/api";
-import { Global } from "@emotion/react";
-import { getScrollbarStyle } from "@/styles/scrollbar";
-import { useColorMode } from "@/components/ui/color-mode";
+import MainSection from "../../main/component/MainSection";
+import { usePathname } from "next/navigation";
+import { useQuery } from "@tanstack/react-query";
+import { menuApi, menuKeys, sortMenus } from "@/lib/api/menu";
+import { MenuApiResponse } from "@/types/api-response";
 
-interface LayoutProps {
-  children: React.ReactNode;
-  currentPage?: string;
-  isPreview?: boolean;
-  menus?: Menu[];
-}
+const Layout = () => {
+  const pathname = usePathname();
+  const currentPage = pathname || "/";
 
-// Header를 메모이제이션하여 props가 변경되지 않으면 리렌더링되지 않도록 함
-const MemoizedHeader = memo(Header);
+  // 메뉴 데이터 가져오기
+  const { data: menuResponse } = useQuery<MenuApiResponse>({
+    queryKey: menuKeys.lists(),
+    queryFn: async () => {
+      const response = await menuApi.getPublicMenus();
+      return response.data;
+    },
+    retry: 1,
+  });
 
-// Footer를 메모이제이션
-const MemoizedFooter = memo(Footer);
-
-export default function Layout({
-  children,
-  currentPage = "홈",
-  isPreview,
-  menus,
-}: LayoutProps) {
-  const colors = useColors();
-  const { colorMode } = useColorMode();
-  const isDark = colorMode === "dark";
+  const sortedMenus = sortMenus(menuResponse?.data || []);
 
   return (
-    <Box bg={colors.bg} minHeight="100vh" fontFamily="'Inter', sans-serif">
-      <Global styles={[getScrollbarStyle(isDark)]} />
-      <MemoizedHeader
-        currentPage={currentPage}
-        menus={menus}
-        isPreview={isPreview}
-      />
-      <Box as="main" mx="auto" position="relative" w="full">
-        {children}
-      </Box>
-      <MemoizedFooter />
+    <Box>
+      <Header currentPage={currentPage} menus={sortedMenus} />
+      <MainSection />
     </Box>
   );
-}
+};
+
+export default Layout;
