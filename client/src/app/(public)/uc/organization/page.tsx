@@ -150,7 +150,6 @@ export default function CompanyPage() {
               mb={10}
               textAlign="center"
               color="#4A7CD5"
-              fontFamily="Montserrat, sans-serif !important"
               letterSpacing="2"
               style={{
                 transform: `translateY(${getTransformY(30, 50)}px)`,

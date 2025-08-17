@@ -3,8 +3,11 @@
 import { Box, Text, Heading, Stack, Container, Image } from "@chakra-ui/react";
 import { PageContainer } from "@/components/layout/PageContainer";
 import { PageHeroBanner } from "@/components/sections/PageHeroBanner";
-import { CompanyVisionCircles } from "@/components/sections/CompanyVisionCircles";
+import { CenterServices } from "@/components/sections/CenterServices";
+import { QuoteBoxes } from "@/components/sections/QuoteBoxes";
+import { CounselingProcess } from "@/components/sections/CounselingProcess";
 import React, { useState, useEffect } from "react";
+import { HERO_DATA } from "@/lib/constants/heroSectionData";
 
 export default function CompanyPage() {
   // 애니메이션 상태 관리
@@ -12,8 +15,7 @@ export default function CompanyPage() {
     titleText: false,
     mainHeading: false,
     description: false,
-    companyImage: false,
-    visionTitle: false,
+    servicesHeading: false,
     visionHeading: false,
     visionCircles: false,
   });
@@ -28,10 +30,9 @@ export default function CompanyPage() {
         titleText: scrollY > 100,
         mainHeading: scrollY > 200,
         description: scrollY > 300,
-        companyImage: scrollY > 400,
-        visionTitle: scrollY > 800,
-        visionHeading: scrollY > 900,
-        visionCircles: scrollY > 1000,
+        servicesHeading: scrollY > 400,
+        visionHeading: scrollY > 400,
+        visionCircles: scrollY > 500,
       });
     };
 
@@ -41,105 +42,56 @@ export default function CompanyPage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const companyMenuItems = [
-    { name: "회사소개", href: "/knd/company" },
-    { name: "회사개요", href: "/knd/company" },
-  ];
+  const heroData = HERO_DATA["/uc/center"];
 
   return (
     <Box>
       {/* 상단 배너 컴포넌트 */}
       <PageHeroBanner
-        title="COMPANY"
-        subtitle="K&D Energen을 소개합니다"
-        backgroundImage="/images/main/hero-image.jpg"
-        height="600px"
+        title={heroData.title}
+        subtitle={heroData.subtitle}
+        backgroundImage={heroData.backgroundImage}
+        height={heroData.height}
         menuType="custom"
-        customMenuItems={companyMenuItems}
-        animationType="zoom-in"
+        customMenuItems={heroData.menuItems}
+        animationType={heroData.animationType}
       />
 
       <PageContainer>
         <Stack>
           {/* 회사 개요 섹션 */}
           <Box>
-            <Text
-              fontSize={{ base: "16px", lg: "20px", xl: "24px" }}
-              fontWeight="bold"
-              mb={10}
-              textAlign="center"
-              color="#4A7CD5"
-              fontFamily="Montserrat, sans-serif !important"
-              letterSpacing="2"
-              transition="all 0.8s ease"
-              transform={
-                animations.titleText ? "translateY(0)" : "translateY(50px)"
-              }
-              opacity={animations.titleText ? 1 : 0}
-            >
-              K&D Energen
-            </Text>
             <Heading
               as="h2"
               fontSize={{ base: "24px", lg: "36px", xl: "48px" }}
               fontWeight="bold"
               mb={5}
               lineHeight="1.3"
-              textAlign="center"
               transition="all 0.8s ease 0.2s"
               transform={
                 animations.mainHeading ? "translateY(0)" : "translateY(50px)"
               }
               opacity={animations.mainHeading ? 1 : 0}
             >
-              친환경 에너지 화학기업으로서
-              <br />
-              지속 가능한 미래를 선도하는 <Box as="br" display={{ base: "inline", md: "none" }} />글로벌 수소 전문기업
+              언제든 여러분의 소중한 이야기를 들려주세요.
             </Heading>
             <Text
               fontSize={{ base: "14px", lg: "20px", xl: "24px" }}
-              mb={5}
-              textAlign="center"
               transition="all 0.8s ease 0.4s"
               transform={
                 animations.description ? "translateY(0)" : "translateY(50px)"
               }
               opacity={animations.description ? 1 : 0}
             >
-              케이앤디에너젠은 청정에너지 시대를 여는 수소 전문기업으로서,
-              친환경미래선도를 위한 혁신적인 에너지 솔루션을 제공합니다.  <Box as="br" display={{ base: "none", md: "none", lg: "block" }} />
-              우리는 수소의 생산부터 공급까지 전과정에서 최고의 기술력과
-              안전성을 바탕으로 고객에게 신뢰받는 파트너가 되고자 합니다.
+              혼자 버티지 말고, 함께 이야기해요. <br /><br />
+              학생상담센터는 여러분이 건강한 마음으로 대학생활에 적응하고 성장하도록 돕는 공간입니다. <Box as="br" display={{ base: "none", md: "none", lg: "block" }} />
+              무엇이든 편하게 와서 이야기하세요. 우리는 듣고, 함께 방법을 찾습니다.
             </Text>
-
-            {/* 회사 소개 이미지 */}
-            <Box
-              mt={{ base: "30px", lg: "80px", xl: "100px" }}
-              display="flex"
-              justifyContent="center"
-              transition="all 0.8s ease 0.6s"
-              transform={
-                animations.companyImage ? "translateY(0)" : "translateY(50px)"
-              }
-              opacity={animations.companyImage ? 1 : 0}
-            >
-              <Image
-                src="/images/sub/company_bg.jpg"
-                alt="케이앤디에너젠 회사 소개"
-                width="1300px"
-                height="500px"
-                objectFit="cover"
-                backgroundPosition="center"
-                backgroundRepeat="no-repeat"
-                borderRadius="30px"
-                boxShadow="lg"
-              />
-            </Box>
           </Box>
         </Stack>
       </PageContainer>
       <Box
-      p={8}
+        p={8}
         backgroundColor="#fafafa"
         pt={{ base: "80px", sm: "100px", md: "150px", lg: "180px" }}
         pb={{ base: "80px", sm: "100px", md: "150px", lg: "180px" }}
@@ -149,40 +101,21 @@ export default function CompanyPage() {
             <Stack>
               {/* 회사 개요 섹션 */}
               <Box>
-                <Text
-                  fontSize={{ base: "16px", lg: "20px", xl: "24px" }}
-                  fontWeight="bold"
-                  mb={10}
-                  textAlign="center"
-                  color="#4A7CD5"
-                  fontFamily="Montserrat, sans-serif !important"
-                  letterSpacing="2"
-                  transition="all 0.8s ease 0.8s"
-                  transform={
-                    animations.visionTitle
-                      ? "translateY(0)"
-                      : "translateY(50px)"
-                  }
-                  opacity={animations.visionTitle ? 1 : 0}
-                >
-                  VISION AND GOALS
-                </Text>
                 <Heading
                   as="h2"
                   fontSize={{ base: "24px", lg: "36px", xl: "48px" }}
                   fontWeight="bold"
                   mb={5}
                   lineHeight="1.3"
-                  textAlign="center"
                   transition="all 0.8s ease 1.0s"
                   transform={
-                    animations.visionHeading
+                    animations.servicesHeading
                       ? "translateY(0)"
                       : "translateY(50px)"
                   }
-                  opacity={animations.visionHeading ? 1 : 0}
+                  opacity={animations.servicesHeading ? 1 : 0}
                 >
-                  수소 산업 선도 기업으로의 <Box as="br" display={{ base: "inline", md: "none" }} />도약을 위한 핵심 목표
+                  제공 서비스
                 </Heading>
                 <Box
                   width="100%"
@@ -194,7 +127,76 @@ export default function CompanyPage() {
                   }
                   opacity={animations.visionCircles ? 1 : 0}
                 >
-                  <CompanyVisionCircles />
+                  <CenterServices />
+                </Box>
+              </Box>
+            </Stack>
+          </Box>
+        </Container>
+      </Box>
+      <Box
+        backgroundColor="white"
+        pt={{ base: "80px", sm: "100px", md: "150px", lg: "180px" }}
+        pb={{ base: "80px", sm: "100px", md: "150px", lg: "180px" }}
+      >
+        <Container maxW="1300px">
+          <Box>
+            <Heading
+              as="h2"
+              fontSize={{ base: "24px", lg: "36px", xl: "48px" }}
+              fontWeight="bold"
+              mb={4}
+            >
+              이럴 때 찾아오세요
+            </Heading>
+            <Text
+            fontSize={{ base: "14px", lg: "20px", xl: "24px" }}
+            mb={6}
+            >
+            울산과학대학교 재학생이라면 누구나 이용할 수 있으며,상담 내용은 철저히 비밀이 보장됩니다. 학생상담센터는 여러분 곁에서, 여러분의 마음을 함께합니다.
+            </Text>
+            <QuoteBoxes />
+          </Box>
+        </Container>
+      </Box>
+      <Box
+        p={8}
+        backgroundColor="#fafafa"
+        pt={{ base: "80px", sm: "100px", md: "150px", lg: "180px" }}
+        pb={{ base: "80px", sm: "100px", md: "150px", lg: "180px" }}
+      >
+        <Container maxW="1300px">
+          <Box paddingInline="0">
+            <Stack>
+              {/* 회사 개요 섹션 */}
+              <Box>
+                <Heading
+                  as="h2"
+                  fontSize={{ base: "24px", lg: "36px", xl: "48px" }}
+                  fontWeight="bold"
+                  mb={5}
+                  lineHeight="1.3"
+                  transition="all 0.8s ease 1.0s"
+                  transform={
+                    animations.visionHeading
+                      ? "translateY(0)"
+                      : "translateY(50px)"
+                  }
+                  opacity={animations.visionHeading ? 1 : 0}
+                >
+                  이용시간 안내
+                </Heading>
+                <Box
+                  width="100%"
+                  transition="all 0.8s ease 1.2s"
+                  transform={
+                    animations.visionCircles
+                      ? "translateY(0)"
+                      : "translateY(50px)"
+                  }
+                  opacity={animations.visionCircles ? 1 : 0}
+                >
+                  
                 </Box>
               </Box>
             </Stack>

@@ -85,7 +85,6 @@ export default function PrivacyPolicyPage() {
               mb={10}
               textAlign="center"
               color="#4A7CD5"
-              fontFamily="Montserrat, sans-serif !important"
               letterSpacing="2"
               transition="all 0.8s ease"
               transform={

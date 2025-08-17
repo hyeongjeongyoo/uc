@@ -224,7 +224,6 @@ export default function ChemistrySection({
           color="#4A7CD5"
           letterSpacing="2px"
           textTransform="uppercase"
-          fontFamily="Montserrat, sans-serif"
           transition="transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)"
           transform={
             animations.titleText ? "translateY(0)" : "translateY(50px)"
@@ -248,7 +247,6 @@ export default function ChemistrySection({
         >
           <Text
             as="span"
-            fontFamily="Montserrat, sans-serif !important"
             fontWeight="bold"
             letterSpacing="-0.5px"
           >
@@ -371,7 +369,6 @@ export default function ChemistrySection({
                 fontWeight="600"
                 textTransform="uppercase"
                 letterSpacing="1px"
-                fontFamily="Montserrat, sans-serif"
                 position="relative"
                 zIndex="1"
               >
@@ -381,7 +378,6 @@ export default function ChemistrySection({
                 fontSize={{ base: "24px", md: "36px", xl: "48px" }}
                 color="#2C5AA0"
                 fontWeight="800"
-                fontFamily="Montserrat, sans-serif"
                 lineHeight="1.1"
                 position="relative"
                 zIndex="1"

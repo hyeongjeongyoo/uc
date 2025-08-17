@@ -106,6 +106,10 @@ interface PageHeroBannerProps {
 
   // 수동 설정 (기존 방식, optional)
   title?: string;
+  titleGradient?: {
+    from: string;
+    to: string;
+  };
   subtitle?: string;
   backgroundImage?: string;
   backgroundColor?: string;
@@ -147,6 +151,7 @@ export function PageHeroBanner({
         customMenuItems: manualCustomMenuItems || [],
         menuType: manualMenuType || "custom",
         animationType: manualAnimationType || "zoom-in",
+        titleGradient: undefined,
       }
     : {
         title: autoHeroData.title,
@@ -157,6 +162,7 @@ export function PageHeroBanner({
         customMenuItems: autoHeroData.menuItems,
         menuType: "custom" as const,
         animationType: autoHeroData.animationType || "zoom-in",
+        titleGradient: autoHeroData.titleGradient,
       };
 
   // 렌더링할 메뉴 아이템들 결정
@@ -231,15 +237,18 @@ export function PageHeroBanner({
         mb={finalData.showMenuBar ? 8 : 0}
         animation={`${titleSlideUp} 1s ease-out 0.5s both`}
       >
-        <Heading
-          as="h1"
-          fontFamily="Montserrat, sans-serif !important"
-          fontSize={{ base: "32px", md: "48px", lg: "72px" }}
-          fontWeight="bold"
-          mb={7}
-        >
-          {finalData.title}
-        </Heading>
+<Heading
+  as="h1"
+  fontSize={{ base: "32px", md: "48px", lg: "72px" }}
+  fontWeight="900"
+  mb={7}
+  lineHeight="1.2"
+  backgroundImage="linear-gradient(90deg, #297D83 0%, #0E58A4 100%)"
+  bgClip="text"
+  color="transparent"
+>
+  {finalData.title}
+</Heading>
         {finalData.subtitle && (
           <Text
             fontSize={{ base: "lg", md: "xl" }}

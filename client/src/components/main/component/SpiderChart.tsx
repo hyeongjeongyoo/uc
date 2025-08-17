@@ -185,11 +185,10 @@ const SpiderChart = () => {
             fontWeight="600"
             marginBottom="0.2rem"
             letterSpacing="1px"
-            fontFamily="Montserrat, sans-serif !important"
           >
             K&D
           </Heading>
-          <Text fontSize={{base: "24px", md: "32px", lg: "40px"}} fontWeight="700" letterSpacing="1px" fontFamily="Montserrat, sans-serif !important">
+          <Text fontSize={{base: "24px", md: "32px", lg: "40px"}} fontWeight="700" letterSpacing="1px">
             Energen
           </Text>
         </Box>

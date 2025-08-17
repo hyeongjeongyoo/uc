@@ -81,7 +81,6 @@ export const CompanyVisionCircles: React.FC = () => {
             fontSize={{ base: "16px", md: "20px", lg: "28px" }}
             fontWeight="bold"
             color="white"
-            fontFamily="Montserrat, sans-serif !important"
             lineHeight="1.3"
           >
             CORE <br />

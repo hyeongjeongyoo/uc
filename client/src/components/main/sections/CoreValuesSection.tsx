@@ -58,7 +58,6 @@ export default function CoreValuesSection({
           color="#4A7CD5"
           letterSpacing="2px"
           textTransform="uppercase"
-          fontFamily="Montserrat, sans-serif"
           style={{
             transform: `translateY(${(1 - (isVisible ? 1 : 0)) * 50}px)`,
             opacity: isVisible ? 1 : 0,
@@ -84,7 +83,6 @@ export default function CoreValuesSection({
         >
           <Text
             as="span"
-            fontFamily="Montserrat, sans-serif !important"
             fontWeight="bold"
             letterSpacing="-0.5px"
           >
@@ -251,7 +249,6 @@ export default function CoreValuesSection({
                     as="h3"
                     fontSize={{ base: "18px", md: "24px", xl: "36px" }}
                     fontWeight="700"
-                    fontFamily="Montserrat, sans-serif !important"
                     textShadow="0 2px 4px rgba(0, 0, 0, 0.5)"
                     transition="all 0.4s ease"
                     color="white"

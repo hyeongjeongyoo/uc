@@ -6,7 +6,9 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 import { PopupManager } from "@/components/common/PopupManager";
-import App from "@/components/main/component/App";
+import MainSection from "@/components/main/component/MainSection";
+import { Box } from "@chakra-ui/react";
+import { Header } from "@/components/layout/view/Header/Header";
 
 export default function Home() {
   return (
@@ -22,7 +24,10 @@ export default function Home() {
           },
         }}
       />
-      <App />
+      <Box>
+        <Header currentPage="/" menus={[]} />
+        <MainSection />
+      </Box>
     </>
   );
 }

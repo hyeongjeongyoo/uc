@@ -118,7 +118,6 @@ export default function ProcessPage() {
               fontWeight="bold"
               mb={6}
               color="#4A7CD5"
-              fontFamily="Montserrat, sans-serif"
               letterSpacing="2px"
               textTransform="uppercase"
             >
@@ -130,7 +129,6 @@ export default function ProcessPage() {
               fontWeight="bold"
               mb={6}
               lineHeight="1.3"
-              fontFamily="Montserrat, sans-serif"
             >
               수증기 촉매 개질방식(SMR)
             </Heading>
@@ -151,7 +149,6 @@ export default function ProcessPage() {
               mb={10}
               textAlign="center"
               color="#4A7CD5"
-              fontFamily="Montserrat, sans-serif"
               transition="all 0.8s ease"
               transform={
                 animations.processText ? "translateY(0)" : "translateY(50px)"

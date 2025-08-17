@@ -185,7 +185,6 @@ const CompanyCard = ({
         fontWeight="700"
         color="#4A7CD5"
         mb={{ base: "8px", lg: "10px" }}
-        fontFamily="Montserrat, sans-serif"
         opacity="0.8"
         position="relative"
         display="inline-block"
@@ -219,7 +218,6 @@ const CompanyCard = ({
         right={{ base: "20px", md: "30px", lg: "40px" }}
         color="#4A7CD5"
         fontSize={{ base: "14px", md: "16px", lg: "18px" }}
-        fontFamily="Montserrat, sans-serif"
         opacity="0"
         transform="translateX(-20px)"
         transition="all 0.3s ease"
@@ -359,7 +357,6 @@ export default function CompanySection({
           color="#4A7CD5"
           letterSpacing="2px"
           textTransform="uppercase"
-          fontFamily="Montserrat, sans-serif"
           transition="transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)"
           transform={
             animations.titleText ? "translateY(0)" : "translateY(50px)"
@@ -383,7 +380,6 @@ export default function CompanySection({
         >
           <Text
             as="span"
-            fontFamily="Montserrat, sans-serif !important"
             fontWeight="bold"
             letterSpacing="-0.5px"
           >

@@ -2,13 +2,16 @@
 
 import { Box } from "@chakra-ui/react";
 import { Header } from "./Header/Header";
-import MainSection from "../../main/component/MainSection";
 import { usePathname } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { menuApi, menuKeys, sortMenus } from "@/lib/api/menu";
 import { MenuApiResponse } from "@/types/api-response";
 
-const Layout = () => {
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
+const Layout = ({ children }: LayoutProps) => {
   const pathname = usePathname();
   const currentPage = pathname || "/";
 
@@ -27,7 +30,7 @@ const Layout = () => {
   return (
     <Box>
       <Header currentPage={currentPage} menus={sortedMenus} />
-      <MainSection />
+      {children}
     </Box>
   );
 };

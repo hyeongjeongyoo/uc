@@ -4,6 +4,7 @@ import { Box, Text, Heading, Grid, Stack, Container } from "@chakra-ui/react";
 import { PageContainer } from "@/components/layout/PageContainer";
 import { PageHeroBanner } from "@/components/sections/PageHeroBanner";
 import React, { useState, useEffect } from "react";
+import { HERO_DATA } from "@/lib/constants/heroSectionData";
 
 export default function CompanyPage() {
   // 애니메이션 상태 관리
@@ -46,22 +47,19 @@ export default function CompanyPage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const companyMenuItems = [
-    { name: "회사소개", href: "/knd/company" },
-    { name: "오시는 길", href: "/knd/location" },
-  ];
+  const heroData = HERO_DATA["/uc/location"];
 
   return (
     <Box>
       {/* 상단 배너 컴포넌트 */}
       <PageHeroBanner
-        title="COMPANY"
-        subtitle="K&D Energen의 위치를 소개합니다"
-        backgroundImage="/images/main/hero-image.jpg"
-        height="600px"
+        title={heroData.title}
+        subtitle={heroData.subtitle}
+        backgroundImage={heroData.backgroundImage}
+        height={heroData.height}
         menuType="custom"
-        customMenuItems={companyMenuItems}
-        animationType="zoom-in"
+        customMenuItems={heroData.menuItems}
+        animationType={heroData.animationType}
       />
 
       <PageContainer>
@@ -74,7 +72,7 @@ export default function CompanyPage() {
               mb={10}
               textAlign="center"
               color="#4A7CD5"
-              fontFamily="Montserrat, sans-serif !important"
+              fontFamily="errat, sans-serif !important"
               letterSpacing="2"
               transition="all 0.8s ease"
               transform={
@@ -258,7 +256,6 @@ export default function CompanyPage() {
                   mb={10}
                   textAlign="center"
                   color="#4A7CD5"
-                  fontFamily="Montserrat, sans-serif !important"
                   letterSpacing="2"
                   transition="all 0.8s ease 0.8s"
                   transform={

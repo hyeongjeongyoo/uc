@@ -201,7 +201,6 @@ export default function ArticleDetailPage() {
         return {
           bannerTitle: "NOTICES",
           title: "PR",
-          fontFamily: "montserrat !important",
           subtitle: "케이앤디에너젠의 공지사항을 확인하세요",
           backgroundImage: "/images/sub/privacy_bg.jpg",
           menuItems: [
@@ -213,7 +212,6 @@ export default function ArticleDetailPage() {
         return {
           bannerTitle: "IR",
           title: "IR",
-          fontFamily: "montserrat !important",
           subtitle: "케이앤디에너젠의 IR 정보를 확인하세요",
           backgroundImage: "/images/sub/privacy_bg.jpg",
           menuItems: [
@@ -225,7 +223,6 @@ export default function ArticleDetailPage() {
         return {
           bannerTitle: "뉴스/보도자료",
           title: "PR",
-          fontFamily: "montserrat !important",
           subtitle: "케이앤디에너젠의 최신 소식을 전해드립니다",
           backgroundImage: "/images/sub/privacy_bg.jpg",
           menuItems: [
@@ -237,7 +234,6 @@ export default function ArticleDetailPage() {
         return {
           bannerTitle: "게시판",
           title: "게시판",
-          fontFamily: "montserrat !important",
           subtitle: "게시판입니다",
           backgroundImage: "/images/sub/privacy_bg.jpg",
           menuItems: [
@@ -272,7 +268,6 @@ export default function ArticleDetailPage() {
             mb={10}
             textAlign="center"
             color="#4A7CD5"
-            fontFamily="Montserrat, sans-serif !important"
             letterSpacing="2"
           >
             K&D ENERGEN

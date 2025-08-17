@@ -1,10 +1,14 @@
 export interface HeroPageData {
     title: string;
-  subtitle?: string;
-  backgroundImage: string;
-  height?: string;
-  menuItems: Array<{ name: string; href: string }>;
-  animationType?: "zoom-in" | "zoom-out" | "pan-right";
+    titleGradient?: {
+      from: string;
+      to: string;
+    };
+    subtitle?: string;
+    backgroundImage: string;
+    height?: string;
+    menuItems: Array<{ name: string; href: string }>;
+    animationType?: "zoom-in" | "zoom-out" | "pan-right";
 }
 
 export interface BoardHeroData extends HeroPageData {
@@ -17,43 +21,55 @@ export interface DynamicHeroData extends HeroPageData {
 
 // 완전한 페이지별 히어로 데이터 중앙 관리
 export const HERO_DATA: Record<string, HeroPageData> = {
-  // KND 관련 페이지들
-  "/knd/company": {
-    title: "COMPANY",
-    subtitle: "K&D Energen을 소개합니다",
+  // UC 관련 페이지들
+  "/uc/center": {
+    title: "센터소개",
+    titleGradient: {
+      from: "#297D83",
+      to: "#0E58A4"
+    },
+    subtitle: "울산과학대학교 학생상담센터를 소개합니다",
     backgroundImage: "/images/main/hero-image.jpg",
     height: "600px",
     menuItems: [
-      { name: "회사소개", href: "/knd/company" },
-      { name: "회사개요", href: "/knd/company" },
+      { name: "센터안내", href: "/uc/center" },
+      { name: "센터소개", href: "/uc/center" },
     ],
     animationType: "zoom-in",
   },
 
-  "/knd/organization": {
-    title: "COMPANY",
-    subtitle: "K&D Energen의 조직도를 소개합니다",
+  "/uc/location": {
+    title: "센터소개",
+    titleGradient: {
+      from: "#297D83",
+      to: "#0E58A4"
+    },
+    subtitle: "UC의 위치를 소개합니다",
     backgroundImage: "/images/main/hero-image.jpg",
     height: "600px",
     menuItems: [
-      { name: "회사소개", href: "/knd/company" },
-      { name: "조직도", href: "/knd/organization" },
+      { name: "센터안내", href: "/uc/center" },
+      { name: "오시는 길", href: "/uc/location" },
     ],
     animationType: "zoom-in",
   },
 
-  "/knd/location": {
-    title: "COMPANY",
-    subtitle: "K&D Energen의 위치를 소개합니다",
+  "/uc/info": {
+    title: "센터소개",
+    titleGradient: {
+      from: "#297D83",
+      to: "#0E58A4"
+    },
+    subtitle: "UC의 위치를 소개합니다",
     backgroundImage: "/images/main/hero-image.jpg",
     height: "600px",
     menuItems: [
-      { name: "회사소개", href: "/knd/company" },
-      { name: "오시는 길", href: "/knd/location" },
+      { name: "센터안내", href: "/uc/center" },
+      { name: "오시는 길", href: "/uc/info" },
     ],
     animationType: "zoom-in",
   },
-
+  
   // Business 관련 페이지들
   "/business/business": {
     title: "BUSINESS",

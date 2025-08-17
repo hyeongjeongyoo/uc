@@ -177,10 +177,6 @@ export const STYLES = {
       mt: 1,
     },
   },
-  fonts: {
-    body: '"Pretendard", "Montserrat", sans-serif',
-    heading: '"Pretendard", "Montserrat", sans-serif',
-  },
   section: {
     py: {
       base: 8,

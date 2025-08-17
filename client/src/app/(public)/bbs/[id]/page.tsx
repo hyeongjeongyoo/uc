@@ -453,7 +453,6 @@ export default function BoardPage({
       case "notices":
         return {
           title: "PR",
-          fontFamily: "montserrat !important",
           subtitle: "K&D ENERGEN의 공지사항을 확인하세요",
           backgroundImage: "/images/sub/privacy_bg.jpg",
           menuItems: [
@@ -464,7 +463,6 @@ export default function BoardPage({
       case "ir":
         return {
           title: "IR",
-          fontFamily: "montserrat !important",
           subtitle: "K&D ENERGEN의 IR 정보를 확인하세요",
           backgroundImage: "/images/sub/privacy_bg.jpg",
           menuItems: [
@@ -524,7 +522,6 @@ export default function BoardPage({
             mb={5}
             textAlign="center"
             color="#4A7CD5"
-            fontFamily="Montserrat, sans-serif !important"
             letterSpacing="2"
             transform={isScrolled ? "translateY(0)" : "translateY(20px)"}
             opacity={isScrolled ? 1 : 0}

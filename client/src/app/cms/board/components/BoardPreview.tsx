@@ -905,7 +905,6 @@ const BoardPreview = React.memo(function BoardPreview({
             mb={5}
             textAlign="center"
             color="#4A7CD5"
-            fontFamily="Montserrat, sans-serif !important"
             letterSpacing="2"
           >
             K&D ENERGEN
