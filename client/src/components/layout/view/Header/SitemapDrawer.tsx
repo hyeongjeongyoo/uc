@@ -447,7 +447,6 @@ export const SitemapDrawer = memo(
                                           lg: "22px",
                                         }}
                                         lineHeight="1.2"
-                                        fontFamily="pretendard"
                                         color={isDark ? "gray.100" : "gray.800"}
                                         position="relative"
                                         overflow="hidden"

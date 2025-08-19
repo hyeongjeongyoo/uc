@@ -237,18 +237,18 @@ export function PageHeroBanner({
         mb={finalData.showMenuBar ? 8 : 0}
         animation={`${titleSlideUp} 1s ease-out 0.5s both`}
       >
-<Heading
-  as="h1"
-  fontSize={{ base: "32px", md: "48px", lg: "72px" }}
-  fontWeight="900"
-  mb={7}
-  lineHeight="1.2"
-  backgroundImage="linear-gradient(90deg, #297D83 0%, #0E58A4 100%)"
-  bgClip="text"
-  color="transparent"
->
-  {finalData.title}
-</Heading>
+        <Heading
+          as="h1"
+          fontSize={{ base: "32px", md: "48px", lg: "72px" }}
+          fontWeight="900"
+          mb={7}
+          lineHeight="1.2"
+          backgroundImage="linear-gradient(90deg, #297D83 0%, #0E58A4 100%)"
+          bgClip="text"
+          color="transparent"
+        >
+          {finalData.title}
+        </Heading>
         {finalData.subtitle && (
           <Text
             fontSize={{ base: "lg", md: "xl" }}

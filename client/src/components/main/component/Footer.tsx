@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Box, Text, Image, Button } from "@chakra-ui/react"; // Chakra UI import 추가
+import { Box, Text, Image, Button, Flex } from "@chakra-ui/react"; // Chakra UI import 추가
 
 const Footer = () => {
   const [showTopButton, setShowTopButton] = useState(false);
@@ -38,122 +38,120 @@ const Footer = () => {
   return (
     <Box
       as="footer"
-      pt={{ base: "80px", xl: "100px" }}
-      bg="#f8f9fa"
-      borderTop="1px solid #e0e0e0"
+      bg="#267987"
+      color="#fff"
+      pt={{ base: 8, xl: 10 }}
+      pb={{ base: 10, xl: 12 }}
+      fontFamily="paperlogy"
     >
-      <Box maxWidth={{ base: "90%", xl: "1300px" }} margin="0 auto">
-        {/* 상단 영역 - 로고와 설명 */}
-        <Box textAlign="center" marginBottom="40px">
-          <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            gap="12px"
-            marginBottom="20px"
-          >
-            <Image
-              height={{ base: "30px", xl: "55px" }}
-              width="auto"
-              src="/images/logo/logo2.png"
-              alt="케이앤디에너젠"
-            />
-          </Box>
-          <Text fontSize="1rem" color="#666" lineHeight="1.6" margin="0">
-            청정에너지 기술로 지속 가능한 미래를 만들어갑니다.
-          </Text>
-        </Box>
-
-        {/* 연락처 정보 */}
-        <Box
-          display="flex"
-          flexDirection="row"
-          justifyContent="space-between"
-          alignItems="center"
-          flexWrap="wrap"
-          gap={{ base: "20px", xl: "40px" }}
-          marginBottom="40px"
-          padding="30px 0"
-          borderTop="1px solid #e0e0e0"
-          borderBottom="1px solid #e0e0e0"
+      <Box maxWidth={{ base: "92%", xl: "1300px" }} margin="0 auto">
+        {/* 상단: 좌측 브랜드, 우측 링크 */}
+        <Flex
+          direction={{ base: "column", md: "row" }}
+          align={{ base: "flex-start", md: "center" }}
+          justify="space-between"
+          gap={4}
+          py={2}
         >
-          <Box display="flex" alignItems="center" gap="8px" fontSize="0.9rem">
-            <Text fontWeight="600" color="#333" minWidth="60px">
-              주소
-            </Text>
-            <Text color="#666">
-              울산 울주군 온산읍 산암로 213, 케이앤디에너젠(주)
-            </Text>
-          </Box>
-          <Box display="flex" alignItems="center" gap="8px" fontSize="0.9rem">
-            <Text fontWeight="600" color="#333">
-              Tel
-            </Text>
-            <Text color="#666">000-0000-0000</Text>
-          </Box>
-          <Box display="flex" alignItems="center" gap="8px" fontSize="0.9rem">
-            <Text fontWeight="600" color="#333">
-              Fax
-            </Text>
-            <Text color="#666">000-0000-0000</Text>
-          </Box>
-          <Box display="flex" alignItems="center" gap="8px" fontSize="0.9rem">
-            <Text fontWeight="600" color="#333">
-              대표이메일
-            </Text>
-            <Text color="#666">info@kdenergy.co.kr</Text>
-          </Box>
-          <Box display="flex" alignItems="center" gap="8px" fontSize="0.9rem">
-            <Text fontWeight="600" color="#333">
-              채용문의
-            </Text>
-            <Text color="#666">hr@kdenergy.co.kr</Text>
-          </Box>
-        </Box>
-
-        {/* 하단 영역 - 저작권 및 링크 */}
-        <Box
-          background="#4A7CD5"
-          color="white"
-          padding="20px 30px"
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-          borderRadius="20px 20px 0 0"
-          flexDirection={{ base: "column", xl: "row" }}
-        >
-          <Text fontSize="0.9rem" color="rgba(255, 255, 255, 0.9)">
-            © K&D Energen Co., Ltd. All rights reserved.
+          <Text fontWeight="bold" fontSize={{ base: "16px", md: "20px" }}>
+            울산과학대학교 학생상담센터
           </Text>
-          <Box display="flex" gap="10px">
+          <Flex gap={{ base: 2, md: 4 }} wrap="wrap">
             <Button
-              bg="transparent"
-              color="white"
-              fontSize="0.9rem"
               onClick={() => handleLinkClick("/privacy-policy")}
-              _hover={{
-                bg: "rgba(255, 255, 255, 0.1)",
-                textDecoration: "none",
-              }}
-              px="10px"
-            >
-              개인정보취급방침
-            </Button>
-            {/* <Button
               bg="transparent"
-              color="white"
-              fontSize="0.9rem"
-              onClick={() => handleLinkClick("/energy-policy")}
-              _hover={{
-                bg: "rgba(255, 255, 255, 0.1)",
-                textDecoration: "none",
-              }}
-              px="10px"
+              color="#fff"
+              _hover={{ bg: "rgba(255,255,255,0.15)" }}
+              fontSize={{ base: "14px", lg: "16px" }}
             >
-              에너지정책
-            </Button> */}
+              개인정보처리방침
+            </Button>
+            <Button
+              onClick={() => handleLinkClick("/reject-spam-email")}
+              bg="transparent"
+              color="#fff"
+              _hover={{ bg: "rgba(255,255,255,0.15)" }}
+              fontSize={{ base: "14px", lg: "16px" }}
+            >
+              이메일무단수집거부
+            </Button>
+            <Button
+              onClick={() => handleLinkClick("/uc/info")}
+              bg="transparent"
+              color="#fff"
+              _hover={{ bg: "rgba(255,255,255,0.15)" }}
+              fontSize={{ base: "14px", lg: "16px" }}
+            >
+              교내전화번호
+            </Button>
+            <Button
+              onClick={() => handleLinkClick("/uc/location")}
+              bg="transparent"
+              color="#fff"
+              _hover={{ bg: "rgba(255,255,255,0.15)" }}
+              fontSize={{ base: "14px", lg: "16px" }}
+            >
+              찾아오시는길
+            </Button>
+          </Flex>
+        </Flex>
+
+        {/* 구분선 */}
+        <Box borderTop="1px solid rgba(255,255,255,0.3)" mt={2} mb={6} />
+
+        {/* 본문: 좌측 캠퍼스 정보, 우측 로고 */}
+        <Flex justify="space-between" align="flex-start" gap={6} wrap="wrap">
+          <Box flex="1 1 520px">
+            <Box mb={6}>
+              <Text fontSize={{ base: "14px", lg: "18px" }} mb={2}>
+                동부캠퍼스
+              </Text>
+              <Text fontSize={{ base: "12px", lg: "16px" }}>
+                (우)44022) 울산광역시 동구 봉수로 101
+              </Text>
+              <Text fontSize={{ base: "12px", lg: "16px" }}>
+                TEL : 052-230-0500
+              </Text>
+              <Text fontSize={{ base: "12px", lg: "16px" }}>
+                FAX : 052-234-9300
+              </Text>
+            </Box>
+            <Box>
+              <Text fontSize={{ base: "14px", lg: "18px" }} mb={2}>
+                서부캠퍼스
+              </Text>
+              {/* <Text fontSize={{base:"12px", lg:"16px"}}>(우)44610) 울산광역시 남구 대학로 57</Text>
+              <Text fontSize={{base:"12px", lg:"16px"}}>TEL : 052-279-5300</Text>
+              <Text fontSize={{base:"12px", lg:"16px"}}>FAX : 052-277-1538</Text> */}
+            </Box>
           </Box>
-        </Box>
+
+          <Box
+            flex="0 0 240px"
+            ml="auto"
+            display="flex"
+            justifyContent="flex-end"
+          >
+            <Box borderRadius="md" p={4}>
+              <Image
+                src="/images/logo/big_logo.png"
+                alt="UC 로고"
+                width="200px"
+                height="200px"
+                objectFit="contain"
+                opacity={0.2}
+                filter="brightness(0) invert(1)"
+              />
+            </Box>
+          </Box>
+        </Flex>
+
+        {/* 하단 카피라이트 */}
+        <Flex justify="flex-end" mt={6}>
+          <Text fontSize={{ base: "14px", md: "16px" }} opacity={0.9}>
+            Copyright ⓒ 2025 울산과학대학교 학생상담센터. All Rights Reserved.
+          </Text>
+        </Flex>
       </Box>
 
       {showTopButton && (
@@ -161,19 +159,19 @@ const Footer = () => {
           position="fixed"
           bottom="2rem"
           right="2rem"
-          bg="#4A7CD5"
-          color="white"
+          bg="#267987"
+          color="#fff"
           p="0.8rem 1.2rem"
           borderRadius="25px"
           fontSize="0.9rem"
           fontWeight="600"
-          boxShadow="0 4px 15px rgba(74, 124, 213, 0.3)"
+          boxShadow="0 4px 15px rgba(0, 0, 0, 0.25)"
           zIndex={100}
           onClick={scrollToTop}
           _hover={{
-            bg: "#3a6bb8",
+            bg: "#0D6473",
             transform: "translateY(-2px)",
-            boxShadow: "0 6px 20px rgba(74, 124, 213, 0.4)",
+            boxShadow: "0 6px 20px rgba(0, 0, 0, 0.35)",
           }}
         >
           TOP

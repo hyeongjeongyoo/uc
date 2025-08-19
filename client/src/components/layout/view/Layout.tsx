@@ -2,6 +2,7 @@
 
 import { Box } from "@chakra-ui/react";
 import { Header } from "./Header/Header";
+import Footer from "@/components/main/component/Footer";
 import { usePathname } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { menuApi, menuKeys, sortMenus } from "@/lib/api/menu";
@@ -28,9 +29,10 @@ const Layout = ({ children }: LayoutProps) => {
   const sortedMenus = sortMenus(menuResponse?.data || []);
 
   return (
-    <Box>
+    <Box display="flex" flexDirection="column" minHeight="100vh">
       <Header currentPage={currentPage} menus={sortedMenus} />
-      {children}
+      <Box flex="1">{children}</Box>
+      <Footer />
     </Box>
   );
 };
