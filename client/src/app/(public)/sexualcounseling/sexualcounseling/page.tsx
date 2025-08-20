@@ -25,6 +25,7 @@ export default function SexualCounselingPage() {
     harassHeading: false,
     harassText: false,
     applySection: false,
+    processSection: false,
   });
 
   // 스크롤 이벤트 처리
@@ -38,6 +39,7 @@ export default function SexualCounselingPage() {
   const harassHeadingRef = useRef<HTMLDivElement | null>(null);
   const harassTextRef = useRef<HTMLParagraphElement | null>(null);
   const applySectionRef = useRef<HTMLDivElement | null>(null);
+  const processSectionRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
@@ -52,6 +54,7 @@ export default function SexualCounselingPage() {
       let harHeadingInView = false;
       let harTextInView = false;
       let applyInView = false;
+      let processInView = false;
       if (infoDescRef.current) {
         const rect = infoDescRef.current.getBoundingClientRect();
         const viewportH =
@@ -112,6 +115,12 @@ export default function SexualCounselingPage() {
           window.innerHeight || document.documentElement.clientHeight;
         applyInView = rect.top < viewportH - 80;
       }
+      if (processSectionRef.current) {
+        const rect = processSectionRef.current.getBoundingClientRect();
+        const viewportH =
+          window.innerHeight || document.documentElement.clientHeight;
+        processInView = rect.top < viewportH - 80;
+      }
 
       // 각 애니메이션 트리거 지점 설정
       setAnimations({
@@ -128,6 +137,7 @@ export default function SexualCounselingPage() {
         harassHeading: harHeadingInView,
         harassText: harTextInView,
         applySection: applyInView,
+        processSection: processInView,
       });
     };
 
@@ -750,6 +760,289 @@ export default function SexualCounselingPage() {
                   w={{ base: "64px", md: "96px" }}
                 />
               </Box>
+            </Box>
+          </Flex>
+        </Container>
+      </Box>
+
+      {/* 새 섹션: 사건 처리 절차 (프로세스 표) */}
+      <Box
+        backgroundColor="white"
+        pt={{ base: "80px", sm: "100px", md: "150px", lg: "180px" }}
+        pb={{ base: "80px", sm: "100px", md: "150px", lg: "180px" }}
+        ref={processSectionRef}
+        transition="all 0.8s ease 0.2s"
+        style={{
+          transform: animations.processSection
+            ? "translateY(0)"
+            : "translateY(50px)",
+          opacity: animations.processSection ? 1 : 0,
+        }}
+      >
+        <Container maxW="1300px">
+          <Box mb={5}>
+            <DecoratedHeading
+              text="사건 처리 절차"
+              inView={animations.processSection}
+            />
+          </Box>
+
+          {/* 캡슐형 프로세스 다이어그램 */}
+          <Flex
+            direction={{ base: "column", md: "row" }}
+            align="flex-start"
+            gap={{ base: 8, md: 10 }}
+          >
+            {/* 좌측 단계 1~3 */}
+            <Box
+              display="flex"
+              flexDirection="column"
+              gap={4}
+              w={{ base: "100%", md: "300px" }}
+            >
+              {[
+                "1. 사건발생",
+                "2. 성고충상담",
+                "3. 상담 접수 및 면담 실시",
+              ].map((t, i, arr) => (
+                <React.Fragment key={i}>
+                  <Box
+                    bg="#E9EFF8"
+                    color="#0D344E"
+                    borderRadius="9999px"
+                    px={5}
+                    py={3}
+                    fontWeight="600"
+                    boxShadow="inset 0 1px 0 rgba(255,255,255,0.6)"
+                    border="1px solid #dbe4f3"
+                  >
+                    {t}
+                  </Box>
+                  {i < arr.length - 1 && (
+                    <Box
+                      display="flex"
+                      justifyContent="center"
+                      aria-hidden="true"
+                    >
+                      <Box as="span">
+                        <svg
+                          width="24"
+                          height="14"
+                          viewBox="0 0 24 14"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M3 3l9 8 9-8"
+                            stroke="#0D344E"
+                            strokeWidth="3"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </Box>
+                    </Box>
+                  )}
+                </React.Fragment>
+              ))}
+              <Box
+                bg="#ffffff"
+                border="1px solid #E5E7EB"
+                borderRadius="12px"
+                p={4}
+                boxShadow="0 6px 16px rgba(0,0,0,0.04)"
+              >
+                <Box
+                  as="ul"
+                  pl={3}
+                  color="#555"
+                  fontSize={{ base: "14px", md: "15px" }}
+                >
+                  <Text as="li" mb={1} style={{ listStyleType: "'· '" }}>
+                    상담 참여여부와 고지할 사항 안내
+                  </Text>
+                  <Text as="li" mb={1} style={{ listStyleType: "'· '" }}>
+                    고충처리부서에서 제공할 수 있는 서비스 등 지원 안내
+                  </Text>
+                  <Text as="li" mb={1} style={{ listStyleType: "'· '" }}>
+                    사건 경위·증거 확인
+                  </Text>
+                  <Text as="li" mb={1} style={{ listStyleType: "'· '" }}>
+                    각 이해관계인에 대한 안전 조치
+                  </Text>
+                  <Text as="li" mb={1} style={{ listStyleType: "'· '" }}>
+                    비밀 보장 범위 및 관련 내 법·절차 안내
+                  </Text>
+                </Box>
+              </Box>
+            </Box>
+
+            {/* 우측: 질문 + YES/NO를 함께 나열하는 컬럼 */}
+            <Box
+              display="flex"
+              flexDirection="column"
+              gap={5}
+              flex="1"
+              minW={{ base: "100%", md: "0" }}
+            >
+              {/* 질문 박스 (우측 컬럼 상단 가득) */}
+              <Box
+                bg="#E9EFF8"
+                color="#0D344E"
+                borderRadius="25px"
+                px={5}
+                py={3}
+                fontWeight="700"
+                border="1px solid #dbe4f3"
+                boxShadow="inset 0 1px 0 rgba(255,255,255,0.6)"
+              >
+                4. 조사 필요성이 있는가?
+              </Box>
+              {/* 아래 YES/NO 나란히 */}
+              <Flex
+                direction={{ base: "row", md: "row" }}
+                align="flex-start"
+                gap={{ base: 6, md: 8 }}
+              >
+                {/* YES 영역 */}
+                <Box flex="1">
+                  <Flex align="center" gap={3} mb={3}>
+                    <Box
+                      bg="#297D83"
+                      color="#fff"
+                      borderRadius="9999px"
+                      px={3}
+                      py={1}
+                      fontWeight="700"
+                      fontSize="12px"
+                    >
+                      YES
+                    </Box>
+                    <Box flex="1" h="1px" bg="#dbe4f3" />
+                  </Flex>
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    gap={3}
+                    textAlign="center"
+                  >
+                    {[
+                      "사건 신고 및 접수",
+                      "조사개시",
+                      "보고서 작성",
+                      "위반행위 판단",
+                      "사안 심의·의결",
+                      "심의결과 통보",
+                      "사건 종료 및 재발 예방 모니터링",
+                    ].map((t, i, arr) => (
+                      <React.Fragment key={i}>
+                        <Box
+                          border="1px solid #E5E7EB"
+                          bg="#fff"
+                          borderRadius="9999px"
+                          px={5}
+                          py={2}
+                          boxShadow="0 4px 10px rgba(0,0,0,0.04)"
+                          w="100%"
+                        >
+                          {t}
+                        </Box>
+                        {i < arr.length - 1 && (
+                          <Box
+                            display="flex"
+                            justifyContent="center"
+                            aria-hidden="true"
+                          >
+                            <Box as="span">
+                              <svg
+                                width="24"
+                                height="14"
+                                viewBox="0 0 24 14"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M3 3l9 8 9-8"
+                                  stroke="#0D344E"
+                                  strokeWidth="3"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />
+                              </svg>
+                            </Box>
+                          </Box>
+                        )}
+                      </React.Fragment>
+                    ))}
+                  </Box>
+                </Box>
+                {/* NO 영역 */}
+                <Box flex="1">
+                  <Flex align="center" gap={3} mb={3}>
+                    <Box
+                      bg="#889C3F"
+                      color="#fff"
+                      borderRadius="9999px"
+                      px={3}
+                      py={1}
+                      fontWeight="700"
+                      fontSize="12px"
+                    >
+                      NO
+                    </Box>
+                    <Box flex="1" h="1px" bg="#889C3F" />
+                  </Flex>
+                  <Box
+                    bg="#ffffff"
+                    border="1px solid #E5E7EB"
+                    borderRadius="12px"
+                    p={4}
+                    boxShadow="0 6px 16px rgba(0,0,0,0.04)"
+                    mb={4}
+                  >
+                    <Text fontWeight="600" mb={2}>
+                      상담 종결
+                    </Text>
+                    <Box
+                      as="ul"
+                      pl={3}
+                      color="#555"
+                      fontSize={{ base: "14px", md: "15px" }}
+                    >
+                      <Text as="li" mb={1} style={{ listStyleType: "'· '" }}>
+                        상담인의 상담 종결 판단
+                      </Text>
+                      <Text as="li" mb={1} style={{ listStyleType: "'· '" }}>
+                        필요 시 심리상담 연계
+                      </Text>
+                    </Box>
+                  </Box>
+                  <Box
+                    bg="#ffffff"
+                    border="1px solid #E5E7EB"
+                    borderRadius="12px"
+                    p={4}
+                    boxShadow="0 6px 16px rgba(0,0,0,0.04)"
+                  >
+                    <Text fontWeight="600" mb={2}>
+                      당사자 간 협의 중재
+                    </Text>
+                    <Box
+                      as="ul"
+                      pl={3}
+                      color="#555"
+                      fontSize={{ base: "14px", md: "15px" }}
+                    >
+                      <Text as="li" mb={1} style={{ listStyleType: "'· '" }}>
+                        합의 성립 여부 확인
+                      </Text>
+                      <Text as="li" mb={1} style={{ listStyleType: "'· '" }}>
+                        합의 이행 여부 모니터링
+                      </Text>
+                    </Box>
+                  </Box>
+                </Box>
+              </Flex>
             </Box>
           </Flex>
         </Container>

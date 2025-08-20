@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Text, Heading, Stack, Container } from "@chakra-ui/react";
+import { Box, Text, Heading, Stack, Container, Image } from "@chakra-ui/react";
 import { PageContainer } from "@/components/layout/PageContainer";
 import { PageHeroBanner } from "@/components/sections/PageHeroBanner";
 import React, { useState, useEffect } from "react";
@@ -85,89 +85,18 @@ export default function LocationPage() {
             >
               울산과학대학교 학생상담센터는 학생회관 2층에 위치해 있습니다.
             </Text>
-
-            {/* 카카오맵 - RoughMap (퍼가기) */}
-            {/* 1) 로더 스크립트 */}
-            <Script
-              src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"
-              strategy="afterInteractive"
-            />
-            {/* 2) 실행 스크립트 (공식 퍼가기 가이드 그대로) */}
-            <Script id="daum-roughmap-init" strategy="afterInteractive">
-              {`
-                (function(){
-                  if (!document.getElementById('daumRoughmapContainer1755579031202')) return;
-                  try {
-                    new daum.roughmap.Lander({
-                      timestamp: '1755579031202',
-                      key: '7n9x6x7vbd6',
-                      mapWidth: '100%',
-                      mapHeight: '500'
-                    }).render();
-                  } catch(e) {
-                    if (typeof daum !== 'undefined' && daum.roughmap && typeof daum.roughmap.Lander === 'function') {
-                      var inst = daum.roughmap.Lander({
-                        timestamp: '1755579031202',
-                        key: '7n9x6x7vbd6',
-                        mapWidth: '100%',
-                        mapHeight: '500'
-                      });
-                      if (inst && typeof inst.render === 'function') inst.render();
-                    }
-                  }
-                })();
-              `}
-            </Script>
-            {/* 3) 컨테이너 */}
-            <Box
-              width="1000px"
+            <Image
+              src="/images/sub/location.png"
+              alt="heading decoration"
+              width="100%"
               height="500px"
-              id="daumRoughmapContainer1755579031202"
-              className="root_daum_roughmap root_daum_roughmap_landing"
+              objectFit="cover"
+              objectPosition="center"
+              zIndex={0}
             />
           </Box>
         </Stack>
       </PageContainer>
-
-      {/* 지도 섹션 */}
-      <Box
-        p={8}
-        backgroundColor="#fafafa"
-        pt={{ base: "80px", sm: "100px", md: "150px", lg: "180px" }}
-        pb={{ base: "80px", sm: "100px", md: "150px", lg: "180px" }}
-      >
-        <Container maxW="1300px">
-          <Box paddingInline="0">
-            <Stack>
-              <Box>
-                <Heading
-                  as="h2"
-                  fontSize={{ base: "24px", lg: "36px", xl: "48px" }}
-                  fontWeight="bold"
-                  mb={5}
-                  lineHeight="1.3"
-                  transition="all 0.8s ease 1.0s"
-                  transform={
-                    animations.mapHeading ? "translateY(0)" : "translateY(50px)"
-                  }
-                  opacity={animations.mapHeading ? 1 : 0}
-                >
-                  위치 안내
-                </Heading>
-                <Text
-                  fontSize={{ base: "14px", lg: "20px", xl: "24px" }}
-                  mb={5}
-                >
-                  주소: 울산광역시 동구 봉수로 101 울산과학대학교 학생회관 2층
-                  <Box as="br" />
-                  전화: 052-123-4567
-                </Text>
-                {/* 여기에 지도 컴포넌트를 추가할 수 있습니다 */}
-              </Box>
-            </Stack>
-          </Box>
-        </Container>
-      </Box>
     </Box>
   );
 }

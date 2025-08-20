@@ -225,76 +225,192 @@ export default function DisabledPage() {
                   text="무엇을 다루나요?"
                   inView={animations.recommendHeading}
                 />
-                {/* 추천 리스트 (2열, 아이콘 + 텍스트) */}
+                {/* 무엇을 지원하나요? 1x4 카드 디자인으로 통일 */}
                 <Flex
-                  wrap={{ base: "wrap", md: "wrap" }}
-                  gap={{ base: 5, md: 5 }}
+                  wrap={{ base: "wrap", md: "nowrap" }}
                   w="100%"
+                  justify={{ base: "flex-start", md: "space-between" }}
+                  gap={{ base: 3, md: 5 }}
                 >
                   {[
                     {
-                      text: "집중, 과제·시험 스트레스, 공부 방법",
-                      icon: "/images/icons/pencil.png",
+                      title: "학업",
+                      desc: "집중, 과제·시험 스트레스, 공부 방법",
+                      iconType: "study",
                     },
                     {
-                      text: "친구·교수·가족과의 갈등, 소통 방법",
-                      icon: "/images/icons/talk.png",
+                      title: "대인관계",
+                      desc: "친구·교수·가족과의 갈등, 소통 방법",
+                      iconType: "relation",
                     },
                     {
-                      text: "관심·강점 탐색, 진로 결정 고민",
-                      icon: "/images/icons/headache.png",
+                      title: "진로",
+                      desc: "관심·강점 탐색, 진로 결정 고민",
+                      iconType: "career",
                     },
                     {
-                      text: "학교생활 리듬, 감정 조절, 스트레스 대처",
-                      icon: "/images/icons/mind.png",
+                      title: "생활 적응",
+                      desc: "학교생활 리듬, 감정 조절, 스트레스 대처",
+                      iconType: "adapt",
                     },
-                  ].map((item, idx) => (
-                    <Flex
+                  ].map((card, idx) => (
+                    <Box
                       key={idx}
-                      align="center"
+                      flex={{ base: "1 1 100%", md: "0 0 calc(25% - 10px)" }}
+                      maxW={{ base: "100%", md: "calc(25% - 10px)" }}
+                      flexShrink={0}
                       bg="#ffffff"
+                      borderRadius="xl"
                       boxShadow="0 8px 16px rgba(0,0,0,0.04)"
-                      borderRadius="12px"
-                      p={{ base: 3, md: 4 }}
+                      p={{ base: 6, md: 8 }}
+                      minH={{ base: "auto", md: "300px" }}
+                      display="flex"
+                      justifyContent="center"
+                      flexDirection="column"
                       gap={3}
-                      flex={{ base: "1 1 100%", md: "0 0 calc(50% - 12px)" }}
-                      maxW={{ base: "100%", md: "calc(50% - 12px)" }}
-                      transition={`all 0.6s ease-out ${0.15 + idx * 0.05}s`}
+                      position="relative"
+                      transition={`all 0.6s ease-out ${0.2 + idx * 0.1}s`}
                       transform={
                         animations.recommendHeading
                           ? "translateY(0)"
-                          : "translateY(16px)"
+                          : "translateY(24px)"
                       }
                       opacity={animations.recommendHeading ? 1 : 0}
+                      cursor="default"
+                      willChange="transform, box-shadow, border-color"
                       _hover={{
                         transform: animations.recommendHeading
-                          ? "translateY(-2px)"
-                          : "translateY(16px)",
+                          ? "translateY(-4px)"
+                          : "translateY(24px)",
                         boxShadow: "0 12px 24px rgba(0,0,0,0.08)",
+                        borderColor: "#e2e8f0",
                       }}
                     >
+                      {/* 상단 아이콘 (배경 없음, 그라데이션 스트로크) */}
                       <Box
-                        w={{ base: "28px", md: "32px" }}
-                        h={{ base: "28px", md: "32px" }}
-                        borderRadius="8px"
-                        bg="#267987"
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center"
-                        flexShrink={0}
+                        w={{ base: "30px", md: "40px" }}
+                        h={{ base: "30px", md: "40px" }}
+                        mb={10}
                       >
-                        <Image
-                          src={item.icon}
-                          alt="icon"
-                          w="70%"
-                          h="auto"
-                          filter="brightness(0) invert(1)"
-                        />
+                        {(() => {
+                          const gradId = `disabledGrad_${idx}`;
+                          const Gradient = (
+                            <defs>
+                              <linearGradient
+                                id={gradId}
+                                x1="0%"
+                                y1="0%"
+                                x2="100%"
+                                y2="0%"
+                              >
+                                <stop offset="0%" stopColor="#297D83" />
+                                <stop offset="100%" stopColor="#3DAD5F" />
+                              </linearGradient>
+                            </defs>
+                          );
+                          if (card.iconType === "study") {
+                            return (
+                              <svg
+                                viewBox="0 0 24 24"
+                                width="100%"
+                                height="100%"
+                                fill="none"
+                              >
+                                {Gradient}
+                                <path
+                                  d="M3 21l3-1 11-11-2-2L4 18l-1 3z"
+                                  stroke={`url(#${gradId})`}
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />
+                                <path
+                                  d="M14 5l2 2"
+                                  stroke={`url(#${gradId})`}
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                />
+                              </svg>
+                            );
+                          }
+                          if (card.iconType === "relation") {
+                            return (
+                              <svg
+                                viewBox="0 0 24 24"
+                                width="100%"
+                                height="100%"
+                                fill="none"
+                              >
+                                {Gradient}
+                                <path
+                                  d="M21 15a4 4 0 0 1-4 4H8l-5 3 1.5-4A4 4 0 0 1 4 15V7a4 4 0 0 1 4-4h9a4 4 0 0 1 4 4v8z"
+                                  stroke={`url(#${gradId})`}
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />
+                              </svg>
+                            );
+                          }
+                          if (card.iconType === "career") {
+                            return (
+                              <svg
+                                viewBox="0 0 24 24"
+                                width="100%"
+                                height="100%"
+                                fill="none"
+                              >
+                                {Gradient}
+                                <circle
+                                  cx="12"
+                                  cy="12"
+                                  r="9"
+                                  stroke={`url(#${gradId})`}
+                                  strokeWidth="2"
+                                />
+                                <path
+                                  d="M10 14l4-4-2 6-2-2z"
+                                  stroke={`url(#${gradId})`}
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />
+                              </svg>
+                            );
+                          }
+                          return (
+                            <svg
+                              viewBox="0 0 24 24"
+                              width="100%"
+                              height="100%"
+                              fill="none"
+                            >
+                              {Gradient}
+                              <path
+                                d="M12 21s-6.5-4.35-9-7.5A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9 7.5c-2.5 3.15-9 7.5-9 7.5z"
+                                stroke={`url(#${gradId})`}
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </svg>
+                          );
+                        })()}
                       </Box>
-                      <Text fontSize={{ base: "14px", md: "18px" }}>
-                        {item.text}
+                      <Text
+                        fontSize={{ base: "16px", md: "24px" }}
+                        fontWeight="bold"
+                        color="#333"
+                      >
+                        {card.title}
                       </Text>
-                    </Flex>
+                      <Text
+                        fontSize={{ base: "14px", md: "16px" }}
+                        lineHeight="1.5"
+                      >
+                        {card.desc}
+                      </Text>
+                    </Box>
                   ))}
                 </Flex>
               </Box>
