@@ -3,8 +3,8 @@
 import { Box, Flex, Text, Heading } from "@chakra-ui/react";
 import { motion, MotionValue } from "framer-motion";
 import { useRef } from "react";
-import FractalCanvas from "./FractalCanvas";
-import CounselCard from "./card/CounselCard";
+import FractalCanvas from "./component/FractalCanvas";
+import CounselCard from "./component/card/CounselCard";
 import { useColorMode } from "@/components/ui/color-mode";
 
 interface FractalSectionProps {
@@ -20,13 +20,13 @@ const FractalSection = ({ mouse }: FractalSectionProps) => {
   const isDark = colorMode === "dark";
 
   const gradient = isDark
-    ? "linear-gradient(to right, hsl(184, 51%, 70%), hsl(204, 51%, 75%), hsl(224, 51%, 80%))"
-    : "linear-gradient(to right, hsl(184, 51%, 40%), hsl(204, 51%, 45%), hsl(224, 51%, 50%))";
+    ? "linear-gradient(180deg, hsl(172, 68.50%, 80%), hsl(64, 100%, 82.70%), hsl(37, 100%, 65%))"
+    : "linear-gradient(to right, hsl(130, 43.60%, 54.10%), hsl(61, 100.00%, 50.40%), hsl(27, 100.00%, 67.30%))";
 
   return (
     <Flex
       display={{ base: "none", lg: "flex" }}
-      flex="0 0 45%"
+      flex="0 0 57%"
       h="97vh"
       justifyContent="center"
       alignItems="center"
@@ -66,42 +66,41 @@ const FractalSection = ({ mouse }: FractalSectionProps) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 1.2 }}
         >
-          <Flex>
-            {"길이 보이지 않아도 한 걸음 내디디면, 마음이 방향을 만든다.".split("").map((char, index) => (
-              <motion.div
-                key={index}
-                animate={{ y: [0, -3, 0] }}
-                transition={{
-                  duration: 0.5,
-                  repeat: Infinity,
-                  repeatType: "loop",
-                  ease: "easeInOut",
-                  delay: index * 0.1,
-                  repeatDelay: 5,
-                }}
-              >
-                <Text
-                  fontSize={{ base: "sm", md: "md" }}
-                  fontWeight="bold"
-                  letterSpacing="widest"
-                  lineHeight="1.1"
-                  bgGradient={gradient}
-                  bgClip="text"
-                  color="transparent"
+          <Flex justifyContent="flex-end">
+            {"길이 보이지 않아도 한 걸음 내디디면, 마음이 방향을 만든다."
+              .split("")
+              .map((char, index) => (
+                <motion.div
+                  key={index}
+                  animate={{ y: [0, -3, 0] }}
+                  transition={{
+                    duration: 0.5,
+                    repeat: Infinity,
+                    repeatType: "loop",
+                    ease: "easeInOut",
+                    delay: index * 0.1,
+                    repeatDelay: 5,
+                  }}
                 >
-                  {char === " " ? "\u00A0" : char}
-                </Text>
-              </motion.div>
-            ))}
+                  <Text
+                    fontSize={{ base: "sm", md: "md" }}
+                    fontWeight="bold"
+                    letterSpacing="widest"
+                    lineHeight="1.1"
+                    color="#297D83"
+                  >
+                    {char === " " ? "\u00A0" : char}
+                  </Text>
+                </motion.div>
+              ))}
           </Flex>
           <Text
             fontSize={{ base: "sm", md: "md" }}
             fontWeight="bold"
             letterSpacing="widest"
             lineHeight="1.1"
-            bgGradient={gradient}
-            bgClip="text"
-            color="transparent"
+            color="#297D83"
+            textAlign="right"
           >
             - 석민철(전기전자공학부) -
           </Text>

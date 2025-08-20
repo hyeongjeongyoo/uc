@@ -462,7 +462,8 @@ export const SitemapDrawer = memo(
                                           left: 0,
                                           width: "0%",
                                           height: "100%",
-                                          backgroundColor: "#0D344E",
+                                          backgroundImage:
+                                            "linear-gradient(90deg, #297D83 0%, #889C3F 100%)",
                                           transition: "width 0.4s ease",
                                           zIndex: 0,
                                         }}
@@ -510,13 +511,14 @@ export const SitemapDrawer = memo(
                                           left: 0,
                                           width: "0%",
                                           height: "100%",
-                                          backgroundColor: "#4A7CD5",
+                                          backgroundImage:
+                                            "linear-gradient(90deg, #297D83 0%, #889C3F 100%)",
                                           transition: "width 0.4s ease",
                                           zIndex: 0,
                                         }}
                                         _hover={{
                                           color: {
-                                            base: "#4A7CD5",
+                                            base: "#0D344E",
                                             xl: "white",
                                           },
                                           fontWeight: "bold",
@@ -577,7 +579,8 @@ export const SitemapDrawer = memo(
                                                 left: 0,
                                                 width: "0%",
                                                 height: "100%",
-                                                backgroundColor: "#0D344E",
+                                                backgroundImage:
+                                                  "linear-gradient(90deg, #297D83 0%, #889C3F 100%)",
                                                 transition: "width 0.4s ease",
                                                 zIndex: 0,
                                               }}

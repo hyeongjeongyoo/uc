@@ -4,7 +4,7 @@ import { Box, Flex, Text, VStack, Button, Icon, Badge } from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useColorMode } from "@/components/ui/color-mode";
 import { useEffect, useMemo, useState } from "react";
-import { LuPlus, LuChevronRight } from "react-icons/lu";
+import { LuPlus, LuChevronRight, LuMessageCircle } from "react-icons/lu";
 import { useRouter } from "next/navigation";
 
 const CounselCard = () => {
@@ -276,7 +276,7 @@ const CounselCard = () => {
         zIndex: 4,
       }}
     >
-      <motion.div
+      {/* <motion.div
         variants={cardVariants}
         initial="initial"
         animate={isHovered ? "hover" : "initial"}
@@ -301,7 +301,35 @@ const CounselCard = () => {
           {isHovered ? <ExpandedBody /> : <CardBody />}
           <CardFooter />
         </Box>
-      </motion.div>
+      </motion.div> */}
+
+      {/* 상담 신청 폼 비활성화: 챗 버튼으로 대체 */}
+      <Button
+        onClick={() => router.push("/chat")}
+        aria-label="open-chat"
+        borderRadius="full"
+        w="60px"
+        h="60px"
+        p={0}
+        bg={isDark ? "rgba(255,255,255,0.9)" : "#3DAD5F"}
+        color={isDark ? "black" : "white"}
+        boxShadow="0 8px 12px 0 rgba(31, 38, 135, 0.20)"
+        _hover={{ transform: "scale(1.05)" }}
+        transition="all 0.2s ease-in-out"
+      >
+        <Icon as={LuMessageCircle} boxSize={7} />
+      </Button>
+
+      {/**
+       * 기존 카드 UI
+       * <motion.div variants={cardVariants} initial="initial" animate={isHovered ? "hover" : "initial"} transition={transition as any} style={{ position: "relative", borderRadius: "1.5rem", backdropFilter: "blur(5px) saturate(180%)", boxShadow: "0 8px 12px 0 rgba(31, 38, 135, 0.20)", border: `1px solid ${isDark ? "rgba(255, 255, 255, 0.18)" : "rgba(209, 213, 219, 0.3)"}`, overflow: "hidden" }}>
+       *   <Box color={isDark ? "whiteAlpha.800" : "blackAlpha.800"} w="full" h="full">
+       *     <CardHeader />
+       *     {isHovered ? <ExpandedBody /> : <CardBody />}
+       *     <CardFooter />
+       *   </Box>
+       * </motion.div>
+       */}
     </motion.div>
   );
 };

@@ -140,6 +140,23 @@ export const HERO_DATA: Record<string, HeroPageData> = {
   ],
   animationType: "zoom-in",
 },
+"/therapy/counseling": {
+  title: "심리상담",
+  titleGradient: {
+    from: "#297D83",
+    to: "#3DAD5F"
+  },
+  subtitle: "나를 객관적으로 보는 첫걸음입니다. <br />결과를 함께 해석하며, 앞으로의 방향을 정리합니다.",
+  subtitleColor: "#0D344E",
+  subtitleBrAlways: true,
+  backgroundImage: "/images/sub/bg.jpg",
+  height: "600px",
+  menuItems: [
+    { name: "심리상담", href: "/therapy/counseling" },
+    { name: "심리검사 안내", href: "/therapy/counseling" },
+  ],
+  animationType: "zoom-in",
+},  
 "/sexualcounseling/sexualcounseling": {
   title: "성고충상담",
   titleGradient: {

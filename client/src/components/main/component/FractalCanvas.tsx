@@ -2,7 +2,8 @@
 
 import { useColorMode } from "@/components/ui/color-mode";
 import { MotionValue } from "framer-motion";
-import { MutableRefObject, useEffect, useMemo, useRef } from "react";
+import { MutableRefObject, useEffect, useMemo, useRef, useState } from "react";
+import { NodeButtons } from "@/components/sections/NodeButtons";
 
 // Interfaces
 interface NeuronNode {
@@ -29,6 +30,13 @@ interface Galaxy {
   currentRadius: number;
   baseRotation: { x: number; y: number; z: number };
   rotationVelocity: { x: number; y: number; z: number };
+}
+
+interface ButtonPosition {
+  x: number;
+  y: number;
+  alpha: number;
+  scale: number;
 }
 
 // Animation Helper Functions
@@ -99,8 +107,8 @@ const drawFractalsLayer = (
   isForeground: boolean,
   isDark: boolean
 ) => {
-  const baseHue = 184;
-  const hueRange = 40;
+  const baseHue = 120; // green base
+  const hueRange = -60; // limit to green(120) -> yellow(60)
   const saturation = "51%";
   const lightness = isDark ? "45%" : "45%";
 
@@ -163,7 +171,7 @@ const drawFractalsLayer = (
 
       ctx.beginPath();
       const size = node.scale * 1.5;
-      ctx.rect(-size / 2, -size / 2, size, size); // Draw a square instead of arc for clear rotation
+      ctx.rect(-size / 2, -size / 2, size, size);
       ctx.fill();
 
       ctx.restore();
@@ -184,6 +192,10 @@ const FractalCanvas = ({ mouse, containerRef }: FractalCanvasProps) => {
   const animationRef = useRef<number>();
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
+  const [buttonPositions, setButtonPositions] = useState<ButtonPosition[]>([]);
+  const lastEmitMsRef = useRef(0);
+  const lastEmittedPositionsRef = useRef<ButtonPosition[] | null>(null);
+  const isPausedRef = useRef(false);
 
   const galaxies = useMemo(() => {
     const newGalaxies: Galaxy[] = [];
@@ -208,7 +220,7 @@ const FractalCanvas = ({ mouse, containerRef }: FractalCanvasProps) => {
           scale: 0,
           alpha: 0,
           angle: Math.random() * Math.PI * 2,
-          angularVelocity: (Math.random() - 0.5) * 0.05, // Increased velocity
+          angularVelocity: (Math.random() - 0.5) * 0.05,
         });
       }
       newGalaxies.push({
@@ -229,6 +241,19 @@ const FractalCanvas = ({ mouse, containerRef }: FractalCanvasProps) => {
     }
     return newGalaxies;
   }, []);
+
+  // 버튼 위치를 위한 노드 선택
+  const selectedNodeIndices = useMemo(() => {
+    const indices: number[] = [];
+    const totalNodes = galaxies[0].nodes.length;
+    const startOffset = Math.floor(totalNodes * 0.2); // 20% 오프셋으로 시작
+
+    // 5개의 버튼을 위해 균등하게 분포된 인덱스 선택
+    for (let i = 0; i < 5; i++) {
+      indices.push(Math.floor(startOffset + (i * (totalNodes * 0.6)) / 5));
+    }
+    return indices;
+  }, [galaxies]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -282,35 +307,81 @@ const FractalCanvas = ({ mouse, containerRef }: FractalCanvasProps) => {
         y: mouse.y.get(),
       };
 
-      const rect = containerRef.current.getBoundingClientRect();
-      const scale = window.devicePixelRatio || 1;
+      if (!isPausedRef.current) {
+        mouseVelocity.x = mousePos.x - lastMousePosition.x;
+        mouseVelocity.y = mousePos.y - lastMousePosition.y;
+        lastMousePosition = { ...mousePos };
 
-      mouseVelocity.x = mousePos.x - lastMousePosition.x;
-      mouseVelocity.y = mousePos.y - lastMousePosition.y;
-      lastMousePosition = { ...mousePos };
+        mouseVelocity.x *= dampingFactor;
+        mouseVelocity.y *= dampingFactor;
 
-      mouseVelocity.x *= dampingFactor;
-      mouseVelocity.y *= dampingFactor;
+        const targetMouseRotX = mousePos.y - 0.5;
+        const targetMouseRotY = mousePos.x - 0.5;
 
-      const targetMouseRotX = mousePos.y - 0.5;
-      const targetMouseRotY = mousePos.x - 0.5;
-
-      mouseRotationX +=
-        (targetMouseRotX - mouseRotationX) * 0.1 + mouseVelocity.y * 0.5;
-      mouseRotationY +=
-        (targetMouseRotY - mouseRotationY) * 0.1 + mouseVelocity.x * 0.5;
+        mouseRotationX +=
+          (targetMouseRotX - mouseRotationX) * 0.1 + mouseVelocity.y * 0.5;
+        mouseRotationY +=
+          (targetMouseRotY - mouseRotationY) * 0.1 + mouseVelocity.x * 0.5;
+      }
 
       const mouseRotation = { x: mouseRotationX, y: mouseRotationY };
 
-      updateGalaxies(
-        galaxies,
-        mouseRotation,
-        maxRadius,
-        growthSpeed,
-        canvasWidth,
-        canvasHeight,
-        FOCAL_LENGTH
-      );
+      if (!isPausedRef.current) {
+        updateGalaxies(
+          galaxies,
+          mouseRotation,
+          maxRadius,
+          growthSpeed,
+          canvasWidth,
+          canvasHeight,
+          FOCAL_LENGTH
+        );
+      }
+
+      // 버튼 위치 업데이트 (throttle + diff check)
+      const newButtonPositions = selectedNodeIndices.map((nodeIndex) => {
+        const node = galaxies[0].nodes[nodeIndex];
+        return {
+          x: node.screenX,
+          y: node.screenY,
+          alpha: Math.pow(node.alpha, 0.7), // 알파값을 부드럽게 조정
+          scale: Math.max(0.8, Math.min(1.2, node.scale)), // 스케일 범위 제한
+        } as ButtonPosition;
+      });
+
+      const nowMs = performance.now();
+      const elapsedMs = nowMs - lastEmitMsRef.current;
+      const prev = lastEmittedPositionsRef.current;
+      const POSITION_EPS = 0.75;
+      const ALPHA_EPS = 0.02;
+      const SCALE_EPS = 0.01;
+
+      let hasMeaningfulChange = false;
+      if (!prev || prev.length !== newButtonPositions.length) {
+        hasMeaningfulChange = true;
+      } else {
+        for (let i = 0; i < newButtonPositions.length; i++) {
+          const a = prev[i];
+          const b = newButtonPositions[i];
+          if (
+            Math.abs(a.x - b.x) > POSITION_EPS ||
+            Math.abs(a.y - b.y) > POSITION_EPS ||
+            Math.abs(a.alpha - b.alpha) > ALPHA_EPS ||
+            Math.abs(a.scale - b.scale) > SCALE_EPS
+          ) {
+            hasMeaningfulChange = true;
+            break;
+          }
+        }
+      }
+
+      // emit at most ~15fps and only if changed; always emit immediately when paused state toggles to true
+      if ((elapsedMs >= 66 && hasMeaningfulChange) || isPausedRef.current) {
+        setButtonPositions(newButtonPositions);
+        lastEmittedPositionsRef.current = newButtonPositions;
+        lastEmitMsRef.current = nowMs;
+      }
+
       drawFractalsLayer(ctx, galaxies, MAX_CONNECT_DISTANCE_SQR, false, isDark);
       drawFractalsLayer(ctx, galaxies, MAX_CONNECT_DISTANCE_SQR, true, isDark);
 
@@ -323,21 +394,29 @@ const FractalCanvas = ({ mouse, containerRef }: FractalCanvasProps) => {
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
       if (containerRef.current) resizeObserver.unobserve(containerRef.current);
     };
-  }, [galaxies, isDark, mouse, containerRef]);
+  }, [galaxies, isDark, mouse, containerRef, selectedNodeIndices]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        zIndex: 1,
-        willChange: "transform",
-      }}
-    />
+    <>
+      <canvas
+        ref={canvasRef}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          zIndex: 1,
+          willChange: "transform",
+        }}
+      />
+      <NodeButtons
+        buttonPositions={buttonPositions}
+        onHoverChange={(hovering) => {
+          isPausedRef.current = hovering;
+        }}
+      />
+    </>
   );
 };
 

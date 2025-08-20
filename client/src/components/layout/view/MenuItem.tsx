@@ -110,25 +110,32 @@ export function MenuItem({
           href={menuUrl}
           display="block"
           py={6}
-          fontSize={{ base: "xs", md: "sm", lg: "md" }}
+          fontSize={{ base: "xs", md: "16", lg: "18px" }}
           fontWeight={isRoot ? "bold" : "bold"}
           color={topLevelColor}
           position="relative"
           _hover={{
             textDecoration: "none",
-            color: "#0D344E",
-            fontWeight: "bold",
+            bgClip: "text",
+            backgroundImage: "linear-gradient(90deg, #297D83 0%, #889C3F 100%)",
+            color: "transparent",
+            fontWeight: "900",
           }}
           _focus={{
             boxShadow: "none",
-            color: "#0D344E",
-            fontWeight: "bold",
+            bgClip: "text",
+            backgroundImage: "linear-gradient(90deg, #297D83 0%, #889C3F 100%)",
+            color: "transparent",
+            fontWeight: "900",
             transform: "translateY(-1px)",
             outline: "none",
             border: "none",
           }}
           _active={{
             bg: "transparent",
+            bgClip: "text",
+            backgroundImage: "linear-gradient(90deg, #297D83 0%, #889C3F 100%)",
+            color: "transparent",
           }}
           transition="all 0.2s cubic-bezier(0.4, 0, 0.2, 1)"
           borderRadius="md"
