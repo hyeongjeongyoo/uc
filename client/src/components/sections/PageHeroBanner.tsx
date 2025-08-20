@@ -111,6 +111,7 @@ interface PageHeroBannerProps {
     to: string;
   };
   subtitle?: string;
+  subtitleColor?: string;
   backgroundImage?: string;
   backgroundColor?: string;
   height?: string;
@@ -127,6 +128,7 @@ export function PageHeroBanner({
   // 수동 설정 (기존 방식)
   title: manualTitle,
   subtitle: manualSubtitle,
+  subtitleColor: manualSubtitleColor,
   backgroundImage: manualBackgroundImage,
   height: manualHeight,
   showMenuBar: manualShowMenuBar,
@@ -145,6 +147,7 @@ export function PageHeroBanner({
     ? {
         title: manualTitle || "K&D ENERGEN",
         subtitle: manualSubtitle,
+        subtitleColor: manualSubtitleColor,
         backgroundImage: manualBackgroundImage || "/images/main/hero-image.jpg",
         height: manualHeight || "500px",
         showMenuBar: manualShowMenuBar ?? true,
@@ -156,6 +159,7 @@ export function PageHeroBanner({
     : {
         title: autoHeroData.title,
         subtitle: autoHeroData.subtitle,
+        subtitleColor: (autoHeroData as any).subtitleColor,
         backgroundImage: autoHeroData.backgroundImage,
         height: autoHeroData.height || "500px",
         showMenuBar: true,
@@ -174,6 +178,26 @@ export function PageHeroBanner({
   };
 
   const menuItems = getMenuItems();
+
+  // subtitle 내의 <br /> 토큰을 모바일에서만 줄바꿈으로 반영
+  const renderMobileOnlyBreaks = (raw?: string) => {
+    if (!raw) return null;
+    const parts = raw.split(/<br\s*\/?>(?:\s*)?/i);
+    const nodes: React.ReactNode[] = [];
+    parts.forEach((seg, idx) => {
+      nodes.push(seg);
+      if (idx < parts.length - 1) {
+        nodes.push(
+          <Box
+            as="br"
+            key={`mob-br-${idx}`}
+            display={{ base: "inline", md: "none" }}
+          />
+        );
+      }
+    });
+    return nodes;
+  };
 
   // 애니메이션 타입에 따른 Ken Burns 효과 선택
   const kenBurnsAnimation =
@@ -224,7 +248,6 @@ export function PageHeroBanner({
         left={0}
         right={0}
         bottom={0}
-        backgroundColor="rgba(13, 52, 78, 0.42)"
         animation={`${fadeInSimple} 1.5s ease-out`}
       />
 
@@ -253,9 +276,10 @@ export function PageHeroBanner({
           <Text
             fontSize={{ base: "lg", md: "xl" }}
             opacity={0.9}
+            color={(finalData as any).subtitleColor || undefined}
             animation={`${subtitleSlideUp} 1s ease-out 0.8s both`}
           >
-            {finalData.subtitle}
+            {renderMobileOnlyBreaks(finalData.subtitle)}
           </Text>
         )}
       </Box>
@@ -278,13 +302,14 @@ export function PageHeroBanner({
               border="1px solid rgba(255, 255, 255, 0.2)"
               boxShadow="0 8px 32px rgba(0, 0, 0, 0.1)"
               flexWrap="wrap"
+              color="#0D344E"
             >
               {/* 홈 버튼 */}
               <Box>
                 <Link as={NextLink} href="/">
                   <Box
                     bg="rgba(255, 255, 255, 0.2)"
-                    color="white"
+                    color="#0D344E"
                     borderRadius="full"
                     p={3}
                     display="flex"
@@ -325,7 +350,7 @@ export function PageHeroBanner({
                     <Link as={NextLink} href={item.href}>
                       <Button
                         bg="transparent"
-                        color="white"
+                        color="#0D344E"
                         fontWeight="medium"
                         fontSize={{ base: "sm", md: "md" }}
                         borderRadius="full"
@@ -346,7 +371,7 @@ export function PageHeroBanner({
                     <Box
                       display="flex"
                       alignItems="center"
-                      color="white"
+                      color="#0D344E"
                       opacity={0.7}
                       mx={2}
                     >

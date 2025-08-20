@@ -5,6 +5,7 @@ export interface HeroPageData {
     to: string;
   };
   subtitle?: string;
+  subtitleColor?: string;
   backgroundImage: string;
   height?: string;
   menuItems: Array<{ name: string; href: string }>;
@@ -44,7 +45,7 @@ export const HERO_DATA: Record<string, HeroPageData> = {
     from: "#297D83",
     to: "#0E58A4"
   },
-  subtitle: "UC의 위치를 소개합니다",
+  subtitle: "울산과학대학교 학생상담센터의 위치를 소개합니다",
   backgroundImage: "/images/main/hero-image.jpg",
   height: "600px",
   menuItems: [
@@ -53,19 +54,19 @@ export const HERO_DATA: Record<string, HeroPageData> = {
   ],
   animationType: "zoom-in",
 },
-
 "/uc/info": {
   title: "센터소개",
   titleGradient: {
     from: "#297D83",
     to: "#0E58A4"
   },
-  subtitle: "UC의 위치를 소개합니다",
-  backgroundImage: "/images/main/hero-image.jpg",
+  subtitle: "울산과학대학교 학생상담센터의 <br />위기 상황별 대응 및 연계기관을 안내드립니다",
+  subtitleColor: "#0D344E",
+  backgroundImage: "/images/sub/bg.jpg",
   height: "600px",
   menuItems: [
     { name: "센터안내", href: "/uc/center" },
-    { name: "오시는 길", href: "/uc/info" },
+    { name: "위기상황별 대응 및 연계기관 안내", href: "/uc/info" },
   ],
   animationType: "zoom-in",
 },
@@ -156,22 +157,9 @@ export const HERO_DATA: Record<string, HeroPageData> = {
   animationType: "zoom-in",
 },
 
-
 };
 
 
-
-// 기본 히어로 데이터 (매칭되지 않는 페이지용)
-export const DEFAULT_HERO_DATA: HeroPageData = {
-title: "K&D ENERGEN",
-subtitle: "친환경 에너지 화학기업",
-backgroundImage: "/images/main/hero-image.jpg",
-height: "600px",
-menuItems: [
-  { name: "홈", href: "/" },
-],
-animationType: "zoom-in",
-};
 
 // HERO_DATA를 HeroSection 형태로 자동 변환하는 함수
 function convertHeroDataToLegacyFormat(heroData: HeroPageData, path: string): {

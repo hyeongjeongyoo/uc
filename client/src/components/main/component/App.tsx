@@ -12,7 +12,6 @@ import MainSection from "./MainSection";
 import { menuApi, menuKeys, sortMenus } from "@/lib/api/menu";
 import { MenuApiResponse } from "@/types/api-response";
 import { Header } from "@/components/layout/view/Header/Header";
-import Footer from "./Footer";
 
 // QueryClient 인스턴스 생성
 const queryClient = new QueryClient({
@@ -52,7 +51,6 @@ function AppContent() {
         }}
       />
       <MainSection />
-      <Footer />
     </Box>
   );
 }

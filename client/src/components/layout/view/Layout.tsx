@@ -32,7 +32,7 @@ const Layout = ({ children }: LayoutProps) => {
     <Box display="flex" flexDirection="column" minHeight="100vh">
       <Header currentPage={currentPage} menus={sortedMenus} />
       <Box flex="1">{children}</Box>
-      <Footer />
+      {pathname !== "/" && <Footer />}
     </Box>
   );
 };
