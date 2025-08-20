@@ -11,9 +11,15 @@ const services = [
     icon: (
       <svg viewBox="0 0 24 24" fill="none" width="100%" height="100%">
         <defs>
-          <linearGradient id="serviceGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <linearGradient
+            id="serviceGradient"
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="0%"
+          >
             <stop offset="0%" stopColor="#297D83" />
-            <stop offset="100%" stopColor="#0E58A4" />
+            <stop offset="100%" stopColor="#3DAD5F" />
           </linearGradient>
         </defs>
         <path
@@ -28,11 +34,18 @@ const services = [
   },
   {
     title: "집단상담",
-    description: "비슷한 고민을 가진 학생들과 함께하는 그룹 상담 프로그램입니다.",
+    description:
+      "비슷한 고민을 가진 학생들과 함께하는 그룹 상담 프로그램입니다.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" width="100%" height="100%">
         <defs>
-          <linearGradient id="serviceGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <linearGradient
+            id="serviceGradient"
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="0%"
+          >
             <stop offset="0%" stopColor="#297D83" />
             <stop offset="100%" stopColor="#0E58A4" />
           </linearGradient>
@@ -53,7 +66,13 @@ const services = [
     icon: (
       <svg viewBox="0 0 24 24" fill="none" width="100%" height="100%">
         <defs>
-          <linearGradient id="serviceGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <linearGradient
+            id="serviceGradient"
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="0%"
+          >
             <stop offset="0%" stopColor="#297D83" />
             <stop offset="100%" stopColor="#0E58A4" />
           </linearGradient>
@@ -74,7 +93,13 @@ const services = [
     icon: (
       <svg viewBox="0 0 24 24" fill="none" width="100%" height="100%">
         <defs>
-          <linearGradient id="serviceGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <linearGradient
+            id="serviceGradient"
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="0%"
+          >
             <stop offset="0%" stopColor="#297D83" />
             <stop offset="100%" stopColor="#0E58A4" />
           </linearGradient>
@@ -97,17 +122,17 @@ export const CenterServices: React.FC = () => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) {
-          setIsVisible(true);
-        }
+        // 한 번 보이면 true로 고정 (단방향)
+        const anyInView = entries.some((entry) => entry.isIntersecting);
+        setIsVisible((prev) => prev || anyInView);
       },
       {
         threshold: 0.1,
-        rootMargin: '-100px 0px'
+        rootMargin: "-100px 0px",
       }
     );
 
-    const container = document.querySelector('.services-container');
+    const container = document.querySelector(".services-container");
     if (container) {
       observer.observe(container);
     }
@@ -115,15 +140,7 @@ export const CenterServices: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const card = e.currentTarget;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    card.style.setProperty("--mouse-x", `${x}px`);
-    card.style.setProperty("--mouse-y", `${y}px`);
-  };
+  // 마우스 트래킹 기반 효과 제거 (요구사항: 기존 호버 제거 후 통일된 호버 적용)
   return (
     <Flex
       className="services-container"
@@ -138,18 +155,19 @@ export const CenterServices: React.FC = () => {
           className="service-card"
           data-index={index}
           initial={{ opacity: 0, y: 50 }}
-          animate={{ 
+          animate={{
             opacity: isVisible ? 1 : 0,
-            y: isVisible ? 0 : 50
+            y: isVisible ? 0 : 50,
           }}
-          transition={{ 
+          transition={{
             duration: 0.5,
             delay: isVisible ? index * 0.3 : 0,
-            ease: "easeOut"
+            type: "tween",
+            ease: [0.25, 0.1, 0.25, 1],
           }}
           bg="white"
           borderRadius="xl"
-          boxShadow="lg"
+          boxShadow="0 8px 16px rgba(0,0,0,0.04)"
           p={{ base: 6, md: 8 }}
           flex="1"
           minHeight={{ base: "auto", md: "300px" }}
@@ -158,48 +176,16 @@ export const CenterServices: React.FC = () => {
           flexDirection="column"
           alignItems="flex-start"
           textAlign="left"
-          transition={{ duration: 0.2, ease: "easeInOut" }}
+          transitionProperty="transform, box-shadow, border-color"
+          transitionDuration="0.6s"
+          transitionTimingFunction="ease-out"
           position="relative"
           overflow="hidden"
-          cursor="pointer"
-          onMouseMove={handleMouseMove}
-          _before={{
-            content: '""',
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: "radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(181, 223, 226, 0.1), transparent 40%)",
-            zIndex: 1,
-            opacity: 0,
-            transition: "opacity 0.2s",
-            pointerEvents: "none",
-          }}
-          _after={{
-            content: '""',
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: "radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(77, 131, 186, 0.1), transparent 40%)",
-            zIndex: 0,
-            opacity: 0,
-            transition: "opacity 0.2s",
-            pointerEvents: "none",
-          }}
-          _hover={{
-            transform: "translateY(-5px)",
-            _before: {
-              opacity: 1,
-            },
-            _after: {
-              opacity: 1,
-            }
-          }}
+          cursor="default"
+          willChange="transform, box-shadow, border-color"
+          whileHover={{ y: -4, boxShadow: "0 12px 24px rgba(0,0,0,0.08)" }}
+          _hover={{ borderColor: "#e2e8f0" }}
         >
-          
           {/* 아이콘 */}
           <Box
             width={{ base: "30px", md: "40px" }}
@@ -212,7 +198,12 @@ export const CenterServices: React.FC = () => {
           </Box>
 
           {/* 텍스트 */}
-          <VStack gap={3} position="relative" zIndex={2} alignItems="flex-start">
+          <VStack
+            gap={3}
+            position="relative"
+            zIndex={2}
+            alignItems="flex-start"
+          >
             <Text
               fontSize={{ base: "16px", md: "24px" }}
               fontWeight="bold"
@@ -220,10 +211,7 @@ export const CenterServices: React.FC = () => {
             >
               {service.title}
             </Text>
-            <Text
-              fontSize={{ base: "14px", md: "16px" }}
-              lineHeight="1.5"
-            >
+            <Text fontSize={{ base: "14px", md: "16px" }} lineHeight="1.5">
               {service.description}
             </Text>
           </VStack>

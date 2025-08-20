@@ -127,8 +127,8 @@ export const Header = memo(function Header({
     isLastMenuItem: index === visibleMenus.length - 1,
   }));
 
-  const logoWidth = useBreakpointValue({ base: 20, lg: 35 }) || 35;
-  const logoHeight = useBreakpointValue({ base: 22, lg: 30 }) || 22;
+  const logoWidth = useBreakpointValue({ base: 135, lg: 135 }) || 135;
+  const logoHeight = useBreakpointValue({ base: 31, lg: 31 }) || 31;
 
   const iconColor = isScrolled || isNavHovered ? "#0D344E" : "#0D344E";
 

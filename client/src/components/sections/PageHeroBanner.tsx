@@ -172,7 +172,8 @@ export function PageHeroBanner({
   // 렌더링할 메뉴 아이템들 결정
   const getMenuItems = () => {
     if (finalData.menuType === "custom") {
-      return finalData.customMenuItems;
+      const items = (finalData as any).customMenuItems;
+      return Array.isArray(items) ? items : [];
     }
     return [];
   };
@@ -191,7 +192,10 @@ export function PageHeroBanner({
           <Box
             as="br"
             key={`mob-br-${idx}`}
-            display={{ base: "inline", md: "none" }}
+            display={{
+              base: "inline",
+              md: (finalData as any).subtitleBrAlways ? "inline" : "none",
+            }}
           />
         );
       }
@@ -266,7 +270,11 @@ export function PageHeroBanner({
           fontWeight="900"
           mb={7}
           lineHeight="1.2"
-          backgroundImage="linear-gradient(90deg, #297D83 0%, #0E58A4 100%)"
+          backgroundImage={
+            finalData.titleGradient
+              ? `linear-gradient(90deg, ${finalData.titleGradient.from} 0%, ${finalData.titleGradient.to} 100%)`
+              : "linear-gradient(90deg, #0D6473 0%, #3DAD5F 100%)"
+          }
           bgClip="text"
           color="transparent"
         >

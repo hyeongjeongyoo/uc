@@ -6,6 +6,9 @@ export interface HeroPageData {
   };
   subtitle?: string;
   subtitleColor?: string;
+  // true면 subtitle 내 <br />을 모든 해상도에서 줄바꿈 처리
+  // 기본은 모바일에서만 줄바꿈 처리
+  subtitleBrAlways?: boolean;
   backgroundImage: string;
   height?: string;
   menuItems: Array<{ name: string; href: string }>;
@@ -27,7 +30,7 @@ export const HERO_DATA: Record<string, HeroPageData> = {
   title: "센터소개",
   titleGradient: {
     from: "#297D83",
-    to: "#0E58A4"
+    to: "#3DAD5F"
   },
   subtitle: "울산과학대학교 학생상담센터를 소개합니다",
   backgroundImage: "/images/main/hero-image.jpg",
@@ -43,7 +46,7 @@ export const HERO_DATA: Record<string, HeroPageData> = {
   title: "센터소개",
   titleGradient: {
     from: "#297D83",
-    to: "#0E58A4"
+    to: "#3DAD5F"
   },
   subtitle: "울산과학대학교 학생상담센터의 위치를 소개합니다",
   backgroundImage: "/images/main/hero-image.jpg",
@@ -58,10 +61,11 @@ export const HERO_DATA: Record<string, HeroPageData> = {
   title: "센터소개",
   titleGradient: {
     from: "#297D83",
-    to: "#0E58A4"
+    to: "#3DAD5F"
   },
   subtitle: "울산과학대학교 학생상담센터의 <br />위기 상황별 대응 및 연계기관을 안내드립니다",
   subtitleColor: "#0D344E",
+  subtitleBrAlways: false,
   backgroundImage: "/images/sub/bg.jpg",
   height: "600px",
   menuItems: [
@@ -70,48 +74,82 @@ export const HERO_DATA: Record<string, HeroPageData> = {
   ],
   animationType: "zoom-in",
 },
-
-// Business 관련 페이지들
-"/business/business": {
-  title: "BUSINESS",
-  subtitle: "K&D Energen의 사업을 소개합니다",
-  backgroundImage: "/images/sub/business_bg.jpg",
+"/counsel/individual": {
+  title: "개인상담",
+  titleGradient: {
+    from: "#297D83",
+    to: "#3DAD5F"
+  },
+  subtitle: "혼자 끙끙대지 말고, 안전한 공간에서 가볍게 시작해 보세요",
+  subtitleColor: "#0D344E",
+  backgroundImage: "/images/sub/bg.jpg",
   height: "600px",
   menuItems: [
-    { name: "사업분야", href: "/business/business" },
-    { name: "사업분야", href: "/business/business" },
+    { name: "개인상담", href: "/counsel/individual" },
+    { name: "개인상담 안내", href: "/counsel/individual" },
   ],
   animationType: "zoom-out",
 },
-
-"/business/process": {
-  title: "BUSINESS",
-  subtitle: "K&D Energen의 주요공정을 소개합니다",
-  backgroundImage: "/images/sub/business_bg.jpg",
+"/counsel/group": {
+  title: "개인상담",
+  titleGradient: {
+    from: "#297D83",
+    to: "#3DAD5F"
+  },
+  subtitle: "함께 이야기하고, 함께 자라는 시간입니다",
+  subtitleColor: "#0D344E",
+  backgroundImage: "/images/sub/bg.jpg",
   height: "600px",
   menuItems: [
-    { name: "사업분야", href: "/business/business" },
-    { name: "주요공정", href: "/business/process" },
+    { name: "개인상담", href: "/counsel/group" },
+    { name: "그룹상담 안내", href: "/counsel/group" },
   ],
   animationType: "zoom-out",
 },
-
-"/business/product": {
-  title: "BUSINESS",
-  subtitle: "K&D Energen의 주력 제품을 소개합니다",
-  backgroundImage: "/images/sub/business_bg.jpg",
+"/counsel/disabled": {
+  title: "개인상담",
+  titleGradient: {
+    from: "#297D83",
+    to: "#3DAD5F"
+  },
+  subtitle: "내 마음을 이해하고, 문제 해결 방법을 함께 찾습니다.",
+  subtitleColor: "#0D344E",
+  subtitleBrAlways: true,
+  backgroundImage: "/images/sub/bg.jpg",
   height: "600px",
   menuItems: [
-    { name: "사업분야", href: "/business/business" },
-    { name: "제품소개", href: "/business/product" },
+    { name: "개인상담", href: "/counsel/individual" },
+    { name: "장애학생심리지원상담 안내", href: "/counsel/disabled" },
   ],
   animationType: "zoom-out",
 },
+"/sexualcounseling/sexualcounseling": {
+  title: "성고충상담",
+  titleGradient: {
+    from: "#297D83",
+    to: "#3DAD5F"
+  },
+  subtitle: "내 마음을 이해하고, 문제 해결 방법을 함께 찾습니다.",
+  subtitleColor: "#0D344E",
+  subtitleBrAlways: true,
+  backgroundImage: "/images/sub/bg.jpg",
+  height: "600px",
+  menuItems: [
+    { name: "성고충상담", href: "/sexualcounseling/sexualcounseling" },
+    { name: "장애학생심리지원상담 안내", href: "/sexualcounseling/sexualcounseling" },
+  ],
+  animationType: "zoom-in",
+},
+
 
 // 게시판 관련 페이지들 (완전 통합)
 "/bbs": {
   title: "BOARD",
-  subtitle: "K&D ENERGEN의 게시판입니다",
+  titleGradient: {
+    from: "#297D83",
+    to: "#3DAD5F"
+  },
+  subtitle: "울산과학대학교 학생상담센터의 게시판입니다",
   backgroundImage: "/images/sub/privacy_bg.jpg",
   height: "600px",
   menuItems: [
@@ -123,7 +161,12 @@ export const HERO_DATA: Record<string, HeroPageData> = {
 
 "/bbs/notices": {
   title: "PR",
-  subtitle: "K&D ENERGEN의 공지사항을 확인하세요",
+  titleGradient: {
+    from: "#297D83",
+    to: "#3DAD5F"
+  },
+  subtitle: "울산과학대학교 학생상담센터의 공지사항을 확인하세요",
+  subtitleColor: "#0D344E",
   backgroundImage: "/images/sub/privacy_bg.jpg",
   height: "600px",
   menuItems: [
@@ -135,7 +178,12 @@ export const HERO_DATA: Record<string, HeroPageData> = {
 
 "/bbs/resources": {
   title: "PR",
+  titleGradient: {
+    from: "#297D83",
+    to: "#3DAD5F"
+  },
   subtitle: "K&D ENERGEN의 최신 소식을 전해드립니다",
+  subtitleColor: "#0D344E",
   backgroundImage: "/images/sub/privacy_bg.jpg",
   height: "600px",
   menuItems: [
@@ -148,6 +196,7 @@ export const HERO_DATA: Record<string, HeroPageData> = {
 "/bbs/ir": {
   title: "IR",
   subtitle: "K&D ENERGEN의 IR 정보를 확인하세요",
+  subtitleColor: "#0D344E",
   backgroundImage: "/images/sub/privacy_bg.jpg",
   height: "600px",
   menuItems: [

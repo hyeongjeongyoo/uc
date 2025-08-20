@@ -452,8 +452,13 @@ export default function BoardPage({
     switch (currentPathId) {
       case "notices":
         return {
-          title: "PR",
-          subtitle: "K&D ENERGEN의 공지사항을 확인하세요",
+          title: "공지/소식",
+          titleGradient: {
+            from: "#297D83",
+            to: "#3DAD5F"
+          },
+          subtitle: "울산과학대학교 학생상담센터의 공지사항을 확인하세요",
+          subtitleColor: "#0D344E",
           backgroundImage: "/images/sub/privacy_bg.jpg",
           menuItems: [
             { name: "PR", href: "/bbs/notices" },
@@ -463,7 +468,12 @@ export default function BoardPage({
       case "ir":
         return {
           title: "IR",
-          subtitle: "K&D ENERGEN의 IR 정보를 확인하세요",
+          titleGradient: {
+            from: "#297D83",
+            to: "#3DAD5F"
+          },
+          subtitle: "울산과학대학교 학생상담센터의 IR 정보를 확인하세요",
+          subtitleColor: "#0D344E",
           backgroundImage: "/images/sub/privacy_bg.jpg",
           menuItems: [
             { name: "IR", href: "/bbs/ir" },

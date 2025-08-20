@@ -125,25 +125,6 @@ const Footer = () => {
               <Text fontSize={{base:"12px", lg:"16px"}}>FAX : 052-277-1538</Text> */}
             </Box>
           </Box>
-
-          <Box
-            flex="0 0 240px"
-            ml="auto"
-            display="flex"
-            justifyContent="flex-end"
-          >
-            <Box borderRadius="md" p={4}>
-              <Image
-                src="/images/logo/big_logo.png"
-                alt="UC 로고"
-                width="200px"
-                height="200px"
-                objectFit="contain"
-                opacity={0.2}
-                filter="brightness(0) invert(1)"
-              />
-            </Box>
-          </Box>
         </Flex>
 
         {/* 하단 카피라이트 */}
@@ -169,7 +150,7 @@ const Footer = () => {
           zIndex={100}
           onClick={scrollToTop}
           _hover={{
-            bg: "#0D6473",
+            bg: "linear-gradient(135deg, #297D83 0%, #3DAD5F 100%)",
             transform: "translateY(-2px)",
             boxShadow: "0 6px 20px rgba(0, 0, 0, 0.35)",
           }}

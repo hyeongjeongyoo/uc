@@ -15,7 +15,7 @@ export const MenuItems = [
   // { icon: LuAlarmClockCheck, label: "일정관리", path: "/cms/schedule" },
   // { icon: LuFiles, label: "수영장관리", path: "/cms/swimming" },
   // { icon: LuFiles, label: "파일관리", path: "/cms/file" },
-  // { icon: LuMessageCircle, label: "문의관리", path: "/cms/inquiry" },
+  { icon: LuMessageCircle, label: "문의관리", path: "/cms/inquiry" },
   //{ icon: LuLayers3, label: "팝업관리", path: "/cms/popup" },
   //{ icon: LuUser, label: "회원관리", path: "/cms/user" },
 ];

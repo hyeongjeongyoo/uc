@@ -6,25 +6,25 @@ const MotionBox = motion(Box);
 
 const quotes = [
   {
-    text: "'고민이 많아서 머리가 너무 복잡해요'",
+    text: "'원치 않는 성적 말·농담·메시지·사진·영상으로 불쾌감·굴욕감이 들 때'",
     bgColor: "white",
     borderColor: "#0E58A4",
     borderRadius: "20px",
   },
   {
-    text: "'앞으로의 진로와 미래가 막막하게 느껴져 불안해요'",
+    text: "'동의 없이 신체 접촉·촬영·유포가 이루어졌을 때(디지털성범죄 포함)'",
     gradient: "linear-gradient(135deg, #297D83 0%, #3DAD5F 100%)",
     textColor: "white",
     borderRadius: "20px",
   },
   {
-    text: "'인간관계 때문에 마음이 자꾸 흔들려요'",
+    text: "'연인·선후배·교수–학생 등 권력/의존 관계에서의 강요나 압박을 느낄 때'",
     bgColor: "white",
     borderColor: "#0E58A4",
     borderRadius: "20px",
   },
   {
-    text: "'그냥 누군가에게 내 마음을 털어놓고 싶어요'",
+    text: "'사건을 목격했거나, 그로 인해 불안·수치심·분노 등 심리적 어려움이 클 때'",
     gradient: "linear-gradient(135deg, #297D83 0%, #3DAD5F 100%)",
     textColor: "white",
     borderRadius: "20px",
@@ -122,3 +122,6 @@ export const QuoteBoxes: React.FC = () => {
     </Flex>
   );
 };
+
+// 동일 컴포넌트를 다른 이름으로도 사용할 수 있게 별칭 내보내기
+export const CounselingBoxes = QuoteBoxes;

@@ -66,8 +66,6 @@ export default function LocationPage() {
     return () => window.removeEventListener("scroll", handleScrollCards);
   }, []);
 
-  const heroData = HERO_DATA["/uc/location"];
-
   return (
     <Box>
       {/* 상단 배너 컴포넌트 */}
@@ -77,24 +75,39 @@ export default function LocationPage() {
         <Stack>
           {/* 안내 섹션 */}
           <Box>
-            <Heading
-              as="h2"
-              fontSize={{ base: "24px", lg: "36px", xl: "48px" }}
-              fontWeight="bold"
-              mb={5}
-              lineHeight="1.3"
-              transition="all 0.8s ease 0.2s"
-              transform={
-                animations.mainHeading ? "translateY(0)" : "translateY(50px)"
-              }
-              opacity={animations.mainHeading ? 1 : 0}
-            >
-              위기 상황별 정보
-            </Heading>
+            <Box position="relative" mb={5}>
+              <Heading
+                as="h2"
+                fontSize={{ base: "24px", lg: "36px", xl: "48px" }}
+                fontWeight="bold"
+                lineHeight="1.3"
+                transition="all 0.6s ease 0.2s"
+                transform={
+                  animations.mainHeading ? "translateY(0)" : "translateY(50px)"
+                }
+                opacity={animations.mainHeading ? 1 : 0}
+                position="relative"
+                zIndex={1}
+              >
+                위기 상황별 정보
+              </Heading>
+              <Image
+                src="/images/sub/textLine.png"
+                alt="heading decoration"
+                position="absolute"
+                top="50%"
+                left="calc(50% - 50vw)"
+                transform="translateY(-55%)"
+                w="auto"
+                h="auto"
+                pointerEvents="none"
+                zIndex={0}
+              />
+            </Box>
             <Text
               fontSize={{ base: "14px", lg: "20px", xl: "24px" }}
               mb={5}
-              transition="all 0.8s ease 0.4s"
+              transition="all 0.8s ease-out"
               transform={
                 animations.description ? "translateY(0)" : "translateY(50px)"
               }
@@ -208,7 +221,7 @@ export default function LocationPage() {
           <Text
             fontSize={{ base: "14px", md: "18px" }}
             mt={5}
-            transition="all 0.8s ease 0.4s"
+            transition="all 0.6s ease-out"
             transform={
               animations.infoDescription ? "translateY(0)" : "translateY(50px)"
             }

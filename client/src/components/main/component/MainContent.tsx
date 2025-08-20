@@ -24,7 +24,6 @@ interface MainContentProps {
   };
 }
 
-const mainTitle = "울산과학대학교";
 const subTitle = "학생상담센터";
 const description =
   "울산과학대학교 학생상담센터는 학생들의 심리적 건강과 성장을 지원하기 위해 전문 상담사와 함께 개인 및 집단 상담을 제공합니다.";
@@ -132,24 +131,6 @@ const MainContent = ({ mouse }: MainContentProps) => {
           initial="hidden"
           animate="visible"
         >
-          <MotionHeading
-            as="h1"
-            fontSize={{ base: "6xl", md: "7xl", lg: "8xl" }}
-            fontWeight="800"
-            lineHeight="1.1"
-            variants={itemVariants}
-          >
-            <motion.span
-              variants={typingContainerVariants}
-              style={{ display: "inline-block" }}
-            >
-              {mainTitle.split("").map((char, i) => (
-                <motion.span key={i} variants={typingLetterVariants}>
-                  {char}
-                </motion.span>
-              ))}
-            </motion.span>
-          </MotionHeading>
           <MotionHeading
             as="h2"
             fontSize={{ base: "7xl", md: "8xl", lg: "9xl" }}
