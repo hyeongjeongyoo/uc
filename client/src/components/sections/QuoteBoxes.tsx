@@ -8,24 +8,24 @@ const quotes = [
   {
     text: "'고민이 많아서 머리가 너무 복잡해요'",
     bgColor: "white",
-    borderColor: "#0E58A4",
+    borderColor: "#297D83",
     borderRadius: "20px",
   },
   {
     text: "'앞으로의 진로와 미래가 막막하게 느껴져 불안해요'",
-    gradient: "linear-gradient(135deg, #297D83 0%, #3DAD5F 100%)",
+    gradient: "linear-gradient(135deg, #297D83 0%, #48AF84 100%)",
     textColor: "white",
     borderRadius: "20px",
   },
   {
     text: "'인간관계 때문에 마음이 자꾸 흔들려요'",
     bgColor: "white",
-    borderColor: "#0E58A4",
+    borderColor: "#297D83",
     borderRadius: "20px",
   },
   {
     text: "'그냥 누군가에게 내 마음을 털어놓고 싶어요'",
-    gradient: "linear-gradient(135deg, #297D83 0%, #3DAD5F 100%)",
+    gradient: "linear-gradient(135deg, #297D83 0%, #48AF84 100%)",
     textColor: "white",
     borderRadius: "20px",
   },

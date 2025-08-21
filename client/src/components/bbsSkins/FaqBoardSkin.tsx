@@ -111,7 +111,7 @@ const FaqBoardSkin: React.FC<FaqBoardSkinProps> = ({
                     >
                       <Text
                         alignSelf="flex-start"
-                        color="#4A7CD5"
+                        color="#267987"
                         fontSize={{ base: "md ", md: "2xl", lg: "4xl" }}
                         fontWeight="semibold"
                       >

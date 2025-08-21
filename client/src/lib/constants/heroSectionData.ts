@@ -30,7 +30,7 @@ export const DEFAULT_HERO_DATA: HeroPageData = {
   subtitleColor: "#0D344E",
   subtitleBrAlways: false,
   backgroundImage: "/images/sub/bg.jpg",
-  height: "600px",
+  height: "500px",
   menuItems: [{ name: "홈", href: "/" }],
   animationType: "zoom-in",
 };
@@ -42,11 +42,11 @@ export const HERO_DATA: Record<string, HeroPageData> = {
   title: "센터소개",
   titleGradient: {
     from: "#297D83",
-    to: "#3DAD5F"
+    to: "#48AF84"
   },
   subtitle: "울산과학대학교 학생상담센터를 소개합니다",
   backgroundImage: "/images/main/hero-image.jpg",
-  height: "600px",
+  height: "500px",
   menuItems: [
     { name: "센터안내", href: "/uc/center" },
     { name: "센터소개", href: "/uc/center" },
@@ -58,11 +58,11 @@ export const HERO_DATA: Record<string, HeroPageData> = {
   title: "센터소개",
   titleGradient: {
     from: "#297D83",
-    to: "#3DAD5F"
+    to: "#48AF84"
   },
   subtitle: "울산과학대학교 학생상담센터의 위치를 소개합니다",
   backgroundImage: "/images/main/hero-image.jpg",
-  height: "600px",
+  height: "500px",
   menuItems: [
     { name: "센터안내", href: "/uc/center" },
     { name: "오시는 길", href: "/uc/location" },
@@ -73,13 +73,13 @@ export const HERO_DATA: Record<string, HeroPageData> = {
   title: "센터소개",
   titleGradient: {
     from: "#297D83",
-    to: "#3DAD5F"
+    to: "#48AF84"
   },
   subtitle: "울산과학대학교 학생상담센터의 <br />위기 상황별 대응 및 연계기관을 안내드립니다",
   subtitleColor: "#0D344E",
   subtitleBrAlways: false,
   backgroundImage: "/images/sub/bg.jpg",
-  height: "600px",
+  height: "500px",
   menuItems: [
     { name: "센터안내", href: "/uc/center" },
     { name: "위기상황별 대응 및 연계기관 안내", href: "/uc/info" },
@@ -90,12 +90,12 @@ export const HERO_DATA: Record<string, HeroPageData> = {
   title: "개인상담",
   titleGradient: {
     from: "#297D83",
-    to: "#3DAD5F"
+    to: "#48AF84"
   },
   subtitle: "혼자 끙끙대지 말고, 안전한 공간에서 가볍게 시작해 보세요",
   subtitleColor: "#0D344E",
   backgroundImage: "/images/sub/bg.jpg",
-  height: "600px",
+  height: "500px",
   menuItems: [
     { name: "개인상담", href: "/counsel/individual" },
     { name: "개인상담 안내", href: "/counsel/individual" },
@@ -106,12 +106,12 @@ export const HERO_DATA: Record<string, HeroPageData> = {
   title: "개인상담",
   titleGradient: {
     from: "#297D83",
-    to: "#3DAD5F"
+    to: "#48AF84"
   },
   subtitle: "함께 이야기하고, 함께 자라는 시간입니다",
   subtitleColor: "#0D344E",
   backgroundImage: "/images/sub/bg.jpg",
-  height: "600px",
+  height: "500px",
   menuItems: [
     { name: "개인상담", href: "/counsel/group" },
     { name: "그룹상담 안내", href: "/counsel/group" },
@@ -122,13 +122,13 @@ export const HERO_DATA: Record<string, HeroPageData> = {
   title: "개인상담",
   titleGradient: {
     from: "#297D83",
-    to: "#3DAD5F"
+    to: "#48AF84"
   },
   subtitle: "내 마음을 이해하고, 문제 해결 방법을 함께 찾습니다.",
   subtitleColor: "#0D344E",
   subtitleBrAlways: true,
   backgroundImage: "/images/sub/bg.jpg",
-  height: "600px",
+  height: "500px",
   menuItems: [
     { name: "개인상담", href: "/counsel/individual" },
     { name: "장애학생심리지원상담 안내", href: "/counsel/disabled" },
@@ -139,13 +139,13 @@ export const HERO_DATA: Record<string, HeroPageData> = {
   title: "심리검사",
   titleGradient: {
     from: "#297D83",
-    to: "#3DAD5F"
+    to: "#48AF84"
   },
   subtitle: "자가진단은 <br />현재 나의 마음 상태를 간단히 살펴볼 수 있는 도구입니다.",
   subtitleColor: "#0D344E",
   subtitleBrAlways: true,
   backgroundImage: "/images/sub/bg.jpg",
-  height: "600px",
+  height: "500px",
   menuItems: [
     { name: "심리검사", href: "/therapy/therapy" },
     { name: "자가진단", href: "/therapy/therapy" },
@@ -156,13 +156,13 @@ export const HERO_DATA: Record<string, HeroPageData> = {
   title: "심리검사",
   titleGradient: {
     from: "#297D83",
-    to: "#3DAD5F"
+    to: "#48AF84"
   },
   subtitle: "나를 객관적으로 보는 첫걸음입니다. <br />결과를 함께 해석하며, 앞으로의 방향을 정리합니다.",
   subtitleColor: "#0D344E",
   subtitleBrAlways: true,
   backgroundImage: "/images/sub/bg.jpg",
-  height: "600px",
+  height: "500px",
   menuItems: [
     { name: "심리검사", href: "/therapy/counseling" },
     { name: "심리검사 안내", href: "/therapy/counseling" },
@@ -173,13 +173,13 @@ export const HERO_DATA: Record<string, HeroPageData> = {
   title: "성고충상담",
   titleGradient: {
     from: "#297D83",
-    to: "#3DAD5F"
+    to: "#48AF84"
   },
   subtitle: "내 마음을 이해하고, 문제 해결 방법을 함께 찾습니다.",
   subtitleColor: "#0D344E",
   subtitleBrAlways: true,
   backgroundImage: "/images/sub/bg.jpg",
-  height: "600px",
+  height: "500px",
   menuItems: [
     { name: "성고충상담", href: "/sexualcounseling/sexualcounseling" },
     { name: "장애학생심리지원상담 안내", href: "/sexualcounseling/sexualcounseling" },
@@ -193,11 +193,11 @@ export const HERO_DATA: Record<string, HeroPageData> = {
   title: "BOARD",
   titleGradient: {
     from: "#297D83",
-    to: "#3DAD5F"
+    to: "#48AF84"
   },
   subtitle: "울산과학대학교 학생상담센터의 게시판입니다",
   backgroundImage: "/images/sub/privacy_bg.jpg",
-  height: "600px",
+  height: "500px",
   menuItems: [
     { name: "홈", href: "/" },
     { name: "게시판", href: "/bbs" },
@@ -209,12 +209,12 @@ export const HERO_DATA: Record<string, HeroPageData> = {
   title: "공지/소식",
   titleGradient: {
     from: "#297D83",
-    to: "#3DAD5F"
+    to: "#48AF84"
   },
   subtitle: "울산과학대학교 학생상담센터의 공지사항을 확인하세요",
   subtitleColor: "#0D344E",
   backgroundImage: "/images/sub/privacy_bg.jpg",
-  height: "600px",
+  height: "500px",
   menuItems: [
     { name: "공지/소식", href: "/bbs/notices" },
     { name: "공지/소식", href: "/bbs/notices" },
@@ -226,12 +226,12 @@ export const HERO_DATA: Record<string, HeroPageData> = {
   title: "공지/소식",
   titleGradient: {
     from: "#297D83",
-    to: "#3DAD5F"
+    to: "#48AF84"
   },
   subtitle: "울산과학대학교 학생상담센터의 이야기를 전해드립니다",
   subtitleColor: "#0D344E",
   backgroundImage: "/images/sub/privacy_bg.jpg",
-  height: "600px",
+  height: "500px",
   menuItems: [
     { name: "공지/소식", href: "/bbs/resources" },
     { name: "상담센터 이야기", href: "/bbs/resources" },
@@ -244,7 +244,7 @@ export const HERO_DATA: Record<string, HeroPageData> = {
   subtitle: "K&D ENERGEN의 IR 정보를 확인하세요",
   subtitleColor: "#0D344E",
   backgroundImage: "/images/sub/privacy_bg.jpg",
-  height: "600px",
+  height: "500px",
   menuItems: [
     { name: "IR", href: "/bbs/ir" },
     { name: "IR", href: "/bbs/ir" },

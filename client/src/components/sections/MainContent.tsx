@@ -87,7 +87,7 @@ const MainContent = ({ mouse }: MainContentProps) => {
     (normY) => normY * dimensions.win.height - (dimensions.el?.top || 0)
   );
 
-  const baseColor = { r: 61, g: 173, b: 95 };
+  const baseColor = { r: 72, g: 175, b: 132 };
   const hue = useTransform(mouse.x, [0, 1], [70, 30]);
   const lightness = useTransform(mouse.y, [0, 1], [0.5, 0.6]);
 
@@ -290,8 +290,8 @@ const MainContent = ({ mouse }: MainContentProps) => {
                   <MotionFlex
                     key={label}
                     display="inline-flex"
-                    border="1px solid #3DAD5F"
-                    color="#3DAD5F"
+                    border="1px solid #48AF84"
+                    color="#48AF84"
                     borderRadius="full"
                     align="center"
                     py={0}

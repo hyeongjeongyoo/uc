@@ -80,7 +80,7 @@ export default function ProcessPage() {
               fontWeight="bold"
               mb={10}
               textAlign="center"
-              color="#4A7CD5"
+              color="#267987"
               letterSpacing="2"
               transition="all 0.8s ease"
               transform={

@@ -150,7 +150,7 @@ const Footer = () => {
           zIndex={100}
           onClick={scrollToTop}
           _hover={{
-            bg: "linear-gradient(135deg, #297D83 0%, #3DAD5F 100%)",
+            bg: "linear-gradient(135deg, #297D83 0%, #48AF84 100%)",
             transform: "translateY(-2px)",
             boxShadow: "0 6px 20px rgba(0, 0, 0, 0.35)",
           }}

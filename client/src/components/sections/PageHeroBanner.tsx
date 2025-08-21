@@ -11,6 +11,11 @@ import {
 import NextLink from "next/link";
 import { keyframes } from "@emotion/react";
 import { usePageHero } from "@/hooks/usePageHero";
+import dynamic from "next/dynamic";
+// 커스텀 OGL Threads 컴포넌트 동적 로딩 (브라우저 전용)
+const Threads = dynamic(() => import("@/components/visual/Threads"), {
+  ssr: false,
+});
 
 // Ken Burns zoom-in 애니메이션 정의
 const kenBurnsZoomIn = keyframes`
@@ -229,21 +234,25 @@ export function PageHeroBanner({
       position="relative"
       overflow="hidden"
     >
-      {/* 배경 이미지 - zoom-in 효과 */}
+      {/* 배경: react-bits Threads (서브 페이지 전역 적용) */}
       <Box
         position="absolute"
         top={0}
         left={0}
         right={0}
         bottom={0}
-        backgroundImage={`url('${finalData.backgroundImage}')`}
-        backgroundSize="cover"
-        backgroundPosition="center"
-        backgroundRepeat="no-repeat"
-        animation={`${fadeInAnimation} 1.5s ease-out, ${kenBurnsAnimation} 12s ease-in-out 1.5s infinite alternate`}
-        willChange="transform"
-        style={{ backfaceVisibility: "hidden" }}
-      />
+        animation={`${fadeInAnimation} 1.2s ease-out`}
+      >
+        {/* 배경색은 히어로 데이터의 그라디언트 톤과 어울리는 딥 블루/그린 계열 */}
+        <Threads
+          backgroundColor="#0B1F2B"
+          color={(finalData.titleGradient?.from as string) || "#297D83"}
+          lineWidth={1.2}
+          speed={0.6}
+          density={1.05}
+          style={{ width: "100%", height: "100%" }}
+        />
+      </Box>
 
       {/* 오버레이 */}
       <Box
@@ -273,7 +282,7 @@ export function PageHeroBanner({
           backgroundImage={
             finalData.titleGradient
               ? `linear-gradient(90deg, ${finalData.titleGradient.from} 0%, ${finalData.titleGradient.to} 100%)`
-              : "linear-gradient(90deg, #0D6473 0%, #3DAD5F 100%)"
+              : "linear-gradient(90deg, #0D6473 0%, #48AF84 100%)"
           }
           bgClip="text"
           color="transparent"

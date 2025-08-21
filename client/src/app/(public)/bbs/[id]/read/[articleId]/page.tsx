@@ -267,7 +267,7 @@ export default function ArticleDetailPage() {
             fontWeight="bold"
             mb={10}
             textAlign="center"
-            color="#4A7CD5"
+            color="#267987"
             letterSpacing="2"
           >
             K&D ENERGEN

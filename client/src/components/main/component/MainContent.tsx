@@ -223,7 +223,7 @@ const MainContent = ({ mouse }: MainContentProps) => {
                   바로가기
                   <Icon
                     as={ChevronsRightIcon}
-                    color="#3DAD5F"
+                    color="#48AF84"
                     strokeWidth={2.75}
                   />
                 </MotionBox>
@@ -246,8 +246,8 @@ const MainContent = ({ mouse }: MainContentProps) => {
                   <MotionFlex
                     key={label}
                     display="inline-flex"
-                    border="1px solid #3DAD5F"
-                    color="#3DAD5F"
+                    border="1px solid #48AF84"
+                    color="#48AF84"
                     style={{
                       transition:
                         "background-color 0.25s ease, transform 0.2s ease",
@@ -275,7 +275,7 @@ const MainContent = ({ mouse }: MainContentProps) => {
                         },
                       }),
                       hover: {
-                        backgroundColor: "#3DAD5F",
+                        backgroundColor: "#48AF84",
                         color: "#ffffff",
                         x: 5,
                         transition: {

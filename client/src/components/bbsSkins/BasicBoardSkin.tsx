@@ -268,7 +268,7 @@ const BasicBoardSkin: React.FC<BasicBoardSkinProps> = ({
                         post.no === 0 ||
                         isNoticeCategory ? (
                           <Badge
-                            bg={isNoticeCategory ? "#4A7CD5" : "red.500"}
+                            bg={isNoticeCategory ? "#267987" : "red.500"}
                             color="white"
                             variant="solid"
                             fontSize="12px"
@@ -293,7 +293,7 @@ const BasicBoardSkin: React.FC<BasicBoardSkinProps> = ({
                       >
                         <Flex align="center" justify="center" gap={2}>
                           <Text
-                            color={isNoticeCategory ? "#4A7CD5" : "#666"}
+                            color={isNoticeCategory ? "#267987" : "#666"}
                             _hover={{ color: "blue.500" }}
                             transition="color 0.2s ease"
                             fontWeight={isNoticeCategory ? "600" : "normal"}

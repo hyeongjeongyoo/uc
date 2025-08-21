@@ -178,7 +178,6 @@ export default function PrivacyPolicyPage() {
                           {/* 심플 라인 아이콘 (gradient stroke) */}
                           <Box
                             as="svg"
-                            viewBox="0 0 24 24"
                             width="32"
                             height="32"
                             fill="none"

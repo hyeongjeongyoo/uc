@@ -58,7 +58,7 @@ const NavButton: React.FC<any> = (props) => (
     backdropFilter="blur(10px)"
     _hover={{
       bg: "rgba(74, 124, 213, 0.8)",
-      borderColor: "#4A7CD5",
+      borderColor: "#267987",
       transform: "translateY(-50%) scale(1.1)",
     }}
     {...props}

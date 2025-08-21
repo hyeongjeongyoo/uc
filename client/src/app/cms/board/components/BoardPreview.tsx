@@ -85,7 +85,7 @@ const NoticeNumberRenderer = (
     <Flex w="100%" h="100%" alignItems="center" justifyContent="center">
       {(data && data.no === 0) || isNoticeCategory ? (
         <Badge
-          bg={isNoticeCategory ? "#4A7CD5" : "orange.500"}
+          bg={isNoticeCategory ? "#267987" : "orange.500"}
           color="white"
           variant="solid"
           fontSize="12px"
@@ -148,7 +148,7 @@ const PressTitleRenderer_Preview: React.FC<
     post.categories.some((cat) => cat.name === "공지" || cat.code === "NOTICE");
 
   const titleColor = isNoticeCategory
-    ? "#4A7CD5" // 공지 카테고리는 파란색
+    ? "#267987" // 공지 카테고리는 파란색
     : colorMode === "dark"
     ? colors.text?.primary || "#E2E8F0"
     : colors.text?.primary || "#2D3748";
@@ -899,16 +899,6 @@ const BoardPreview = React.memo(function BoardPreview({
       <Box px={8} py={8} minH="800px">
         {/* 콘텐츠 영역 - HeroSection과 별도 영역 */}
         <Box mb={{ base: "30px", lg: "50px" }}>
-          <Text
-            fontSize={{ base: "16px", lg: "20px", xl: "24px" }}
-            fontWeight="bold"
-            mb={5}
-            textAlign="center"
-            color="#4A7CD5"
-            letterSpacing="2"
-          >
-            K&D ENERGEN
-          </Text>
           <ContentsHeading
             title={(() => {
               const pathParts = (menu?.url ?? "").split("/");
@@ -979,7 +969,7 @@ const BoardPreview = React.memo(function BoardPreview({
             width={{ base: "100%", md: "50%" }}
           >
             <HStack gap={1}>
-              <Text fontSize="sm" color="#4A7CD5" whiteSpace="nowrap" mr={2}>
+              <Text fontSize="sm" color="#267987" whiteSpace="nowrap" mr={2}>
                 총 {articlesData?.totalElements ?? 0}건
               </Text>
               <Input

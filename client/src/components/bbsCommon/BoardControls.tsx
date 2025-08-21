@@ -103,7 +103,7 @@ const BoardControls: React.FC<BoardControlsProps> = ({
               <Text
                 as="span"
                 fontSize={{ base: "lg", md: "xl", lg: "2xl" }}
-                color="#4A7CD5"
+                color="#267987"
                 fontWeight="semibold"
               >
                 {pagination.totalElements}

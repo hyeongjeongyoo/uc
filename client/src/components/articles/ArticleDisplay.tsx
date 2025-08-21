@@ -151,7 +151,7 @@ export const ArticleDisplay: React.FC<ArticleDisplayProps> = ({
                   (cat) => cat.name === "공지" || cat.code === "NOTICE"
                 ) && (
                   <Badge
-                    bg="#4A7CD5"
+                    bg="#267987"
                     color="white"
                     variant="solid"
                     fontSize="12px"
@@ -172,7 +172,7 @@ export const ArticleDisplay: React.FC<ArticleDisplayProps> = ({
                   article.categories.some(
                     (cat) => cat.name === "공지" || cat.code === "NOTICE"
                   )
-                    ? "#4A7CD5"
+                    ? "#267987"
                     : "inherit"
                 }
               >

@@ -19,7 +19,7 @@ const services = [
             y2="0%"
           >
             <stop offset="0%" stopColor="#297D83" />
-            <stop offset="100%" stopColor="#3DAD5F" />
+            <stop offset="100%" stopColor="#48AF84" />
           </linearGradient>
         </defs>
         <path

@@ -455,7 +455,7 @@ export default function BoardPage({
           title: "공지/소식",
           titleGradient: {
             from: "#297D83",
-            to: "#3DAD5F"
+            to: "#48AF84"
           },
           subtitle: "울산과학대학교 학생상담센터의 공지사항을 확인하세요",
           subtitleColor: "#0D344E",
@@ -470,7 +470,7 @@ export default function BoardPage({
           title: "IR",
           titleGradient: {
             from: "#297D83",
-            to: "#3DAD5F"
+            to: "#48AF84"
           },
           subtitle: "울산과학대학교 학생상담센터의 IR 정보를 확인하세요",
           subtitleColor: "#0D344E",
@@ -536,19 +536,6 @@ export default function BoardPage({
           opacity={isHeaderVisible ? 1 : 0}
           transition="all 0.6s ease-out"
         >
-          <Text
-            fontSize={{ base: "16px", lg: "20px", xl: "24px" }}
-            fontWeight="bold"
-            mb={5}
-            textAlign="center"
-            color="#4A7CD5"
-            letterSpacing="2"
-            transform={isScrolled ? "translateY(0)" : "translateY(20px)"}
-            opacity={isScrolled ? 1 : 0}
-            transition="all 0.8s ease-out 0.2s"
-          >
-            K&D ENERGEN
-          </Text>
           <Box
             transform={isHeaderVisible ? "translateY(0)" : "translateY(20px)"}
             opacity={isHeaderVisible ? 1 : 0}

@@ -8,7 +8,7 @@ const quotes = [
   {
     text: "'원치 않는 성적 말·농담·메시지·사진·영상으로 불쾌감·굴욕감이 들 때'",
     bgColor: "white",
-    borderColor: "#0E58A4",
+    borderColor: "#297D83",
     borderRadius: "20px",
   },
   {
@@ -20,7 +20,7 @@ const quotes = [
   {
     text: "'연인·선후배·교수–학생 등 권력/의존 관계에서의 강요나 압박을 느낄 때'",
     bgColor: "white",
-    borderColor: "#0E58A4",
+    borderColor: "#297D83",
     borderRadius: "20px",
   },
   {
