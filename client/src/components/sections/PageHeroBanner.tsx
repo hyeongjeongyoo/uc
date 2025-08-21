@@ -15,9 +15,11 @@ import { usePageHero } from "@/hooks/usePageHero";
 
 import dynamic from "next/dynamic";
 // 커스텀 OGL Threads 컴포넌트 동적 로딩 (브라우저 전용)
-const Threads = dynamic(() => import("@/components/visual/Threads"), {
-  ssr: false,
-});
+// 경로 별칭 관련 이슈를 피하기 위해 상대 경로로 로드하고, 클라이언트 전용으로 비SSR 처리
+const Threads = dynamic(
+  () => import("../visual/Threads").then((m) => m.default),
+  { ssr: false, loading: () => null }
+);
 
 // Ken Burns zoom-in 애니메이션 정의
 const kenBurnsZoomIn = keyframes`
