@@ -24,9 +24,7 @@ interface MainContentProps {
 }
 
 const subTitle = "학생상담센터";
-const description =
-  `울산과학대학교 학생상담센터는 학생들의 심리적 건강과 성장을 지원하기 위해
-  전문 상담사와 함께 개인 및 집단 상담을 제공합니다.`;
+const description = `울산과학대학교 학생상담센터는 학생들의 심리적 건강과 성장을 지원하기 위해\n전문 상담사와 함께 개인 및 집단 상담을 제공합니다.`;
 
 const containerVariants: Variants = {
   hidden: {},
@@ -156,6 +154,7 @@ const MainContent = ({ mouse }: MainContentProps) => {
             color="#0d344e"
             variants={itemVariants}
             as="div"
+            style={{ whiteSpace: "pre-line" }}
           >
             <motion.span
               variants={{
