@@ -1,11 +1,11 @@
 "use client";
 
-import { Box, Text, Heading, Stack, Container, Image } from "@chakra-ui/react";
+import { Box, Text, Heading, Stack, Image } from "@chakra-ui/react";
+
 import { PageContainer } from "@/components/layout/PageContainer";
 import { PageHeroBanner } from "@/components/sections/PageHeroBanner";
 import React, { useState, useEffect } from "react";
 import { HERO_DATA } from "@/lib/constants/heroSectionData";
-import Script from "next/script";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -83,7 +83,7 @@ export default function LocationPage() {
               }
               opacity={animations.description ? 1 : 0}
             >
-              울산과학대학교 학생상담센터는 학생회관 2층에 위치해 있습니다.
+              울산과학대학교 학생상담센터 위치를 소개해드립니다.
             </Text>
             <Image
               src="/images/sub/location.png"
@@ -93,7 +93,93 @@ export default function LocationPage() {
               objectFit="cover"
               objectPosition="center"
               zIndex={0}
+              transition="all 0.8s ease 0.4s"
+              transform={
+                animations.mapHeading ? "translateY(0)" : "translateY(50px)"
+              }
+              opacity={animations.mapHeading ? 1 : 0}
             />
+
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              mt={6}
+              mb={6}
+              pb={4}
+              borderBottom="2px solid #333"
+            >
+              <Heading
+                fontSize={{ base: "18px", md: "24px", lg: "32px" }}
+                fontWeight="bold"
+                color="#333"
+              >
+                울산과학대학교 학생상담센터
+              </Heading>
+              <Box
+                as="button"
+                bg="#267987"
+                color="white"
+                px={6}
+                py={3}
+                borderRadius="full"
+                fontSize="16px"
+                fontWeight="bold"
+                _hover={{
+                  bg: "linear-gradient(135deg, #297D83 0%, #48AF84 100%)",
+                  cursor: "pointer",
+                }}
+                display="flex"
+                alignItems="center"
+                gap={2}
+              >
+                View Map
+              </Box>
+            </Box>
+
+            {/* 주소 정보 */}
+            <Box
+              display="grid"
+              gridTemplateColumns={{ base: "1fr", md: "1fr 1fr" }}
+              gap={8}
+              mb={6}
+            >
+              <Box>
+                <Text fontSize="18px" fontWeight="bold" color="#333" mb={3}>
+                  ADDRESS
+                </Text>
+                <Text fontSize="16px" color="#666" lineHeight="1.6">
+                  [44022] 울산광역시 동구 봉수로 101 울산과학대학교 제 1대학관
+                  203호 학생상담센터
+                </Text>
+              </Box>
+            </Box>
+
+            {/* 연락처 정보 */}
+            <Box mt={6} pt={4} borderTop="1px solid #f0f0f0">
+              <Box
+                display="grid"
+                gridTemplateColumns={{ base: "1fr", md: "1fr 1fr" }}
+                gap={6}
+              >
+                <Box>
+                  <Text fontSize="16px" fontWeight="bold" color="#333" mb={2}>
+                    대표전화
+                  </Text>
+                  <Text fontSize="16px" color="#267987" fontWeight="medium">
+                    052-230-0776~0778
+                  </Text>
+                </Box>
+                <Box>
+                  <Text fontSize="16px" fontWeight="bold" color="#333" mb={2}>
+                    팩스
+                  </Text>
+                  <Text fontSize="16px" color="#267987" fontWeight="medium">
+                    052-234-9300
+                  </Text>
+                </Box>
+              </Box>
+            </Box>
           </Box>
         </Stack>
       </PageContainer>

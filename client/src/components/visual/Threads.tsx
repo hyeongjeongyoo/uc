@@ -5,13 +5,30 @@ import { Renderer, Program, Mesh, Triangle, Color } from "ogl";
 
 type ColorProp = [number, number, number] | string;
 
-interface ThreadsProps extends React.HTMLAttributes<HTMLDivElement> {
+type AllowedDomProps = Pick<
+  React.HTMLAttributes<HTMLDivElement>,
+  | "id"
+  | "className"
+  | "style"
+  | "onClick"
+  | "onMouseEnter"
+  | "onMouseLeave"
+  | "role"
+  | "title"
+  | "tabIndex"
+> &
+  React.AriaAttributes;
+interface ThreadsProps extends AllowedDomProps {
   color?: ColorProp;
   amplitude?: number;
   distance?: number;
   enableMouseInteraction?: boolean;
   gradient?: [ColorProp, ColorProp];
   gradientAxis?: "x" | "y";
+  // custom props used by PageHeroBanner (do not forward to DOM)
+  lineWidth?: number;
+  speed?: number;
+  density?: number;
 }
 
 const vertexShader = `
@@ -173,6 +190,10 @@ const Threads: React.FC<ThreadsProps> = ({
   enableMouseInteraction = true,
   gradient,
   gradientAxis = "x",
+  // strip custom props so they don't reach the DOM
+  lineWidth: _lineWidth,
+  speed: _speed,
+  density: _density,
   ...rest
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -282,11 +303,19 @@ const Threads: React.FC<ThreadsProps> = ({
     };
   }, [color, amplitude, distance, enableMouseInteraction]);
 
+  const { style, ...domProps } = rest;
   return (
     <div
       ref={containerRef}
-      style={{ width: "100%", height: "100%", position: "absolute", inset: 0 }}
-      {...rest}
+      style={{
+        width: "100%",
+        height: "100%",
+        position: "absolute",
+        inset: 0,
+        ...(style as React.CSSProperties),
+        backgroundColor: "#fafafa",
+      }}
+      {...domProps}
     />
   );
 };

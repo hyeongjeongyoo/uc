@@ -13,7 +13,7 @@ interface ButtonPosition {
 
 interface NodeButtonsProps {
   buttonPositions: ButtonPosition[];
-  onHoverChange?: (hovering: boolean) => void;
+  onHoverChange?: (hovering: boolean, mappedIndex: number) => void;
 }
 
 export const NodeButtons = ({
@@ -148,6 +148,7 @@ export const NodeButtons = ({
                   return next;
                 });
                 frozenPositionsRef.current[index] = position;
+                onHoverChange?.(true, mappedIndex);
               }}
               onHoverEnd={() => {
                 setHoveredIndices((prev) => {
@@ -156,6 +157,7 @@ export const NodeButtons = ({
                   return next;
                 });
                 delete frozenPositionsRef.current[index];
+                onHoverChange?.(false, mappedIndex);
               }}
               variants={{
                 rest: {

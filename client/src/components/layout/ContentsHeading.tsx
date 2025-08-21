@@ -2,11 +2,16 @@ import { Box } from "@chakra-ui/react";
 
 import { Heading } from "@chakra-ui/react";
 
-const ContentsHeading = ({ title }: { title: string }) => {
+type ContentsHeadingProps = {
+  title: string;
+  textAlign?: "left" | "center" | "right" | "start" | "end";
+};
+
+const ContentsHeading = ({ title, textAlign }: ContentsHeadingProps) => {
   return (
     <Box>
       <Heading
-        textAlign="center"
+        textAlign={textAlign ?? "center"}
         as="h2"
         lineHeight="1.3"
         fontSize={{ base: "24px", lg: "36px", xl: "48px" }}

@@ -11,6 +11,10 @@ import {
 import NextLink from "next/link";
 import { keyframes } from "@emotion/react";
 import { usePageHero } from "@/hooks/usePageHero";
+import { useColorModeValue } from "@chakra-ui/react";
+import { useColorMode } from "@chakra-ui/react";
+import { useTheme } from "@chakra-ui/react";
+
 import dynamic from "next/dynamic";
 // 커스텀 OGL Threads 컴포넌트 동적 로딩 (브라우저 전용)
 const Threads = dynamic(() => import("@/components/visual/Threads"), {
@@ -245,11 +249,7 @@ export function PageHeroBanner({
       >
         {/* 배경색은 히어로 데이터의 그라디언트 톤과 어울리는 딥 블루/그린 계열 */}
         <Threads
-          backgroundColor="#0B1F2B"
           color={(finalData.titleGradient?.from as string) || "#297D83"}
-          lineWidth={1.2}
-          speed={0.6}
-          density={1.05}
           style={{ width: "100%", height: "100%" }}
         />
       </Box>

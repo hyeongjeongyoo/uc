@@ -28,11 +28,13 @@ const Layout = ({ children }: LayoutProps) => {
 
   const sortedMenus = sortMenus(menuResponse?.data || []);
 
+  const hideChrome = pathname?.startsWith("/therapy/assessment");
+
   return (
     <Box display="flex" flexDirection="column" minHeight="100vh">
-      <Header currentPage={currentPage} menus={sortedMenus} />
+      {!hideChrome && <Header currentPage={currentPage} menus={sortedMenus} />}
       <Box flex="1">{children}</Box>
-      {pathname !== "/" && <Footer />}
+      {!hideChrome && pathname !== "/" && <Footer />}
     </Box>
   );
 };

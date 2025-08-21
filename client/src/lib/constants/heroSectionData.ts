@@ -65,7 +65,7 @@ export const HERO_DATA: Record<string, HeroPageData> = {
   height: "500px",
   menuItems: [
     { name: "센터안내", href: "/uc/center" },
-    { name: "오시는 길", href: "/uc/location" },
+    { name: "찾아오시는 길", href: "/uc/location" },
   ],
   animationType: "zoom-in",
 },

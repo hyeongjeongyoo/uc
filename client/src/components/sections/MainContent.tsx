@@ -9,7 +9,7 @@ import {
   useMotionTemplate,
 } from "framer-motion";
 import { ChevronRightIcon } from "lucide-react";
-import NoticeCard from "./card/NoticeCard";
+import NoticeCard from "@/components/main/component/card/NoticeCard";
 import { useState, useEffect, useRef } from "react";
 
 const MotionHeading = motion(Heading);

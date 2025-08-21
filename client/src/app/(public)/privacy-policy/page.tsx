@@ -57,6 +57,7 @@ export default function PrivacyPolicyPage() {
       <PageHeroBanner
         title="개인정보처리방침"
         subtitle="울산과학대학교 학생상담센터의 개인정보처리방침을 소개합니다"
+        subtitleColor="#0D344E"
         backgroundImage="/images/sub/privacy_bg.jpg"
         height="600px"
         menuType="custom"
@@ -176,10 +177,12 @@ export default function PrivacyPolicyPage() {
                           mb={4}
                         >
                           {/* 심플 라인 아이콘 (gradient stroke) */}
-                          <Box
-                            as="svg"
-                            width="32"
-                            height="32"
+                          <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            preserveAspectRatio="xMidYMid meet"
+                            style={{ display: "block" }}
                             fill="none"
                           >
                             <defs>
@@ -249,7 +252,7 @@ export default function PrivacyPolicyPage() {
                                 strokeLinejoin="round"
                               />
                             )}
-                          </Box>
+                          </svg>
                         </Box>
 
                         <Text

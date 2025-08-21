@@ -861,7 +861,7 @@ const BoardPreview = React.memo(function BoardPreview({
   };
 
   return (
-    <Layout currentPage="홈" isPreview={true} menus={menus}>
+    <Layout>
       <Box
         css={{
           "& > div:first-of-type": {

@@ -15,7 +15,7 @@ interface MainProps {
 export const Main = memo(
   ({ menus, isPreview = false, children, currentPage }: MainProps) => {
     return (
-      <Layout currentPage={currentPage} isPreview={isPreview} menus={menus}>
+      <Layout>
         <MainContentArea>{children}</MainContentArea>
       </Layout>
     );

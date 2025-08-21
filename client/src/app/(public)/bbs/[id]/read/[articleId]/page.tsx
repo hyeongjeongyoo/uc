@@ -202,6 +202,7 @@ export default function ArticleDetailPage() {
           bannerTitle: "NOTICES",
           title: "PR",
           subtitle: "케이앤디에너젠의 공지사항을 확인하세요",
+          subtitleColor: "#0D344E",
           backgroundImage: "/images/sub/privacy_bg.jpg",
           menuItems: [
             { name: "PR", href: "/bbs/notices" },
@@ -213,6 +214,7 @@ export default function ArticleDetailPage() {
           bannerTitle: "IR",
           title: "IR",
           subtitle: "케이앤디에너젠의 IR 정보를 확인하세요",
+          subtitleColor: "#0D344E",
           backgroundImage: "/images/sub/privacy_bg.jpg",
           menuItems: [
             { name: "PR", href: "/bbs/ir" },
@@ -224,6 +226,7 @@ export default function ArticleDetailPage() {
           bannerTitle: "뉴스/보도자료",
           title: "PR",
           subtitle: "케이앤디에너젠의 최신 소식을 전해드립니다",
+          subtitleColor: "#0D344E",
           backgroundImage: "/images/sub/privacy_bg.jpg",
           menuItems: [
             { name: "PR", href: "/bbs/resources" },
@@ -235,6 +238,7 @@ export default function ArticleDetailPage() {
           bannerTitle: "게시판",
           title: "게시판",
           subtitle: "게시판입니다",
+          subtitleColor: "#0D344E",
           backgroundImage: "/images/sub/privacy_bg.jpg",
           menuItems: [
             { name: "게시판", href: `/bbs/${id}` },
@@ -252,6 +256,7 @@ export default function ArticleDetailPage() {
       <PageHeroBanner
         title={boardConfig.bannerTitle}
         subtitle={boardConfig.subtitle}
+        subtitleColor={boardConfig.subtitleColor}
         backgroundImage={boardConfig.backgroundImage}
         height="500px"
         menuType="custom"
@@ -266,13 +271,13 @@ export default function ArticleDetailPage() {
             fontSize={{ base: "16px", lg: "20px", xl: "24px" }}
             fontWeight="bold"
             mb={10}
-            textAlign="center"
+            textAlign="left"
             color="#267987"
             letterSpacing="2"
           >
             K&D ENERGEN
           </Text>
-          <ContentsHeading title={boardConfig.title} />
+          <ContentsHeading textAlign="left" title={boardConfig.title} />
         </Box>
 
         <Container maxW={"1300px"} py={0} px={0}>

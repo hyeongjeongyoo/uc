@@ -131,7 +131,7 @@ export function MenuPreview({ selectedMenu }: MenuPreviewProps) {
           미리보기를 사용할 수 없습니다
         </Text>
         <Text fontSize="sm" textAlign="center">
-          선택된 메뉴 "{selectedMenu.name}"은
+          선택된 메뉴 &quot;{selectedMenu.name}&quot;은
           <br />
           미리보기 URL이 설정되지 않았습니다.
         </Text>

@@ -455,7 +455,7 @@ export default function BoardPage({
           title: "공지/소식",
           titleGradient: {
             from: "#297D83",
-            to: "#48AF84"
+            to: "#48AF84",
           },
           subtitle: "울산과학대학교 학생상담센터의 공지사항을 확인하세요",
           subtitleColor: "#0D344E",
@@ -470,7 +470,7 @@ export default function BoardPage({
           title: "IR",
           titleGradient: {
             from: "#297D83",
-            to: "#48AF84"
+            to: "#48AF84",
           },
           subtitle: "울산과학대학교 학생상담센터의 IR 정보를 확인하세요",
           subtitleColor: "#0D344E",
@@ -484,6 +484,7 @@ export default function BoardPage({
         return {
           title: "공지/소식",
           subtitle: "울산과학대학교 학생상담센터의 이야기를 전해드립니다",
+          subtitleColor: "#0D344E",
           backgroundImage: "/images/sub/privacy_bg.jpg",
           menuItems: [
             { name: "공지/소식", href: "/bbs/resources" },
@@ -493,7 +494,9 @@ export default function BoardPage({
       case "gallery":
         return {
           title: "공지/소식",
-          subtitle: "울산과학대학교 학생상담센터의 마음건강 이야기를 확인하세요",
+          subtitle:
+            "울산과학대학교 학생상담센터의 마음건강 이야기를 확인하세요",
+          subtitleColor: "#0D344E",
           backgroundImage: "/images/sub/privacy_bg.jpg",
           menuItems: [
             { name: "공지/소식", href: "/bbs/gallery" },
@@ -504,6 +507,7 @@ export default function BoardPage({
         return {
           title: "게시판",
           subtitle: "게시판입니다",
+          subtitleColor: "#0D344E",
           backgroundImage: "/images/bbs/privacy_bg.jpg",
           menuItems: [
             { name: "PR", href: `/bbs/${currentPathId}` },
@@ -521,6 +525,7 @@ export default function BoardPage({
       <PageHeroBanner
         title={boardConfig.title}
         subtitle={boardConfig.subtitle}
+        subtitleColor={boardConfig.subtitleColor}
         backgroundImage={boardConfig.backgroundImage}
         height="500px"
         menuType="custom"
@@ -542,6 +547,7 @@ export default function BoardPage({
             transition="all 0.8s ease-out 0.4s"
           >
             <ContentsHeading
+              textAlign="left"
               title={(() => {
                 switch (currentPathId) {
                   case "notices":
