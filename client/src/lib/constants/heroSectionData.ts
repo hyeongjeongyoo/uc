@@ -45,6 +45,7 @@ export const HERO_DATA: Record<string, HeroPageData> = {
     to: "#48AF84"
   },
   subtitle: "울산과학대학교 학생상담센터를 소개합니다",
+  subtitleColor: "#0d344e",
   backgroundImage: "/images/main/hero-image.jpg",
   height: "500px",
   menuItems: [
@@ -61,6 +62,7 @@ export const HERO_DATA: Record<string, HeroPageData> = {
     to: "#48AF84"
   },
   subtitle: "울산과학대학교 학생상담센터의 위치를 소개합니다",
+  subtitleColor: "#0d344e",
   backgroundImage: "/images/main/hero-image.jpg",
   height: "500px",
   menuItems: [
