@@ -119,13 +119,13 @@ export default function TherapyAssessmentPage() {
         return;
       }
       setSubmitting(true);
-      await surveyApi.savePersonPublic({
-        studentNumber,
-        fullName,
-        genderCode: gender,
-        departmentName,
-        locale: (locale || "ko") as "ko" | "en",
-      });
+      // await surveyApi.savePersonPublic({
+      //   studentNumber,
+      //   fullName,
+      //   genderCode: gender,
+      //   departmentName,
+      //   locale: (locale || "ko") as "ko" | "en",
+      // });
       setPersonSaved(true);
       setStep(3);
     } catch (e) {
