@@ -32,6 +32,12 @@ public class Person {
     @Column(length = 32)
     private String phoneNumber;
 
+    @Column(length = 100)
+    private String departmentName;
+
+    @Column(length = 8)
+    private String locale;
+
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime createdAt;

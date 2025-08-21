@@ -1,11 +1,32 @@
 "use client";
 
-import { Box, Text, Heading, Stack, Container, Image } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Heading,
+  Stack,
+  Container,
+  Image,
+  Tabs,
+  Button,
+  Checkbox,
+  Flex,
+  Icon,
+  Input,
+  NativeSelect,
+  VStack,
+  RadioGroup,
+  Stack as ChakraStack,
+  Progress,
+} from "@chakra-ui/react";
 import { PageContainer } from "@/components/layout/PageContainer";
 import { PageHeroBanner } from "@/components/sections/PageHeroBanner";
 import React, { useState, useEffect, useRef } from "react";
 import { HERO_DATA } from "@/lib/constants/heroSectionData";
-import { Flex } from "@chakra-ui/react";
+import { Check as CheckIcon } from "lucide-react";
+import StressTest from "@/components/assessments/StressTest";
+import { surveyApi } from "@/lib/api/survey";
+import { publicApi } from "@/lib/api/client";
 
 export default function TherapyPage() {
   // 애니메이션 상태 관리
@@ -66,6 +87,89 @@ export default function TherapyPage() {
     return () => window.removeEventListener("scroll", handleScrollCards);
   }, []);
 
+  // 자가진단 설문: 1단계(개인정보 동의)
+  const [locale, setLocale] = useState<"ko" | "en">("ko");
+  const [step, setStep] = useState<number>(1);
+  const [consentChecked, setConsentChecked] = useState(false);
+  const [selectedSurvey, setSelectedSurvey] = useState<
+    null | "personality" | "depression" | "anxiety"
+  >(null);
+  const [studentNumber, setStudentNumber] = useState("");
+  const [departmentName, setDepartmentName] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [gender, setGender] = useState<"M" | "F" | "">("");
+  const [submitting, setSubmitting] = useState(false);
+  const [personSaved, setPersonSaved] = useState(false);
+
+  // 4단계: 스트레스 척도 (PSS) 문항 상수 (외부 컴포넌트로 이동 예정)
+  const PSS_QUESTIONS = [
+    "예상치 못한 일이 생겨서 기분 나빠진 적이 얼마나 있었나요?",
+    "중요한 일들을 통제할 수 없다고 느낀 적은 얼마나 있었나요?",
+    "어려운 일이 너무 많이 쌓여서 극복할 수 없다고 느낀 적이 얼마나 있었나요?",
+    "당신이 통제할 수 없는 범위에서 발생한 일 때문에 화가 난 적이 얼마나 있었나요?",
+    "매사를 잘 컨트롤하고 있다고 느낀 적이 얼마나 있었나요?",
+    "자신의 뜻대로 일이 진행된다고 느낀 적이 얼마나 있었나요?",
+    "개인적인 문제를 처리하는 능력에 대해 자신감을 느낀적은 얼마나 있었나요?",
+    "생활 속에서 일어난 중요한 변화들을 효과적으로 대처한 적이 얼마나 있었나요?",
+    "짜증나고 성가신 일들을 성공적으로 처리한 적이 얼마나 있었나요?",
+    "초조하거나 스트레스가 쌓인다고 느낀적이 얼마나 있었나요?",
+  ];
+  // PSS는 별도 컴포넌트로 분리됨
+  const handlePublicSubmit = async () => {
+    try {
+      // 디버그: 실제 요청 baseURL 확인
+      console.log("API baseURL:", (publicApi as any)?.defaults?.baseURL);
+      if (!studentNumber || !departmentName || !fullName || !gender) {
+        alert("기본정보를 모두 입력해주세요.");
+        setStep(2);
+        return;
+      }
+      setSubmitting(true);
+      await surveyApi.savePersonPublic({
+        studentNumber,
+        fullName,
+        genderCode: gender,
+        departmentName,
+        locale,
+      });
+      setPersonSaved(true);
+      alert("제출되었습니다.");
+    } catch (err) {
+      console.error(err);
+      alert("제출 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handleStep2Next = async () => {
+    if (personSaved) {
+      setStep(3);
+      return;
+    }
+    try {
+      if (!studentNumber || !departmentName || !fullName || !gender) {
+        alert("기본정보를 모두 입력해주세요.");
+        return;
+      }
+      setSubmitting(true);
+      await surveyApi.savePersonPublic({
+        studentNumber,
+        fullName,
+        genderCode: gender,
+        departmentName,
+        locale,
+      });
+      setPersonSaved(true);
+      setStep(3);
+    } catch (e) {
+      console.error(e);
+      alert("저장 중 오류가 발생했습니다.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <Box>
       {/* 상단 배너 컴포넌트 */}
@@ -89,7 +193,7 @@ export default function TherapyPage() {
                 position="relative"
                 zIndex={1}
               >
-                위기 상황별 정보
+                심리검사
               </Heading>
               <Image
                 src="/images/sub/textLine.png"
@@ -113,127 +217,519 @@ export default function TherapyPage() {
               }
               opacity={animations.description ? 1 : 0}
             >
-              울산과학대학교 학생상담센터의 위기 상황별 대응 및 연계기관을
-              안내드립니다.
+              자가진단은 현재 나의 마음 상태를 간단히 살펴볼 수 있는 도구입니다.
+              검사 결과는 참고 자료로만 활용하시고, 정확한 이해와 도움이 필요할
+              경우 학생상담센터 상담을 통해 자세히 안내받으시기 바랍니다.
             </Text>
-          </Box>
-          {/* 2x2 카드 그리드 */}
-          <Flex wrap="wrap" gap={{ base: 4, md: 6 }} w="100%">
-            {/* 카드 공통 스타일 */}
-            {[
-              {
-                title: "생명·정신건강 위기 (24시간)",
-                items: [
-                  "생명의 전화: 1588-9191 (24시간 자살 위기, 극심한 절망감 등)",
-                  "정신건강위기상담전화: 1577-0199 (장관·불안·우울·알코올 의존 등 24시간 상담)",
-                ],
-              },
-              {
-                title: "보건·복지 연계",
-                items: [
-                  "보건복지콜센터: 129 (국번없이) (복지·의료 정보 안내 및 연계)",
-                ],
-              },
-              {
-                title: "지역(울산) 정신건강 지원",
-                items: [
-                  "울산광역시정신건강복지센터: 052-220-4930",
-                  "동구정신건강복지센터: 052-233-1040",
-                  "중구정신건강복지센터: 052-245-5570",
-                  "북구정신건강복지센터: 052-255-1534",
-                ],
-              },
-              {
-                title: "성폭력·성고충 지원",
-                items: [
-                  "여성긴급전화 1366 (주간·야간·가정폭력 긴급 상담)",
-                  "울산해바라기센터: 052-250-1366 (성폭력·가정폭력·디지털성범죄 의료·법률·상담)",
-                  "충북해바라기센터(남성): 052-244-1366 (성폭력 피해 남성 지원)",
-                ],
-              },
-            ].map((card, idx) => (
+
+            {/* 탭(국문/영문) */}
+            <Box display="flex" justifyContent="center" mt={20} border="none">
               <Box
-                key={idx}
-                flex={{ base: "1 1 100%", md: "1 1 calc(50% - 12px)" }}
-                bg="#ffffff"
-                borderRadius="12px"
-                border="1px solid #eee"
-                boxShadow="0 8px 16px rgba(0,0,0,0.04)"
-                p={{ base: 5, md: 6 }}
-                minH={{ base: "auto", md: "200px" }}
-                display="flex"
-                flexDirection="column"
-                gap={3}
-                position="relative"
-                transition="all 0.6s ease-out"
-                transform={
-                  cardVisible[idx] ? "translateY(0)" : "translateY(24px)"
-                }
-                opacity={cardVisible[idx] ? 1 : 0}
-                cursor="default"
-                willChange="transform, box-shadow, border-color"
-                _hover={{
-                  transform: cardVisible[idx]
-                    ? "translateY(-4px)"
-                    : "translateY(24px)",
-                  boxShadow: "0 12px 24px rgba(0,0,0,0.08)",
-                  borderColor: "#e2e8f0",
-                }}
+                border="2px solid #43AD83"
+                borderRadius="full"
+                px={{ base: 2, md: 4 }}
+                py={{ base: 1, md: 2 }}
               >
-                <Heading as="h3" fontSize={{ base: "16px", md: "20px" }}>
-                  {card.title}
-                </Heading>
-                <Box
-                  as="ul"
-                  pl={3}
-                  color="#555"
-                  fontSize={{ base: "14px", md: "18px" }}
+                <Tabs.Root
+                  value={locale}
+                  onValueChange={({ value }) => setLocale(value as "ko" | "en")}
                 >
-                  {card.items.map((text, i) => (
-                    <Text
-                      as="li"
-                      key={i}
-                      mb={1}
-                      style={{ listStyleType: "'· '" }}
+                  <Tabs.List gap={8} alignItems="center" border="none">
+                    <Tabs.Trigger
+                      value="ko"
+                      px={{ base: 6, md: 14 }}
+                      py={{ base: 2, md: 4 }}
+                      borderRadius="full"
+                      color="#43AD83"
+                      _selected={{ background: "#43AD83", color: "white" }}
+                      border="none"
+                      _before={{ display: "none" }}
                     >
-                      {text}
-                    </Text>
-                  ))}
-                </Box>
-                <Box
-                  position="absolute"
-                  right={{ base: 3, md: 6 }}
-                  bottom={{ base: 3, md: 6 }}
-                  userSelect="none"
-                  pointerEvents="none"
-                >
-                  <Image
-                    src="/images/logo/big_logo.png"
-                    alt="UC 로고 워터마크"
-                    w={{ base: "64px", md: "96px" }}
-                    h="auto"
-                    opacity={0.2}
-                  />
-                </Box>
+                      국문
+                    </Tabs.Trigger>
+                    <Tabs.Trigger
+                      value="en"
+                      px={{ base: 8, md: 14 }}
+                      py={{ base: 3, md: 4 }}
+                      borderRadius="full"
+                      _selected={{ background: "#43AD83", color: "white" }}
+                      color="#43AD83"
+                      _before={{ display: "none" }}
+                    >
+                      영문
+                    </Tabs.Trigger>
+                  </Tabs.List>
+                </Tabs.Root>
               </Box>
-            ))}
-          </Flex>
-          <Text
-            fontSize={{ base: "14px", md: "18px" }}
-            mt={5}
-            transition="all 0.6s ease-out"
-            transform={
-              animations.infoDescription ? "translateY(0)" : "translateY(50px)"
-            }
-            opacity={animations.infoDescription ? 1 : 0}
-            ref={infoDescRef}
-          >
-            <Text as="span" fontWeight="bold" color="#0D344E">
-              * 급한 상황일수록 가장 먼저 24시간 상담 번호로 연락하세요.
-            </Text>
-            <Box as="br" />* 통화가 어려우면 가까운 사람에게 도움을 요청하고,
-            가능한 안전한 장소로 이동하세요.
-          </Text>
+            </Box>
+
+            {/* 스텝 인디케이터 (1~4) - 원 안/체크/도넛 스타일 */}
+            <Flex
+              mt={6}
+              justify="space-between"
+              align="center"
+              maxW="300px"
+              mx="auto"
+            >
+              {[1, 2, 3, 4].map((n) => {
+                const isDone = n < step;
+                const isCurrent = n === step;
+                return (
+                  <Box
+                    key={n}
+                    w="64px"
+                    display="flex"
+                    justifyContent="center"
+                    mt={20}
+                    mb={10}
+                  >
+                    {isDone ? (
+                      <Flex
+                        w={{ base: "25px", md: "35px" }}
+                        h={{ base: "25px", md: "35px" }}
+                        borderRadius="full"
+                        bg="#43AD83"
+                        align="center"
+                        justify="center"
+                      >
+                        <Icon as={CheckIcon} boxSize={4} color="white" />
+                      </Flex>
+                    ) : isCurrent ? (
+                      <Box
+                        w={{ base: "25px", md: "35px" }}
+                        h={{ base: "25px", md: "35px" }}
+                        borderRadius="full"
+                        bg="white"
+                        border="10px solid #43AD83"
+                      />
+                    ) : (
+                      <Flex
+                        w={{ base: "25px", md: "35px" }}
+                        h={{ base: "25px", md: "35px" }}
+                        borderRadius="full"
+                        bg="#e1e1e1"
+                        align="center"
+                        justify="center"
+                      >
+                        <Text
+                          fontSize={{ base: "14px", md: "18px" }}
+                          color="#333"
+                        >
+                          {n}
+                        </Text>
+                      </Flex>
+                    )}
+                  </Box>
+                );
+              })}
+            </Flex>
+
+            {/* 단계별 컨텐츠 */}
+            {step === 1 && (
+              <Box mt={4}>
+                <Heading as="h3" fontSize={{ base: "16px", md: "18px" }} mb={3}>
+                  {locale === "ko"
+                    ? "[개인정보(민감정보 처리) 수집 · 이용에 대한 동의]"
+                    : "[Consent to collection and use of personal (sensitive) information]"}
+                </Heading>
+
+                <Box
+                  border="1px solid #cbd5e1"
+                  borderRadius="md"
+                  overflow="hidden"
+                  bg="#fff"
+                >
+                  {/* Row 1 */}
+                  <Box
+                    display="grid"
+                    gridTemplateColumns={{ base: "1fr", md: "220px 1fr" }}
+                  >
+                    <Box
+                      p={3}
+                      bg="gray.100"
+                      borderRight={{ md: "1px solid #cbd5e1" }}
+                      borderBottom="1px solid #cbd5e1"
+                    >
+                      {locale === "ko"
+                        ? "수집·이용하는 개인정보 항목"
+                        : "Items collected/used"}
+                    </Box>
+                    <Box p={3} borderBottom="1px solid #cbd5e1">
+                      {locale === "ko"
+                        ? "성명/ 학번/학과/ 연락처/ 성별/ 자가진단 결과"
+                        : "Full name / Student ID / Department / Contact / Gender / Self‑assessment result"}
+                    </Box>
+                  </Box>
+                  {/* Row 2 */}
+                  <Box
+                    display="grid"
+                    gridTemplateColumns={{ base: "1fr", md: "220px 1fr" }}
+                  >
+                    <Box
+                      p={3}
+                      bg="gray.100"
+                      borderRight={{ md: "1px solid #cbd5e1" }}
+                      borderBottom="1px solid #cbd5e1"
+                    >
+                      {locale === "ko"
+                        ? "개인정보의 수집·이용 목적"
+                        : "Purpose of collection and use"}
+                    </Box>
+                    <Box p={3} borderBottom="1px solid #cbd5e1">
+                      <Box
+                        as="ul"
+                        pl={4}
+                        fontSize={{ base: "14px", md: "15px" }}
+                        color="gray.700"
+                      >
+                        {locale === "ko" ? (
+                          <>
+                            <Text
+                              as="li"
+                              mb={1}
+                              style={{ listStyleType: "'• '" }}
+                            >
+                              이용자 심리·정서적 상태 점검 및 지원 필요성 파악
+                            </Text>
+                            <Text
+                              as="li"
+                              mb={1}
+                              style={{ listStyleType: "'• '" }}
+                            >
+                              자가진단 결과에 따른 상담 연계 및 지원
+                            </Text>
+                            <Text
+                              as="li"
+                              mb={1}
+                              style={{ listStyleType: "'• '" }}
+                            >
+                              자가진단 진행을 위한 본인 확인 및 연락
+                            </Text>
+                            <Text
+                              as="li"
+                              mb={1}
+                              style={{ listStyleType: "'• '" }}
+                            >
+                              상담 진행 시 효과적인 심리검사 진행 및 편의 제공
+                            </Text>
+                          </>
+                        ) : (
+                          <>
+                            <Text
+                              as="li"
+                              mb={1}
+                              style={{ listStyleType: "'• '" }}
+                            >
+                              Check psychological/emotional status and need for
+                              support
+                            </Text>
+                            <Text
+                              as="li"
+                              mb={1}
+                              style={{ listStyleType: "'• '" }}
+                            >
+                              Connect counseling based on results
+                            </Text>
+                            <Text
+                              as="li"
+                              mb={1}
+                              style={{ listStyleType: "'• '" }}
+                            >
+                              Verify identity and contact for assessment
+                              progress
+                            </Text>
+                            <Text
+                              as="li"
+                              mb={1}
+                              style={{ listStyleType: "'• '" }}
+                            >
+                              Provide effective psychological testing and
+                              convenience during counseling
+                            </Text>
+                          </>
+                        )}
+                      </Box>
+                    </Box>
+                  </Box>
+                  {/* Row 3 */}
+                  <Box
+                    display="grid"
+                    gridTemplateColumns={{ base: "1fr", md: "220px 1fr" }}
+                  >
+                    <Box
+                      p={3}
+                      bg="gray.100"
+                      borderRight={{ md: "1px solid #cbd5e1" }}
+                    >
+                      {locale === "ko"
+                        ? "개인정보의 보유 및 이용기간"
+                        : "Retention & usage period"}
+                    </Box>
+                    <Box p={3}>
+                      {locale === "ko"
+                        ? "자가진단 신청일로부터 3년간 보관 후 안전하게 폐기"
+                        : "Stored for 3 years from application date and securely destroyed"}
+                    </Box>
+                  </Box>
+                </Box>
+
+                <Box
+                  mt={3}
+                  color="gray.700"
+                  fontSize={{ base: "13px", md: "14px" }}
+                >
+                  {locale === "ko" ? (
+                    <>
+                      <Text mb={1}>
+                        ※ 귀하는 이에 대한 동의를 거부할 수 있으며, 다만 동의가
+                        없을 경우 원활한 성고충상담의 진행이 불가능할 수 있음을
+                        알려드립니다.
+                      </Text>
+                      <Text>
+                        ※ 개인정보 제공자가 동의한 내용 외의 다른 목적으로
+                        활용하지 않으며 제공된 개인정보의 이용을 거부하고자 할
+                        때에는 개인정보 관리책임자를 통해 정보 열람, 정정,
+                        삭제를 요구할 수 있음
+                      </Text>
+                    </>
+                  ) : (
+                    <>
+                      <Text mb={1}>
+                        ※ You may refuse consent; however, without consent,
+                        smooth processing of counseling may not be possible.
+                      </Text>
+                      <Text>
+                        ※ Personal data will not be used beyond agreed purposes.
+                        You may request access, correction, or deletion via the
+                        data protection officer.
+                      </Text>
+                    </>
+                  )}
+                </Box>
+
+                <Flex
+                  mt={4}
+                  align="center"
+                  gap={3}
+                  justify="space-between"
+                  wrap="wrap"
+                >
+                  <Checkbox.Root
+                    checked={consentChecked}
+                    onCheckedChange={(e) => setConsentChecked(!!e.checked)}
+                  >
+                    <Checkbox.HiddenInput />
+                    <Checkbox.Control />
+                    <Checkbox.Label
+                      ml={2}
+                      fontSize={{ base: "14px", md: "15px" }}
+                    >
+                      {locale === "ko"
+                        ? "개인정보 처리방침을 읽었으며 내용에 동의합니다."
+                        : "I have read the privacy notice and agree."}
+                    </Checkbox.Label>
+                  </Checkbox.Root>
+                  <Button
+                    colorPalette="green"
+                    disabled={step === 1 && !consentChecked}
+                    borderRadius="full"
+                    onClick={() => setStep((prev) => Math.min(prev + 1, 4))}
+                  >
+                    Next
+                  </Button>
+                </Flex>
+              </Box>
+            )}
+
+            {step === 2 && (
+              <Box mt={6}>
+                <Heading as="h3" fontSize={{ base: "18px", md: "20px" }} mb={4}>
+                  {locale === "ko"
+                    ? "기본정보 입력"
+                    : "Enter Basic Information"}
+                </Heading>
+                <Stack gap={4}>
+                  <Box>
+                    <Text mb={2}>
+                      {locale === "ko" ? "학번" : "Student Number"}
+                    </Text>
+                    <Input
+                      value={studentNumber}
+                      onChange={(e) => setStudentNumber(e.target.value)}
+                      placeholder={
+                        locale === "ko" ? "예: 20231234" : "e.g., 20231234"
+                      }
+                    />
+                  </Box>
+                  <Box>
+                    <Text mb={2}>
+                      {locale === "ko" ? "학과" : "Department"}
+                    </Text>
+                    <Input
+                      value={departmentName}
+                      onChange={(e) => setDepartmentName(e.target.value)}
+                      placeholder={
+                        locale === "ko"
+                          ? "학과명을 입력하세요"
+                          : "Enter department"
+                      }
+                    />
+                  </Box>
+                  <Box>
+                    <Text mb={2}>{locale === "ko" ? "이름" : "Full Name"}</Text>
+                    <Input
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                      placeholder={
+                        locale === "ko"
+                          ? "이름을 입력하세요"
+                          : "Enter full name"
+                      }
+                    />
+                  </Box>
+                  <Box>
+                    <Text mb={2}>{locale === "ko" ? "성별" : "Gender"}</Text>
+                    <NativeSelect.Root maxW="240px">
+                      <NativeSelect.Field
+                        value={gender}
+                        onChange={(e) =>
+                          setGender(e.target.value as "M" | "F" | "")
+                        }
+                      >
+                        <option value="">
+                          {locale === "ko" ? "선택" : "Select"}
+                        </option>
+                        <option value="M">
+                          {locale === "ko" ? "남" : "Male"}
+                        </option>
+                        <option value="F">
+                          {locale === "ko" ? "여" : "Female"}
+                        </option>
+                      </NativeSelect.Field>
+                    </NativeSelect.Root>
+                  </Box>
+                </Stack>
+
+                <Flex mt={5} justify="flex-end" gap={3}>
+                  <Button
+                    variant="outline"
+                    borderRadius="full"
+                    onClick={() => setStep(1)}
+                  >
+                    {locale === "ko" ? "이전" : "Back"}
+                  </Button>
+                  <Button
+                    colorPalette="green"
+                    borderRadius="full"
+                    disabled={
+                      !studentNumber || !departmentName || !fullName || !gender
+                    }
+                    onClick={handleStep2Next}
+                  >
+                    {locale === "ko" ? "다음" : "Next"}
+                  </Button>
+                </Flex>
+              </Box>
+            )}
+
+            {step === 3 && (
+              <Box mt={6}>
+                <Heading as="h3" fontSize={{ base: "18px", md: "20px" }} mb={4}>
+                  {locale === "ko"
+                    ? "자가진단 선택"
+                    : "Choose a Self-Assessment"}
+                </Heading>
+                <Stack gap={3}>
+                  {[
+                    {
+                      key: "personality" as const,
+                      ko: {
+                        title: "스트레스 척도 검사",
+                        desc: "성격 특성과 성향을 살펴봅니다",
+                      },
+                      en: {
+                        title: "Personality Test",
+                        desc: "Assess characteristics and traits",
+                      },
+                    },
+                    {
+                      key: "depression" as const,
+                      ko: {
+                        title: "우울 선별 검사",
+                        desc: "우울 증상 여부를 선별합니다",
+                      },
+                      en: {
+                        title: "Severity Measure for Depression",
+                        desc: "Screen for symptoms of depression",
+                      },
+                    },
+                    {
+                      key: "anxiety" as const,
+                      ko: {
+                        title: "불안 척도 검사",
+                        desc: "불안과 두려움 수준을 평가합니다",
+                      },
+                      en: {
+                        title: "Anxiety Scale Test",
+                        desc: "Evaluate feelings of anxiety and fear",
+                      },
+                    },
+                  ].map((item) => {
+                    const t = locale === "ko" ? item.ko : item.en;
+                    const active = selectedSurvey === item.key;
+                    return (
+                      <Box
+                        key={item.key}
+                        p={4}
+                        borderRadius="lg"
+                        border={
+                          active ? "2px solid #43AD83" : "1px solid #e2e8f0"
+                        }
+                        boxShadow={
+                          active ? "0 0 0 2px rgba(67,173,131,0.15)" : "sm"
+                        }
+                        bg="white"
+                        cursor="pointer"
+                        onClick={() => setSelectedSurvey(item.key)}
+                        _hover={{ borderColor: "#43AD83" }}
+                      >
+                        <Text fontWeight="bold" fontSize="lg">
+                          {t.title}
+                        </Text>
+                        <Text mt={1} color="gray.600" fontSize="sm">
+                          {t.desc}
+                        </Text>
+                      </Box>
+                    );
+                  })}
+                </Stack>
+
+                <Flex mt={5} justify="flex-end" gap={3}>
+                  <Button
+                    variant="outline"
+                    borderRadius="full"
+                    onClick={() => setStep(2)}
+                  >
+                    {locale === "ko" ? "이전" : "Back"}
+                  </Button>
+                  <Button
+                    colorPalette="green"
+                    borderRadius="full"
+                    disabled={!selectedSurvey}
+                    onClick={() => setStep(4)}
+                  >
+                    Next
+                  </Button>
+                </Flex>
+              </Box>
+            )}
+
+            {step === 4 && selectedSurvey === "personality" && (
+              <>
+                <StressTest />
+              </>
+            )}
+          </Box>
         </Stack>
       </PageContainer>
     </Box>

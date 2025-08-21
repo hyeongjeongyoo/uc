@@ -81,6 +81,7 @@ public class SecurityConfig {
 				"/nice/checkplus/**",
 				"/api/v1/v3/api-docs/**",
 				"/api/v1/auth/**",
+				"/api/v1/public/**",
 				"/api/v1/cms/menu/public",
 				"/api/v1/cms/menu/public/**/page-details",
 				"/api/v1/cms/template/public",

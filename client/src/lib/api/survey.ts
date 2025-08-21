@@ -41,4 +41,19 @@ export const surveyApi = {
 		);
 		return response.data;
 	},
+
+	// 공개 저장: 사용자 기본 정보만 저장(백엔드에 공개 엔드포인트가 있어야 함)
+	savePersonPublic: async (body: {
+		studentNumber?: string;
+		fullName: string;
+		genderCode?: string;
+		departmentName?: string;
+		locale?: string;
+	}): Promise<ApiResponse<number>> => {
+		const response = await publicApi.post<ApiResponse<number>>(
+			"/public/surveys/persons",
+			body
+		);
+		return response.data;
+	},
 };

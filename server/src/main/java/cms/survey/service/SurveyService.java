@@ -13,4 +13,10 @@ public interface SurveyService {
     Long submitResponses(SubmitRequestDto request);
 
     Page<RegistrationListItemDto> listRegistrations(String locale, String status, Pageable pageable);
+
+    Long upsertPerson(String studentNumber,
+            String fullName,
+            String genderCode,
+            String departmentName,
+            String locale);
 }
