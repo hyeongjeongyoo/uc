@@ -20,6 +20,7 @@ export interface SlideContent {
   header?: string;
   title: string;
   subtitle?: string;
+  subtitleColor?: string;
   image: string;
   breadcrumbBorderColor?: string;
   breadcrumb?: { label: string; url: string }[];
@@ -264,7 +265,9 @@ export function HeroSection({ slideContents }: HeroSectionProps) {
                         fontSize={{ base: "md", sm: "lg", md: "xl" }}
                         mb={{ base: 8, md: 28 }}
                         fontWeight="bold"
-                        color="white"
+                        color={
+                          slideContents[currentPage]?.subtitleColor || "white"
+                        }
                         lineHeight="1.6"
                         whiteSpace="pre-line"
                         textShadow="0 2px 4px rgba(0,0,0,0.3)"

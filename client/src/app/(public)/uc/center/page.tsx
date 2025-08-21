@@ -126,6 +126,7 @@ export default function CompanyPage() {
       <PageHeroBanner
         title={heroData.title}
         subtitle={heroData.subtitle}
+        subtitleColor={heroData.subtitleColor}
         backgroundImage={heroData.backgroundImage}
         height={heroData.height}
         menuType="custom"
@@ -439,11 +440,7 @@ export default function CompanyPage() {
                         fontSize={{ base: "14px", md: "16px" }}
                       >
                         {card.items.map((text, i) => (
-                          <Text
-                            as="li"
-                            key={i}
-                            mb={1}
-                          >
+                          <Text as="li" key={i} mb={1}>
                             {text}
                           </Text>
                         ))}

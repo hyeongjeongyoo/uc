@@ -124,7 +124,7 @@ const Layout = ({ children }: LayoutProps) => {
           id: 13,
           name: "장애학생심리지원상담 안내",
           type: "LINK",
-          url: "/counsel/disability",
+          url: "/counsel/disabled",
           displayPosition: "HEADER",
           visible: true,
           sortOrder: 3,

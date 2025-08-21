@@ -184,7 +184,7 @@ export const HERO_DATA: Record<string, HeroPageData> = {
   height: "500px",
   menuItems: [
     { name: "성고충상담", href: "/sexualcounseling/sexualcounseling" },
-    { name: "장애학생심리지원상담 안내", href: "/sexualcounseling/sexualcounseling" },
+    { name: "성고충상담 안내", href: "/sexualcounseling/sexualcounseling" },
   ],
   animationType: "zoom-in",
 },
@@ -263,6 +263,7 @@ function convertHeroDataToLegacyFormat(heroData: HeroPageData, path: string): {
 header?: string;
 title: string;
 subtitle?: string;
+subtitleColor?: string;
 image: string;
 breadcrumbBorderColor?: string;
 breadcrumb?: { label: string; url: string }[];
@@ -328,6 +329,7 @@ return {
   header,
   title: heroData.title,
   subtitle: heroData.subtitle,
+  subtitleColor: heroData.subtitleColor,
   image: heroData.backgroundImage,
   breadcrumbBorderColor: "#4A7CD5",
   breadcrumb,
@@ -341,6 +343,7 @@ string,
   header?: string;
   title: string;
   subtitle?: string;
+  subtitleColor?: string;
   image: string;
   breadcrumbBorderColor?: string;
   breadcrumb?: { label: string; url: string }[];
