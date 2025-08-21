@@ -26,7 +26,7 @@ const FractalSection = ({ mouse }: FractalSectionProps) => {
   return (
     <Flex
       display={{ base: "none", lg: "flex" }}
-      flex="0 0 45%"
+      flex="0 0 55%"
       h="97vh"
       justifyContent="center"
       alignItems="center"

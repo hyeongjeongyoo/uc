@@ -75,7 +75,7 @@ const Footer = () => {
             >
               이메일무단수집거부
             </Button>
-            <Button
+            {/* <Button
               onClick={() => handleLinkClick("/uc/info")}
               bg="transparent"
               color="#fff"
@@ -83,7 +83,7 @@ const Footer = () => {
               fontSize={{ base: "14px", lg: "16px" }}
             >
               교내전화번호
-            </Button>
+            </Button> */}
             <Button
               onClick={() => handleLinkClick("/uc/location")}
               bg="transparent"

@@ -153,7 +153,7 @@ export const HERO_DATA: Record<string, HeroPageData> = {
   animationType: "zoom-in",
 },
 "/therapy/counseling": {
-  title: "심리상담",
+  title: "심리검사",
   titleGradient: {
     from: "#297D83",
     to: "#3DAD5F"
@@ -164,7 +164,7 @@ export const HERO_DATA: Record<string, HeroPageData> = {
   backgroundImage: "/images/sub/bg.jpg",
   height: "600px",
   menuItems: [
-    { name: "심리상담", href: "/therapy/counseling" },
+    { name: "심리검사", href: "/therapy/counseling" },
     { name: "심리검사 안내", href: "/therapy/counseling" },
   ],
   animationType: "zoom-in",
@@ -206,7 +206,7 @@ export const HERO_DATA: Record<string, HeroPageData> = {
 },
 
 "/bbs/notices": {
-  title: "PR",
+  title: "공지/소식",
   titleGradient: {
     from: "#297D83",
     to: "#3DAD5F"
@@ -216,25 +216,25 @@ export const HERO_DATA: Record<string, HeroPageData> = {
   backgroundImage: "/images/sub/privacy_bg.jpg",
   height: "600px",
   menuItems: [
-    { name: "PR", href: "/bbs/notices" },
-    { name: "공지사항", href: "/bbs/notices" },
+    { name: "공지/소식", href: "/bbs/notices" },
+    { name: "공지/소식", href: "/bbs/notices" },
   ],
   animationType: "zoom-in",
 },
 
 "/bbs/resources": {
-  title: "PR",
+  title: "공지/소식",
   titleGradient: {
     from: "#297D83",
     to: "#3DAD5F"
   },
-  subtitle: "K&D ENERGEN의 최신 소식을 전해드립니다",
+  subtitle: "울산과학대학교 학생상담센터의 이야기를 전해드립니다",
   subtitleColor: "#0D344E",
   backgroundImage: "/images/sub/privacy_bg.jpg",
   height: "600px",
   menuItems: [
-    { name: "PR", href: "/bbs/resources" },
-    { name: "뉴스/보도자료", href: "/bbs/resources" },
+    { name: "공지/소식", href: "/bbs/resources" },
+    { name: "상담센터 이야기", href: "/bbs/resources" },
   ],
   animationType: "zoom-in",
 },
@@ -289,7 +289,7 @@ if (segments[0] === 'knd') {
 } else if (segments[0] === 'bbs') {
   if (segments[1] === 'notices') {
     breadcrumb.push({ label: "PR", url: "/bbs/notices" });
-    breadcrumb.push({ label: "공지사항", url: path });
+    breadcrumb.push({ label: "공지/소식", url: path });
   } else if (segments[1] === 'resources') {
     breadcrumb.push({ label: "PR", url: "/bbs/resources" });
     breadcrumb.push({ label: "뉴스/보도자료", url: path });
@@ -303,7 +303,7 @@ if (segments[0] === 'knd') {
   if (segments[1]) {
     breadcrumb.push({ label: "PR", url: "/pr" });
     if (segments[1] === 'notices') {
-      breadcrumb.push({ label: "공지사항", url: path });
+      breadcrumb.push({ label: "공지/소식", url: path });
     } else if (segments[1] === 'resources') {
       breadcrumb.push({ label: "뉴스/보도자료", url: path });
     } else if (segments[1] === 'ir') {

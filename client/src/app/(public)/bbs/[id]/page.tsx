@@ -461,8 +461,8 @@ export default function BoardPage({
           subtitleColor: "#0D344E",
           backgroundImage: "/images/sub/privacy_bg.jpg",
           menuItems: [
-            { name: "PR", href: "/bbs/notices" },
-            { name: "공지사항", href: "/bbs/notices" },
+            { name: "공지/소식", href: "/bbs/notices" },
+            { name: "공지/소식", href: "/bbs/notices" },
           ],
         };
       case "ir":
@@ -482,12 +482,22 @@ export default function BoardPage({
         };
       case "resources":
         return {
-          title: "PR",
-          subtitle: "K&D ENERGEN의 최신 소식을 전해드립니다",
+          title: "공지/소식",
+          subtitle: "울산과학대학교 학생상담센터의 이야기를 전해드립니다",
           backgroundImage: "/images/sub/privacy_bg.jpg",
           menuItems: [
-            { name: "PR", href: "/bbs/resources" },
-            { name: "뉴스/보도자료", href: "/bbs/resources" },
+            { name: "공지/소식", href: "/bbs/resources" },
+            { name: "상담센터 이야기", href: "/bbs/resources" },
+          ],
+        };
+      case "gallery":
+        return {
+          title: "공지/소식",
+          subtitle: "울산과학대학교 학생상담센터의 마음건강 이야기를 확인하세요",
+          backgroundImage: "/images/sub/privacy_bg.jpg",
+          menuItems: [
+            { name: "공지/소식", href: "/bbs/gallery" },
+            { name: "마음건강 이야기", href: "/bbs/gallery" },
           ],
         };
       default:
@@ -548,11 +558,11 @@ export default function BoardPage({
               title={(() => {
                 switch (currentPathId) {
                   case "notices":
-                    return "공지사항";
+                    return "공지/소식";
                   case "resources":
-                    return "뉴스 / 보도자료";
-                  case "ir":
-                    return "IR";
+                    return "상담센터 이야기";
+                  case "gallery":
+                    return "마음건강 이야기";
                   default:
                     return "게시판";
                 }
