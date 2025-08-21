@@ -129,14 +129,14 @@ export const HERO_DATA: Record<string, HeroPageData> = {
     from: "#297D83",
     to: "#3DAD5F"
   },
-  subtitle: "나를 객관적으로 보는 첫걸음입니다. <br />결과를 함께 해석하며, 앞으로의 방향을 정리합니다.",
+  subtitle: "자가진단은 <br />현재 나의 마음 상태를 간단히 살펴볼 수 있는 도구입니다.",
   subtitleColor: "#0D344E",
   subtitleBrAlways: true,
   backgroundImage: "/images/sub/bg.jpg",
   height: "600px",
   menuItems: [
     { name: "심리검사", href: "/therapy/therapy" },
-    { name: "심리검사 안내", href: "/therapy/therapy" },
+    { name: "자가진단", href: "/therapy/therapy" },
   ],
   animationType: "zoom-in",
 },
