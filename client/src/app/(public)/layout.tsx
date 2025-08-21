@@ -30,7 +30,7 @@ export default async function RoutesLayout({
           </Center>
         }
       >
-        <Layout menus={menus}>{children}</Layout>
+        <Layout>{children}</Layout>
       </Suspense>
       {/* <FloatingButtons /> */}
     </Box>

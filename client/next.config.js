@@ -13,7 +13,10 @@ const nextConfig = {
     optimizePackageImports: ["@chakra-ui/react"],
   },
   images: {
-    domains: ["localhost"],
+    remotePatterns: [
+      { protocol: "http", hostname: "localhost" },
+      { protocol: "https", hostname: "localhost" },
+    ],
   },
   webpack: (config, { isServer /*, webpack */ }) => {
     if (!isServer) {

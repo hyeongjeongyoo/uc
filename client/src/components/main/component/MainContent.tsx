@@ -13,7 +13,6 @@ import NoticeCard from "./card/NoticeCard";
 import { useState, useEffect, useRef } from "react";
 
 const MotionHeading = motion(Heading);
-const MotionText = motion(Text);
 const MotionBox = motion(Box);
 const MotionFlex = motion(Flex);
 
@@ -149,12 +148,13 @@ const MainContent = ({ mouse }: MainContentProps) => {
               ))}
             </motion.span>
           </MotionHeading>
-          <MotionText
+          <MotionBox
             mt={5}
             fontSize={{ base: "lg", md: "xl" }}
             maxW="3xl"
             color="#0d344e"
             variants={itemVariants}
+            as="div"
           >
             <motion.span
               variants={{
@@ -327,7 +327,7 @@ const MainContent = ({ mouse }: MainContentProps) => {
                 ))}
               </motion.div>
             </MotionFlex>
-          </MotionText>
+          </MotionBox>
         </MotionBox>
       </Flex>
       <NoticeCard />

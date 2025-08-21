@@ -24,6 +24,18 @@ type: "dynamic";
 }
 
 // 완전한 페이지별 히어로 데이터 중앙 관리
+export const DEFAULT_HERO_DATA: HeroPageData = {
+  title: "페이지",
+  subtitle: undefined,
+  subtitleColor: "#0D344E",
+  subtitleBrAlways: false,
+  backgroundImage: "/images/sub/bg.jpg",
+  height: "600px",
+  menuItems: [{ name: "홈", href: "/" }],
+  animationType: "zoom-in",
+};
+
+// 완전한 페이지별 히어로 데이터 중앙 관리
 export const HERO_DATA: Record<string, HeroPageData> = {
 // UC 관련 페이지들
 "/uc/center": {

@@ -281,14 +281,14 @@ export function PageHeroBanner({
           {finalData.title}
         </Heading>
         {finalData.subtitle && (
-          <Text
+          <Box
             fontSize={{ base: "lg", md: "xl" }}
             opacity={0.9}
             color={(finalData as any).subtitleColor || undefined}
             animation={`${subtitleSlideUp} 1s ease-out 0.8s both`}
           >
             {renderMobileOnlyBreaks(finalData.subtitle)}
-          </Text>
+          </Box>
         )}
       </Box>
 
