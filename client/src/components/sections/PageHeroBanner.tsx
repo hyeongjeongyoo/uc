@@ -11,9 +11,7 @@ import {
 import NextLink from "next/link";
 import { keyframes } from "@emotion/react";
 import { usePageHero } from "@/hooks/usePageHero";
-import { useColorModeValue } from "@chakra-ui/react";
-import { useColorMode } from "@chakra-ui/react";
-import { useTheme } from "@chakra-ui/react";
+// Removed unused Chakra hooks that caused type errors in v3
 
 import dynamic from "next/dynamic";
 // 커스텀 OGL Threads 컴포넌트 동적 로딩 (브라우저 전용)
