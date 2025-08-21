@@ -271,7 +271,7 @@ const CounselCard = () => {
       onHoverEnd={() => setIsHovered(false)}
       style={{
         position: "absolute",
-        bottom: "7%",
+        bottom: "15%",
         right: "2%",
         zIndex: 4,
       }}

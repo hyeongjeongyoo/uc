@@ -153,7 +153,7 @@ const MainContent = ({ mouse }: MainContentProps) => {
             mt={5}
             fontSize={{ base: "lg", md: "xl" }}
             maxW="3xl"
-            color="#3A3435"
+            color="#0d344e"
             variants={itemVariants}
           >
             <motion.span
@@ -247,7 +247,7 @@ const MainContent = ({ mouse }: MainContentProps) => {
                     key={label}
                     display="inline-flex"
                     border="1px solid #3DAD5F"
-                    color="#fb981b"
+                    color="#3DAD5F"
                     style={{
                       transition:
                         "background-color 0.25s ease, transform 0.2s ease",
@@ -266,8 +266,6 @@ const MainContent = ({ mouse }: MainContentProps) => {
                       expanded: (i: number) => ({
                         opacity: 1,
                         x: 0,
-                        backgroundColor: "#3DAD5F",
-                        color: "white",
                         scale: 1,
                         transition: {
                           type: "spring",
@@ -277,6 +275,8 @@ const MainContent = ({ mouse }: MainContentProps) => {
                         },
                       }),
                       hover: {
+                        backgroundColor: "#3DAD5F",
+                        color: "#ffffff",
                         x: 5,
                         transition: {
                           type: "spring",

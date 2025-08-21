@@ -54,7 +54,8 @@ const FractalSection = ({ mouse }: FractalSectionProps) => {
       <Box
         position="absolute"
         bottom={0}
-        left={0}
+        right={0}
+        textAlign="right"
         zIndex={2}
         p={{
           base: "1rem 1rem 2.5rem 1.5rem",
@@ -87,7 +88,7 @@ const FractalSection = ({ mouse }: FractalSectionProps) => {
                   lineHeight="1.1"
                   bgGradient={gradient}
                   bgClip="text"
-                  color="transparent"
+                  color="#0d344e"
                 >
                   {char === " " ? "\u00A0" : char}
                 </Text>
@@ -101,7 +102,7 @@ const FractalSection = ({ mouse }: FractalSectionProps) => {
             lineHeight="1.1"
             bgGradient={gradient}
             bgClip="text"
-            color="transparent"
+            color="#0d344e"
           >
             - 석민철(전기전자공학부) -
           </Text>

@@ -196,6 +196,7 @@ const FractalCanvas = ({ mouse, containerRef }: FractalCanvasProps) => {
   const lastEmitMsRef = useRef(0);
   const lastEmittedPositionsRef = useRef<ButtonPosition[] | null>(null);
   const isPausedRef = useRef(false);
+  const pausedIndexRef = useRef<number | null>(null);
 
   const galaxies = useMemo(() => {
     const newGalaxies: Galaxy[] = [];
@@ -339,13 +340,15 @@ const FractalCanvas = ({ mouse, containerRef }: FractalCanvasProps) => {
       }
 
       // 버튼 위치 업데이트 (throttle + diff check)
-      const newButtonPositions = selectedNodeIndices.map((nodeIndex) => {
+      const newButtonPositions = selectedNodeIndices.map((nodeIndex, i) => {
         const node = galaxies[0].nodes[nodeIndex];
+        const isPausedThis =
+          pausedIndexRef.current === i && isPausedRef.current;
         return {
           x: node.screenX,
           y: node.screenY,
-          alpha: Math.pow(node.alpha, 0.7), // 알파값을 부드럽게 조정
-          scale: Math.max(0.8, Math.min(1.2, node.scale)), // 스케일 범위 제한
+          alpha: Math.pow(node.alpha, 0.7),
+          scale: Math.max(0.8, Math.min(1.2, node.scale)),
         } as ButtonPosition;
       });
 
@@ -412,8 +415,9 @@ const FractalCanvas = ({ mouse, containerRef }: FractalCanvasProps) => {
       />
       <NodeButtons
         buttonPositions={buttonPositions}
-        onHoverChange={(hovering) => {
+        onHoverChange={(hovering, mappedIndex) => {
           isPausedRef.current = hovering;
+          pausedIndexRef.current = hovering ? mappedIndex : null;
         }}
       />
     </>

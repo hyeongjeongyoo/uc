@@ -28,6 +28,8 @@ export const NodeButtons = ({
     "심리검사",
   ];
   const [isInitialRender, setIsInitialRender] = useState(true);
+  const [hoveredIndices, setHoveredIndices] = useState<Set<number>>(new Set());
+  const frozenPositionsRef = useRef<Record<number, ButtonPosition>>({});
 
   // Shuffle helper to randomize mapping once per mount
   const shuffleArray = (arr: number[]) => {
@@ -88,6 +90,10 @@ export const NodeButtons = ({
           alpha: 0,
           scale: 1,
         };
+        const effectivePosition =
+          hoveredIndices.has(index) && frozenPositionsRef.current[index]
+            ? frozenPositionsRef.current[index]
+            : position;
         const { w, h } = baseSizes[index] || { w: 200, h: 50 };
         const minWForText = restMinWidthByText[text] ?? 140;
         const restW = Math.max(w, minWForText);
@@ -98,17 +104,22 @@ export const NodeButtons = ({
             key={text}
             style={{
               position: "absolute",
-              zIndex: 3,
-              pointerEvents: position.alpha > 0.3 ? "auto" : "none",
+              zIndex: hoveredIndices.has(index) ? 20 : 3,
+              pointerEvents: effectivePosition.alpha > 0.3 ? "auto" : "none",
             }}
             initial={isInitialRender ? { scale: 0, opacity: 0 } : false}
             animate={{
-              x: position.x,
-              y: position.y,
-              opacity: position.alpha,
-              scale: position.scale,
+              x: effectivePosition.x,
+              y: effectivePosition.y,
+              opacity: effectivePosition.alpha,
+              scale: effectivePosition.scale,
             }}
-            transition={{ type: "tween", duration: 0.25, ease: "easeOut" }}
+            transition={{
+              x: { type: "tween", duration: 0 },
+              y: { type: "tween", duration: 0 },
+              scale: { type: "tween", duration: 0 },
+              opacity: { type: "tween", ease: "easeOut", duration: 0.18 },
+            }}
           >
             <MotionButton
               variant="ghost"
@@ -117,9 +128,8 @@ export const NodeButtons = ({
               display="flex"
               alignItems="center" // ★ 수직 상단
               justifyContent="center" // ★ 수평 좌측
-              color="#fb981b"
               //bg="rgba(255,255,255,0.75)"
-              boxShadow="0 0 0 rgba(0,0,0,0)"
+              boxShadow="0 0 0 rgba(0,0,0,0.3)"
               style={{
                 backdropFilter: "blur(8px)",
                 overflow: "hidden",
@@ -131,8 +141,22 @@ export const NodeButtons = ({
               initial="rest"
               animate="rest"
               whileHover="hover"
-              onHoverStart={() => onHoverChange?.(true)}
-              onHoverEnd={() => onHoverChange?.(false)}
+              onHoverStart={() => {
+                setHoveredIndices((prev) => {
+                  const next = new Set(prev);
+                  next.add(index);
+                  return next;
+                });
+                frozenPositionsRef.current[index] = position;
+              }}
+              onHoverEnd={() => {
+                setHoveredIndices((prev) => {
+                  const next = new Set(prev);
+                  next.delete(index);
+                  return next;
+                });
+                delete frozenPositionsRef.current[index];
+              }}
               variants={{
                 rest: {
                   x: 0,
@@ -147,13 +171,12 @@ export const NodeButtons = ({
                   width: 350,
                   height: 130,
                   borderRadius: 24,
-                  boxShadow: "0 10px 24px rgba(13,52,78,.18)",
+                  boxShadow: "0 5px 10px rgba(13,52,78,.18)",
                   background: "rgba(255,255,255,.98)",
                   alignItems: "flex-start",
                   justifyContent: "flex-start",
                 },
               }}
-              transition={{ type: "tween", duration: 0.25, ease: "easeOut" }}
             >
               <motion.div
                 style={{

@@ -17,11 +17,6 @@ interface FractalSectionProps {
 const FractalSection = ({ mouse }: FractalSectionProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { colorMode } = useColorMode();
-  const isDark = colorMode === "dark";
-
-  const gradient = isDark
-    ? "linear-gradient(180deg, hsl(172, 68.50%, 80%), hsl(64, 100%, 82.70%), hsl(37, 100%, 65%))"
-    : "linear-gradient(to right, hsl(130, 43.60%, 54.10%), hsl(61, 100.00%, 50.40%), hsl(27, 100.00%, 67.30%))";
 
   return (
     <Flex
@@ -87,7 +82,6 @@ const FractalSection = ({ mouse }: FractalSectionProps) => {
                     fontWeight="bold"
                     letterSpacing="widest"
                     lineHeight="1.1"
-                    color="#297D83"
                   >
                     {char === " " ? "\u00A0" : char}
                   </Text>
@@ -99,7 +93,6 @@ const FractalSection = ({ mouse }: FractalSectionProps) => {
             fontWeight="bold"
             letterSpacing="widest"
             lineHeight="1.1"
-            color="#297D83"
             textAlign="right"
           >
             - 석민철(전기전자공학부) -
